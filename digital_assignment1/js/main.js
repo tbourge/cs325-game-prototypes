@@ -27,6 +27,8 @@ var Breakout = new Phaser.Class({
 
     preload: function () {
         this.load.atlas('assets', 'assets/breakout.png', 'assets/breakout.json');
+
+        this.load.audio("clink", "assets/glass-clink");
     },
 
     create: function () {
@@ -69,6 +71,8 @@ var Breakout = new Phaser.Class({
             }
 
         }, this);
+
+        this.clinkSound = this.sound.add("clink");
     },
 
     hitBrick: function (ball, brick) {
@@ -76,6 +80,10 @@ var Breakout = new Phaser.Class({
         if (brick.y >= ball.y + 20) {
             brick.disableBody(true, true);
         }
+        else {
+            this.clinkSound.play();
+        }
+
 
         if (this.bricks.countActive() === 0) {
             this.resetLevel();
