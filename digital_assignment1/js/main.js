@@ -73,7 +73,7 @@ var Breakout = new Phaser.Class({
 
     hitBrick: function (ball, brick) {
 
-        if (brick.y >= ball.y) {
+        if (brick.y >= ball.y + 20) {
             brick.disableBody(true, true);
         }
 
