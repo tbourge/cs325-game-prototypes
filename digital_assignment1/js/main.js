@@ -72,7 +72,10 @@ var Breakout = new Phaser.Class({
     },
 
     hitBrick: function (ball, brick) {
-        brick.disableBody(true, true);
+
+        if (brick.y >= ball.y) {
+            brick.disableBody(true, true);
+        }
 
         if (this.bricks.countActive() === 0) {
             this.resetLevel();
