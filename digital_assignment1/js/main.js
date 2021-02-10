@@ -28,7 +28,7 @@ var Breakout = new Phaser.Class({
     preload: function () {
         this.load.atlas('assets', 'assets/breakout.png', 'assets/breakout.json');
 
-        this.load.audio("clink", "assets/glass-clink");
+        this.load.audio("clink", "assets/glass-clink.mp3");
     },
 
     create: function () {
