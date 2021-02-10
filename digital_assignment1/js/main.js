@@ -125,7 +125,7 @@ var Breakout = new Phaser.Class({
 
 const game = new Phaser.Game({
     type: Phaser.AUTO,
-    parent: 'phaser-example',
+    parent: 'game',
     width: 800,
     height: 600,
     scene: [Breakout],
