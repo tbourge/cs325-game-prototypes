@@ -18,7 +18,7 @@ class MyScene extends Phaser.Scene {
     }
     
     preload() {
-        this.load.path = 'assets/anim/';
+        this.load.path = 'assets/Anim/';
 
         this.load.image('pot0', 'Pot0.png');
         this.load.image('pot1', 'Pot1.png');
