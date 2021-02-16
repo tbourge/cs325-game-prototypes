@@ -51,7 +51,7 @@ class MyScene extends Phaser.Scene {
                 { key: 'pot11', duration: 50 }
             ],
             frameRate: 8,
-            repeat: 0
+            repeat: 1
         });
 
         this.add.sprite(400, 300, 'pot0').play('boiling');
