@@ -54,9 +54,8 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        this.add.sprite(400, 300, 'pot0')
-            .play('boiling');
-            });
+        this.add.sprite(400, 300, 'pot0').play('boiling');
+            
         
         
     }
