@@ -82,27 +82,24 @@ class MyScene extends Phaser.Scene {
         });
 
         this.anims.create({
-            key: 'man',
+            key: 'stir',
             frames: [
                 { key: 'man0' },
-                { key: 'man0' },
-                { key: 'man0' },
-                { key: 'man0' },
-                { key: 'man0' },
-                { key: 'man0' },
-                { key: 'man0' },
-                { key: 'man0', duration: 50 }
+                { key: 'man1' },
+                { key: 'man2' },
+                { key: 'man3' },
+                { key: 'man4', duration: 50 }
             ],
             frameRate: 8,
             repeat: -1
         });
 
-        this.add.sprite(400, 300, 'pot0').play('boiling');
+        var p = this.add.sprite(400, 300, 'pot0').play('boiling');
             
         var f = this.add.sprite(400, 300, 'fire0').play('fire');
         f.setVisible(false);
 
-        this.add.sprite(340, 236, 'man0').play('man');        
+        var m = this.add.sprite(340, 236, 'man0').play('stir');        
     }
     
     update() {
