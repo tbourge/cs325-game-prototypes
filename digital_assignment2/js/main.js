@@ -1,5 +1,8 @@
 import "./phaser.js";
 
+var space;
+var text;
+
 // You can copy-and-paste the code from any of the examples at https://examples.phaser.io here.
 // You will need to change the `parent` parameter passed to `new Phaser.Game()` from
 // `phaser-example` to `game`, which is the id of the HTML element where we
@@ -53,10 +56,10 @@ class MyScene extends Phaser.Scene {
     }
 
     create() {    
-        let text = this.add.text(32, 32);
+        text = this.add.text(32, 32);
         text.setText('hi');
         
-        let space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.anims.create({
             key: 'boiling',
