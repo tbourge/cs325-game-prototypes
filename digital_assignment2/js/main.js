@@ -81,10 +81,27 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
+        this.anims.create({
+            key: 'man',
+            frames: [
+                { key: 'man0' },
+                { key: 'man0' },
+                { key: 'man0' },
+                { key: 'man0' },
+                { key: 'man0' },
+                { key: 'man0' },
+                { key: 'man0' },
+                { key: 'man0', duration: 50 }
+            ],
+            frameRate: 8,
+            repeat: -1
+        });
+
         this.add.sprite(400, 300, 'pot0').play('boiling');
             
         this.add.sprite(400, 300, 'fire0').play('fire');
-        
+
+        this.add.sprite(380, 236, 'man0').play('man');        
     }
     
     update() {
