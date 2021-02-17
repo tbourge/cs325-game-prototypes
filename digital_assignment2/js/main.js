@@ -43,6 +43,10 @@ class MyScene extends Phaser.Scene {
         this.load.image('fire7', 'fire7.png');
 
         this.load.image('man0', 'man0.png');
+        this.load.image('man1', 'man1.png');
+        this.load.image('man2', 'man2.png');
+        this.load.image('man3', 'man3.png');
+        this.load.image('man4', 'man4.png');
     }
     
     create() {
@@ -94,12 +98,12 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        this.add.sprite(400, 300, 'pot0').play('boiling');
+        var p = this.add.sprite(400, 300, 'pot0').play('boiling');
             
         var f = this.add.sprite(400, 300, 'fire0').play('fire');
         f.setVisible(false);
 
-        this.add.sprite(340, 236, 'man0').play('stir');        
+        var m = this.add.sprite(340, 236, 'man0').play('stir');        
     }
     
     update() {
