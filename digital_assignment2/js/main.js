@@ -48,8 +48,15 @@ class MyScene extends Phaser.Scene {
         this.load.image('man3', 'man3.png');
         this.load.image('man4', 'man4.png');
     }
-    
-    create() {
+
+    var space;
+    var text;
+
+    create() {    
+        text = this.add.text(32, 32);
+        
+        space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
         this.anims.create({
             key: 'boiling',
             frames: [
@@ -98,16 +105,20 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        var p = this.add.sprite(400, 300, 'pot0').play('boiling');
+        var p = this.add.sprite(400, 300, 'pot0');
             
         var f = this.add.sprite(400, 300, 'fire0').play('fire');
         f.setVisible(false);
 
-        var m = this.add.sprite(340, 236, 'man0').play('stir');        
+        var m = this.add.sprite(340, 236, 'man0');        
     }
     
-    update() {
-        
+    update() {        
+        if (keySpace.isDown) {
+            m.play('stir');
+
+            p.play('boiling');
+        }
     }
 }
 
