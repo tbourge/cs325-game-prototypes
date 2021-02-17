@@ -150,7 +150,7 @@ class MyScene extends Phaser.Scene {
     }
 
     gainScore() {
-        if (score < 99) {
+        if (score < 100) {
             score++;
         }
         else {
