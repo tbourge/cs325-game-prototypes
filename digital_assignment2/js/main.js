@@ -71,7 +71,7 @@ class MyScene extends Phaser.Scene {
 
         space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        timer = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, repeat: 20, paused: true });
+        timer = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, repeat: 20, paused: true });
 
         this.anims.create({
             key: 'boiling',
