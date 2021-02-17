@@ -136,7 +136,10 @@ class MyScene extends Phaser.Scene {
             p.play('boiling');
             if (count > 0) {
                 this.scene.restart();
-                
+
+            }
+            else {
+                timer.paused = false;
             }
             count++;            
         }
