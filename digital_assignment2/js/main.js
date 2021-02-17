@@ -2,6 +2,9 @@ import "./phaser.js";
 
 var space;
 var text;
+var p;
+var m;
+var f;
 
 // You can copy-and-paste the code from any of the examples at https://examples.phaser.io here.
 // You will need to change the `parent` parameter passed to `new Phaser.Game()` from
@@ -57,7 +60,7 @@ class MyScene extends Phaser.Scene {
 
     create() {    
         text = this.add.text(32, 32);
-        text.setText('hi');
+        text.setText('Score :');
         
         space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
@@ -109,12 +112,12 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        var p = this.add.sprite(400, 300, 'pot0');
+        p = this.add.sprite(400, 300, 'pot0');
             
-        var f = this.add.sprite(400, 300, 'fire0').play('fire');
+        f = this.add.sprite(400, 300, 'fire0').play('fire');
         f.setVisible(false);
 
-        var m = this.add.sprite(340, 236, 'man0');        
+        m = this.add.sprite(340, 236, 'man0');        
     }
     
     update() {        
