@@ -102,7 +102,7 @@ class MyScene extends Phaser.Scene {
         var f = this.add.sprite(400, 300, 'fire0').play('fire');
         f.disable();
 
-        this.add.sprite(380, 236, 'man0').play('man');        
+        this.add.sprite(340, 236, 'man0').play('man');        
     }
     
     update() {
