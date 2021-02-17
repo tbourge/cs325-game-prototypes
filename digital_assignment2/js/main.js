@@ -120,8 +120,10 @@ class MyScene extends Phaser.Scene {
         m = this.add.sprite(340, 236, 'man0');        
     }
     
-    update() {        
+    update() {
+        m.play('stir');      
         if (space.isDown) {
+            MyScene.restart();
             m.play('stir');
 
             p.play('boiling');
