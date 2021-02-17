@@ -6,7 +6,8 @@ var p;
 var m;
 var f;
 var count;
-var timer;
+var timer1;
+var timer2;
 var score;
 
 // You can copy-and-paste the code from any of the examples at https://examples.phaser.io here.
@@ -71,7 +72,8 @@ class MyScene extends Phaser.Scene {
 
         space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        timer = this.time.addEvent({ delay: 200, callback: this.onEvent, callbackScope: this, repeat: 99, paused: true });
+        timer1 = this.time.addEvent({ delay: 200, callback: this.gainScore, callbackScope: this, repeat: 99, paused: true });
+        timer2 = this.time.addEvent({ delay: 10, callback: this.loseScore, callbackScope: this, repeat: 99, paused: true });
 
         this.anims.create({
             key: 'boiling',
@@ -147,8 +149,12 @@ class MyScene extends Phaser.Scene {
         text.setText('Score: ' + score);
     }
 
-    onEvent() {
+    gainScore() {
+        if (score === 99) {
+
+        }
         score++;
+        
     }
 }
 
