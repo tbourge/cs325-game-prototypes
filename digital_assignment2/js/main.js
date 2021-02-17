@@ -12,7 +12,8 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 class MyScene extends Phaser.Scene {
-    
+
+
     constructor() {
         super();
     }
@@ -48,9 +49,6 @@ class MyScene extends Phaser.Scene {
         this.load.image('man3', 'man3.png');
         this.load.image('man4', 'man4.png');
     }
-
-    var space;
-    var text;
 
     create() {    
         text = this.add.text(32, 32);
