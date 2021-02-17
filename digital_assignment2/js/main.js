@@ -5,6 +5,7 @@ var text;
 var p;
 var m;
 var f;
+let count = 0;
 
 // You can copy-and-paste the code from any of the examples at https://examples.phaser.io here.
 // You will need to change the `parent` parameter passed to `new Phaser.Game()` from
@@ -121,12 +122,14 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {
-        m.play('stir');      
-        if (space.isDown) {
-            MyScene.restart();
+        if (space.isDown) {            
             m.play('stir');
 
             p.play('boiling');
+            if (count > 0) {
+                MyScene.restart();
+            }
+            count++;
         }
     }
 }
