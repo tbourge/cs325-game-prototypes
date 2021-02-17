@@ -14,6 +14,7 @@ import "./phaser.js";
 
 class MyScene extends Phaser.Scene {
 
+    
 
     constructor() {
         super();
@@ -52,9 +53,9 @@ class MyScene extends Phaser.Scene {
     }
 
     create() {    
-        var text = this.add.text(32, 32);
+        text = this.add.text(32, 32);
         
-        var space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.anims.create({
             key: 'boiling',
@@ -120,6 +121,8 @@ class MyScene extends Phaser.Scene {
         }
     }
 }
+
+var space;
 
 const game = new Phaser.Game({
     type: Phaser.AUTO,
