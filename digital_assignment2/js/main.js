@@ -147,7 +147,7 @@ class MyScene extends Phaser.Scene {
         text.setText('Score: ' + score);
     }
 
-    function onEvent() {
+    onEvent() {
         score++;
     }
 }
