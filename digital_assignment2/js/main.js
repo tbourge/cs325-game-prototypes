@@ -5,7 +5,9 @@ var text;
 var p;
 var m;
 var f;
-let count = 0;
+var count;
+var timer;
+var score;
 
 // You can copy-and-paste the code from any of the examples at https://examples.phaser.io here.
 // You will need to change the `parent` parameter passed to `new Phaser.Game()` from
@@ -62,8 +64,14 @@ class MyScene extends Phaser.Scene {
     create() {    
         text = this.add.text(32, 32);
         text.setText('Score :');
-        
+
+        score = 0;
+
+        count = 0;
+
         space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+        timer = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, repeat: 20, paused: true });
 
         this.anims.create({
             key: 'boiling',
@@ -128,9 +136,16 @@ class MyScene extends Phaser.Scene {
             p.play('boiling');
             if (count > 0) {
                 this.scene.restart();
+                
             }
-            count++;
+            count++;            
         }
+
+        text.setText('Score: ' + score);
+    }
+
+    onEvent() {
+        score++;
     }
 }
 
