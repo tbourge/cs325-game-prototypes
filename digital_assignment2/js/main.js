@@ -62,7 +62,7 @@ class MyScene extends Phaser.Scene {
     }
 
     create() {    
-        text = this.add.text(400, 400);
+        text = this.add.text(350, 500);
         text.setText('Score : ' + score);
 
         score = 0;
