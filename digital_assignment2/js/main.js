@@ -11,6 +11,7 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
+
 class MyScene extends Phaser.Scene {
 
 
@@ -51,9 +52,9 @@ class MyScene extends Phaser.Scene {
     }
 
     create() {    
-        text = this.add.text(32, 32);
+        var text = this.add.text(32, 32);
         
-        space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        var space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.anims.create({
             key: 'boiling',
@@ -112,7 +113,7 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {        
-        if (keySpace.isDown) {
+        if (space.isDown) {
             m.play('stir');
 
             p.play('boiling');
