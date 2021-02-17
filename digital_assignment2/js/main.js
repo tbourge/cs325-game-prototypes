@@ -141,7 +141,7 @@ class MyScene extends Phaser.Scene {
 
             }
             else {
-                timer.paused = false;
+                timer1.paused = false;
             }
             count++;            
         }
@@ -151,10 +151,15 @@ class MyScene extends Phaser.Scene {
 
     gainScore() {
         if (score === 99) {
-
+            score++;
         }
-        score++;
-        
+        else {
+            timer2.paused = false;
+        }
+    }
+
+    loseScore() {
+        score--;
     }
 }
 
