@@ -72,7 +72,6 @@ class MyScene extends Phaser.Scene {
         //Copied from phaser basic playback example
         this.fireSound = this.sound.add("fireSound");
         this.fireSound.setLoop(true);
-        this.fireSound.stop();
         this.bubbleSound = this.sound.add("bubbleSound", { volume: 0.2 });
         this.bubbleSound.setLoop(true);
 
@@ -172,6 +171,8 @@ class MyScene extends Phaser.Scene {
         //Copied from phaser keyboard press example.
         if (Phaser.Input.Keyboard.JustDown(space)) {
             if (count > 1) {
+                this.fireSound.stop();
+                this.bubbleSound.stop();
                 this.scene.restart();                
             }
             else {
