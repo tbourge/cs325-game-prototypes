@@ -136,17 +136,21 @@ class MyScene extends Phaser.Scene {
             m.play('stir');
 
             p.play('boiling');
-            if (count > 0) {
-                this.scene.restart();
 
+            if (count > 0) {
+                timer2.paused = false;
+
+                text.setText('Score: ' + score);
             }
             else {
+                if (count > 1) {
+                    this.scene.restart();
+                }
                 timer1.paused = false;
             }
             count++;            
         }
-
-        text.setText('Score: ' + score);
+        
     }
 
     gainScore() {
@@ -155,10 +159,15 @@ class MyScene extends Phaser.Scene {
         }
         else {
             timer2.paused = false;
+
+            f.setVisible(true);
+
+            p.setVisible(false);
         }
     }
 
     loseScore() {
+        
         score--;
     }
 }
