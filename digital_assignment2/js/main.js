@@ -172,12 +172,14 @@ class MyScene extends Phaser.Scene {
                     if (score > 99) {
                         text1.setText('Score: ' + score + ' Perfect!');
 
+                        m.x -= 64;
                         m.play('dance');
                     }
                     else {
                         if (score > 89) {
                             text1.setText('Score: ' + score + ' Great');
 
+                            m.x -= 64;
                             m.play('dance');
                         }
                         else {
