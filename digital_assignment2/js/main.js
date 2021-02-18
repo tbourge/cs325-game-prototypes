@@ -56,6 +56,12 @@ class MyScene extends Phaser.Scene {
         this.load.image('man2', 'man2.png');
         this.load.image('man3', 'man3.png');
         this.load.image('man4', 'man4.png');
+
+        this.load.image('burn0', 'burn0.png');
+        this.load.image('burn1', 'burn1.png');
+
+        this.load.image('dance0', 'dance0.png');
+        this.load.image('dance1', 'dance1.png');
     }
 
     create() {    
@@ -111,6 +117,26 @@ class MyScene extends Phaser.Scene {
         });
 
         this.anims.create({
+            key: 'burn',
+            frames: [
+                { key: 'burn0' },
+                { key: 'burn1', duration: 50 }
+            ],
+            frameRate: 8,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'dance',
+            frames: [
+                { key: 'dance0' },
+                { key: 'dance1', duration: 50 }
+            ],
+            frameRate: 8,
+            repeat: -1
+        });
+
+        this.anims.create({
             key: 'stir',
             frames: [
                 { key: 'man0' },
@@ -145,10 +171,14 @@ class MyScene extends Phaser.Scene {
 
                     if (score > 99) {
                         text1.setText('Score: ' + score + ' Perfect!');
+
+                        m.play('dance');
                     }
                     else {
                         if (score > 89) {
                             text1.setText('Score: ' + score + ' Great');
+
+                            m.play('dance');
                         }
                         else {
                             if (score > 69) {
@@ -187,6 +217,8 @@ class MyScene extends Phaser.Scene {
             f.setVisible(true);
 
             p.setVisible(false);
+
+            m.play('burn');
 
             burnt = true;
         }
