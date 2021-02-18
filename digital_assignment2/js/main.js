@@ -132,11 +132,7 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {
-        if (space.isDown) {            
-            m.play('stir');
-
-            p.play('boiling');
-
+        if (space.isDown) {
             if (count > 1) {
                 this.scene.restart();                
             }
@@ -170,6 +166,9 @@ class MyScene extends Phaser.Scene {
                     }
                 }
                 else {
+                    m.play('stir');
+                    p.play('boiling');
+
                     timer1.paused = false;
                 }
             }
