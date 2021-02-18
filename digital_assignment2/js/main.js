@@ -64,7 +64,7 @@ class MyScene extends Phaser.Scene {
 
     create() {    
         text = this.add.text(350, 500, {fontSize: 1000});
-        text.setText('Score: ' + score);
+        text.setText('Your goal is to stop cooking after 20 seconds. Press SPACEBAR to start/stop cooking.');
 
         score = 0;
 
@@ -137,14 +137,14 @@ class MyScene extends Phaser.Scene {
 
             p.play('boiling');
 
-            if (count > 0) {
-                timer2.paused = false;
-
-                text.setText('Score: ' + score);
+            if (count > 1) {
+                this.scene.restart();                
             }
             else {
-                if (count > 1) {
-                    this.scene.restart();
+                if (count > 0) {
+                    timer2.paused = true;
+
+                    text.setText('Score: ' + score);
                 }
                 timer1.paused = false;
             }
