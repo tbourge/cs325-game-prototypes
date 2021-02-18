@@ -1,14 +1,10 @@
 import "./phaser.js";
 
 var space;
-var text;
-var p;
-var m;
-var f;
-var count;
-var timer1;
-var timer2;
-var score;
+var text1, text2;
+var p, f, m;
+var count, score, burnt;
+var timer1, timer2;
 
 // You can copy-and-paste the code from any of the examples at https://examples.phaser.io here.
 // You will need to change the `parent` parameter passed to `new Phaser.Game()` from
@@ -63,10 +59,14 @@ class MyScene extends Phaser.Scene {
     }
 
     create() {    
-        text = this.add.text(150, 500, {fontSize: 1000});
-        text.setText('Your goal is to stop cooking after 20 seconds. Press SPACEBAR to start/stop cooking.');
+        text1 = this.add.text(150, 500, { fontSize: 1000 });
+        text2 = this.add.text(150, 550, { fontSize: 1000 });
+
+        text1.setText('Your goal is to stop cooking after 20 seconds.');
+        text2.setText('Press SPACEBAR to START/STOP cooking.');
 
         score = 0;
+        burnt = false;
 
         count = 0;
 
@@ -142,11 +142,17 @@ class MyScene extends Phaser.Scene {
             }
             else {
                 if (count > 0) {
+                    timer1.paused = true;
                     timer2.paused = true;
 
-                    text.setText('Score: ' + score);
+                    text1.setText('Score: ' + score);
+
+                    if (score > )
+                    text2.setText();
                 }
-                timer1.paused = false;
+                else {
+                    timer1.paused = false;
+                }
             }
             count++;            
         }
@@ -163,11 +169,12 @@ class MyScene extends Phaser.Scene {
             f.setVisible(true);
 
             p.setVisible(false);
+
+            burnt = true;
         }
     }
 
     loseScore() {
-        
         score--;
     }
 }
