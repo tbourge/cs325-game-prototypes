@@ -225,6 +225,7 @@ class MyScene extends Phaser.Scene {
             timer2.paused = false;
 
             f.setVisible(true);
+
             this.fireSound.play();
 
             p.setVisible(false);
