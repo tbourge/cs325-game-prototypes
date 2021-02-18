@@ -73,7 +73,7 @@ class MyScene extends Phaser.Scene {
         space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         timer1 = this.time.addEvent({ delay: 200, callback: this.gainScore, callbackScope: this, repeat: 100, paused: true });
-        timer2 = this.time.addEvent({ delay: 10, callback: this.loseScore, callbackScope: this, repeat: 99, paused: true });
+        timer2 = this.time.addEvent({ delay: 10, callback: this.loseScore, callbackScope: this, repeat: 100, paused: true });
 
         this.anims.create({
             key: 'boiling',
@@ -141,25 +141,25 @@ class MyScene extends Phaser.Scene {
                     timer1.paused = true;
                     timer2.paused = true;
 
-                    text1.setText('Score: ' + score);
+                    text2.setText('Press SPACEBAR to restart.');
 
                     if (score > 99) {
-                        text2.setText('Perfect!');
+                        text1.setText('Score: ' + score + ' Perfect!');
                     }
                     else {
                         if (score > 89) {
-                            text2.setText('Great');
+                            text1.setText('Score: ' + score + ' Great');
                         }
                         else {
                             if (score > 69) {
-                                text2.setText('Good');
+                                text1.setText('Score: ' + score + ' Good');
                             }
                             else {
                                 if (burnt) {
-                                    text2.setText('Burnt');
+                                    text1.setText('Score: ' + score + ' Burnt');
                                 }
                                 else {
-                                    text2.setText('Undercooked');
+                                    text1.setText('Score: ' + score + ' Undercooked');
                                 }
                             }
                         }
