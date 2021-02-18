@@ -26,7 +26,7 @@ class MyScene extends Phaser.Scene {
     
     preload() {
         this.load.audio("fireSound", "assets/fireSound.mp3");
-        //this.load.audio("clink", "assets/glass-clink.mp3");
+        this.load.audio("bubbleSound", "assets/boilingSound.mp3");
 
         this.load.path = 'assets/Anim/';
 
@@ -69,8 +69,11 @@ class MyScene extends Phaser.Scene {
         text1 = this.add.text(150, 500, { fontSize: 1000 });
         text2 = this.add.text(150, 550, { fontSize: 1000 });
 
+        //Copied from phaser basic playback example
         this.fireSound = this.sound.add("fireSound");
         this.fireSound.setLoop(true);
+        this.bubbleSound = this.sound.add("bubbleSound", { volume: 0.5 });
+        this.bubbleSound.setLoop(true);
 
         text1.setText('Your goal is to stop cooking after 20 seconds.');
         text2.setText('Press SPACEBAR to START/STOP cooking.');
@@ -209,6 +212,7 @@ class MyScene extends Phaser.Scene {
                     m.play('stir');
                     p.play('boiling');
 
+                    this.bubbleSound.play()
                     timer1.paused = false;
                 }
             }
@@ -227,6 +231,7 @@ class MyScene extends Phaser.Scene {
             f.setVisible(true);
 
             this.fireSound.play();
+            this.bubbleSound.stop();
 
             p.setVisible(false);
 
