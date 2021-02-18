@@ -147,8 +147,27 @@ class MyScene extends Phaser.Scene {
 
                     text1.setText('Score: ' + score);
 
-                    if (score > )
-                    text2.setText();
+                    if (score > 99) {
+                        text2.setText('Perfect!');
+                    }
+                    else {
+                        if (score > 89) {
+                            text2.setText('Great');
+                        }
+                        else {
+                            if (score > 69) {
+                                text2.setText('Good');
+                            }
+                            else {
+                                if (burnt) {
+                                    text2.setText('Burnt');
+                                }
+                                else {
+                                    text2.setText('Undercooked');
+                                }
+                            }
+                        }
+                    }
                 }
                 else {
                     timer1.paused = false;
