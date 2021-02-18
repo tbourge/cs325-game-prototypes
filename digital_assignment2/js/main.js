@@ -219,7 +219,7 @@ class MyScene extends Phaser.Scene {
             p.setVisible(false);
 
             m.play('burn');
-            m.x -= 32;
+            m.x -= 48;
             burnt = true;
         }
     }
