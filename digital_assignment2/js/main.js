@@ -132,7 +132,7 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {
-        if (space.isDown) {
+        if (Phaser.Input.Keyboard.JustDown(space)) {
             if (count > 1) {
                 this.scene.restart();                
             }
