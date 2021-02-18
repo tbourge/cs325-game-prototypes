@@ -18,15 +18,16 @@ var timer1, timer2;
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 
-class MyScene extends Phaser.Scene {
-
-    
+class MyScene extends Phaser.Scene {    
 
     constructor() {
         super();
     }
     
     preload() {
+        this.load.audio("fireSound", "assets/fireSound.mp3");
+        //this.load.audio("clink", "assets/glass-clink.mp3");
+
         this.load.path = 'assets/Anim/';
 
         this.load.image('pot0', 'Pot0.png');
@@ -68,6 +69,8 @@ class MyScene extends Phaser.Scene {
         text1 = this.add.text(150, 500, { fontSize: 1000 });
         text2 = this.add.text(150, 550, { fontSize: 1000 });
 
+        this.fireSound = this.sound.add("fireSound");
+
         text1.setText('Your goal is to stop cooking after 20 seconds.');
         text2.setText('Press SPACEBAR to START/STOP cooking.');
 
@@ -76,11 +79,14 @@ class MyScene extends Phaser.Scene {
 
         count = 0;
 
+        //Copied from phaser keyboard press example.
         space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
+        //Copied from phaser timer example.
         timer1 = this.time.addEvent({ delay: 200, callback: this.gainScore, callbackScope: this, repeat: 100, paused: true });
         timer2 = this.time.addEvent({ delay: 10, callback: this.loseScore, callbackScope: this, repeat: 99, paused: true });
 
+        //Copied from phaser animation from series of images example.
         this.anims.create({
             key: 'boiling',
             frames: [
@@ -158,6 +164,7 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {
+        //Copied from phaser keyboard press example.
         if (Phaser.Input.Keyboard.JustDown(space)) {
             if (count > 1) {
                 this.scene.restart();                
@@ -167,7 +174,7 @@ class MyScene extends Phaser.Scene {
                     timer1.paused = true;
                     timer2.paused = true;
 
-                    text2.setText('Press SPACEBAR to restart.');
+                    text2.setText('Press SPACEBAR to RESTART.');
 
                     if (score > 99) {
                         text1.setText('Score: ' + score + ' Perfect!');
@@ -217,6 +224,7 @@ class MyScene extends Phaser.Scene {
             timer2.paused = false;
 
             f.setVisible(true);
+            this.fireSound.play();
 
             p.setVisible(false);
 

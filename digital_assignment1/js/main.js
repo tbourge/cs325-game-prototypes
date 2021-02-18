@@ -11,6 +11,8 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
+//All code I added has been marked with a comment above it.
+
 var Breakout = new Phaser.Class({
 
     Extends: Phaser.Scene,
@@ -27,7 +29,7 @@ var Breakout = new Phaser.Class({
 
     preload: function () {
         this.load.atlas('assets', 'assets/breakout.png', 'assets/breakout.json');
-
+        //loading my audio
         this.load.audio("clink", "assets/glass-clink.mp3");
         this.load.audio("open", "assets/bottle-open.mp3");
 
@@ -74,17 +76,21 @@ var Breakout = new Phaser.Class({
 
         }, this);
 
+        //Sound Effects I added
         this.clinkSound = this.sound.add("clink");
         this.openSound = this.sound.add("open");
     },
 
     hitBrick: function (ball, brick) {
 
+        //height comparison I added
         if (brick.y >= ball.y + 20) {
+            //sound effect I added
             this.openSound.play();
             brick.disableBody(true, true);
         }
         else {
+            //sound effect I added
             this.clinkSound.play();
         }
 
