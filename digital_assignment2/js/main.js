@@ -72,7 +72,8 @@ class MyScene extends Phaser.Scene {
         //Copied from phaser basic playback example
         this.fireSound = this.sound.add("fireSound");
         this.fireSound.setLoop(true);
-        this.bubbleSound = this.sound.add("bubbleSound", { volume: 0.5 });
+        this.fireSound.stop();
+        this.bubbleSound = this.sound.add("bubbleSound", { volume: 0.2 });
         this.bubbleSound.setLoop(true);
 
         text1.setText('Your goal is to stop cooking after 20 seconds.');
