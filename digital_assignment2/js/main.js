@@ -70,6 +70,7 @@ class MyScene extends Phaser.Scene {
         text2 = this.add.text(150, 550, { fontSize: 1000 });
 
         this.fireSound = this.sound.add("fireSound");
+        this.fireSound.setLoop(true);
 
         text1.setText('Your goal is to stop cooking after 20 seconds.');
         text2.setText('Press SPACEBAR to START/STOP cooking.');
