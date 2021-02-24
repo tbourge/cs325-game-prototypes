@@ -46,7 +46,7 @@ class MyScene extends Phaser.Scene {
 
 
         //Copied from phaser timer example.
-        pirateTimer = this.time.addEvent({ delay: 1000, callback: this.spawn(), callbackScope: this, repeat: -1, paused: true });
+        pirateTimer = this.time.addEvent({ delay: 1000, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
         cannonTimer = this.time.addEvent({ delay: 500, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
 
         //Copied from Create Animation From Sprite Sheet
@@ -84,7 +84,7 @@ class MyScene extends Phaser.Scene {
 
         cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
             if (animNotDone) {
-                new Ball(cannon.x - 32, cannon.y);
+                new Ball(this, cannon.x - 32, cannon.y);
                 this.reload(cannon);
                 animNotDone--;
             }
@@ -110,7 +110,7 @@ class MyScene extends Phaser.Scene {
     }
 
     spawn() {
-        new Pirate(-16, Math.random() * 36 + 32);
+        new Pirate(this, -16, Math.random() * 36 + 32);
     }
 
     impact(ball, pirate) {
@@ -120,12 +120,12 @@ class MyScene extends Phaser.Scene {
 }
 
 class Ball extends Phaser.GameObjects.Sprite {
-    constructor(x, y) {
-        super(MyScene, x, y, 'ball');
-        MyScene.add.existing(this);
+    constructor(scene, x, y) {
+        super(scene, x, y, 'ball');
+        scene.add.existing(this);
 
         this.play('roll');
-        MyScene.physics.world.enableBody(this);
+        scene.physics.world.enableBody(this);
         this.body.velocity.x = -60;
     }
 
@@ -137,12 +137,12 @@ class Ball extends Phaser.GameObjects.Sprite {
 }
 
 class Pirate extends Phaser.GameObjects.Sprite {
-    constructor(x, y) {
-        super(MyScene, x, y, 'pirateb');
-        MyScene.add.existing(this);
+    constructor(scene, x, y) {
+        super(scene, x, y, 'pirateb');
+        scene.add.existing(this);
 
         this.play('walk');
-        MyScene.physics.world.enableBody(this);
+        scene.physics.world.enableBody(this);
         this.body.velocity.x = 30;
     }
 }
