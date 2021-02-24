@@ -13,6 +13,7 @@ import "./phaser.js";
 
 var animNotDone;
 var pirateTimer, cannonTimer;
+var target;
 
 class MyScene extends Phaser.Scene {
     
@@ -32,6 +33,15 @@ class MyScene extends Phaser.Scene {
     create() {
         animNotDone = 1;
 
+        //Copied from
+        target = this.physics.add.image(400, 550, 'assets', 'target').setImmovable();
+
+        this.input.on('pointermove', function (pointer) {
+
+            //  Keep the paddle within the game
+            this.target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
+        }, this);
+
         //Copied from phaser timer example.
         pirateTimer = this.time.addEvent({ delay: 1000, callback: this., callbackScope: this, repeat: -1, paused: true });
         cannonTimer = this.time.addEvent({ delay: 500, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
@@ -40,6 +50,13 @@ class MyScene extends Phaser.Scene {
         this.anims.create({
             key: 'roll',
             frames: this.anims.generateFrameNumbers('ball', { frames: [0, 1, 2, 3] }),
+            frameRate: 8,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'walk',
+            frames: this.anims.generateFrameNumbers('pirateb', { frames: [0, 1, 2, 3, 4, 5] }),
             frameRate: 8,
             repeat: -1
         });
