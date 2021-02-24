@@ -91,7 +91,7 @@ class MyScene extends Phaser.Scene {
             }
         }, this);
 
-        this.shoot(cannon);
+        this.shoot();
 
         this.spawn();
     }
@@ -105,7 +105,7 @@ class MyScene extends Phaser.Scene {
         }
     }
 
-    shoot(cannon) {
+    shoot() {
         cannon.play('fire');
 
         animNotDone = 1;
