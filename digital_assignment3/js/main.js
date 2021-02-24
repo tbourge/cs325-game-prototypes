@@ -23,6 +23,8 @@ class MyScene extends Phaser.Scene {
     
     preload() {
         this.load.image('background', 'assets/art/Background.png');
+        this.load.image('target', 'assets/art/Target.png');
+
         //Copied from Create Animation From Sprite Sheet
         this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('cannon', 'assets/art/Cannon.png', { frameWidth: 64, frameHeight: 32 });
@@ -33,12 +35,15 @@ class MyScene extends Phaser.Scene {
     create() {
         animNotDone = 1;
 
-        //Copied from
+        //Copied from Phaser Breakout example.
         target = this.physics.add.image(400, 550, 'assets', 'target').setImmovable();
 
         this.input.on('pointermove', function (pointer) {          
             this.target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
         }, this);
+
+        this.physics.add.collider(Ball, Pirate, this.impact, null, this);
+
 
         //Copied from phaser timer example.
         pirateTimer = this.time.addEvent({ delay: 1000, callback: this.spawn(), callbackScope: this, repeat: -1, paused: true });
@@ -86,6 +91,8 @@ class MyScene extends Phaser.Scene {
         }, this);
 
         this.shoot(cannon);
+
+        this.spawn();
     }
     
     update() {
@@ -103,8 +110,10 @@ class MyScene extends Phaser.Scene {
     }
 
     spawn() {
-        new Pirate();
+        new Pirate(-16, Math.random() * 36 + 32);
     }
+
+    impact()
 }
 
 class Ball extends Phaser.GameObjects.Sprite {
