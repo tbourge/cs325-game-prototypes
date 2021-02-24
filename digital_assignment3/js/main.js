@@ -96,7 +96,12 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {
-
+        if (cannon.y > target.y) {
+            cannon.y--;
+        }
+        else {
+            cannon.y++;
+        }
     }
 
     shoot(cannon) {
