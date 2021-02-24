@@ -22,6 +22,8 @@ class MyScene extends Phaser.Scene {
         //Copied from Create Animation From Sprite Sheet
         this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('cannon', 'assets/art/Cannon.png', { frameWidth: 64, frameHeight: 32 });
+        this.load.spritesheet('pirateb', 'assets/art/PirateBSheet.png', { frameWidth: 32, frameHeight: 32 });
+
     }
     
     create() {
@@ -49,9 +51,9 @@ class MyScene extends Phaser.Scene {
 
         this.add.sprite(400, 300, 'background');
 
-        this.add.sprite(600, 300, 'cannon');
+        let cannon = this.add.sprite(600, 300, 'cannon').play('fire');
 
-        this.shoot(400, 300);
+        this.shoot(cannon.x, cannon.y);
     }
     
     update() {
