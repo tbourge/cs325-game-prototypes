@@ -53,6 +53,10 @@ class MyScene extends Phaser.Scene {
 
         let cannon = this.add.sprite(600, 300, 'cannon');
 
+        cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
+            this.reload();
+        }, this);
+
         this.shoot(cannon);
     }
     
@@ -61,14 +65,16 @@ class MyScene extends Phaser.Scene {
     }
 
     shoot(cannon) {
-        let x = cannon.x;
+        let x = cannon.x - 32;
         let y = cannon.y;
 
         cannon.play('fire');
 
         new Ball(this, x, y);
+    }
 
-        cannon.play('load');
+    reload() {
+        this.play('load');
     }
 }
 
