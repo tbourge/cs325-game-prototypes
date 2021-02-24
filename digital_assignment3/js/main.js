@@ -20,8 +20,8 @@ class MyScene extends Phaser.Scene {
     preload() {
         this.load.image('background', 'assets/art/Background.png');
         //Copied from Create Animation From Sprite Sheet
-        this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 64, frameHeight: 64 });
-        this.load.spritesheet('cannon', 'assets/art/Cannon.png', { frameWidth: 256, frameHeight: 128 });
+        this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 16, frameHeight: 16 });
+        this.load.spritesheet('cannon', 'assets/art/Cannon.png', { frameWidth: 64, frameHeight: 32 });
     }
     
     create() {
