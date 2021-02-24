@@ -12,8 +12,8 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 var animNotDone;
-var pirateTimer, cannonTimer;
-var target;
+var pirateTimer, cannonTimer, timer;
+var target, cannon;
 
 class MyScene extends Phaser.Scene {
     
@@ -48,6 +48,9 @@ class MyScene extends Phaser.Scene {
         //Copied from phaser timer example.
         pirateTimer = this.time.addEvent({ delay: 1000, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
         cannonTimer = this.time.addEvent({ delay: 500, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
+        timer = this.time.addEvent({ delay: 500, callback: this.addScore, callbackScope: this, repeat: -1, paused: true });
+
+
 
         //Copied from Create Animation From Sprite Sheet
         this.anims.create({
@@ -80,7 +83,7 @@ class MyScene extends Phaser.Scene {
 
         this.add.sprite(0, 0, 'background');
 
-        let cannon = this.add.sprite(600, 300, 'cannon');
+        cannon = this.add.sprite(600, 300, 'cannon');
 
         cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
             if (animNotDone) {
@@ -121,6 +124,10 @@ class MyScene extends Phaser.Scene {
     impact(ball, pirate) {
         pirate.destroy();
         ball.destroy();
+    }
+
+    addScore() {
+
     }
 }
 
