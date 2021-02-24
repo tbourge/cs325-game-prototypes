@@ -26,9 +26,9 @@ class MyScene extends Phaser.Scene {
         this.load.image('target', 'assets/art/Target.png');
 
         //Copied from Create Animation From Sprite Sheet
-        this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 16, frameHeight: 16 });
-        this.load.spritesheet('cannon', 'assets/art/Cannon.png', { frameWidth: 64, frameHeight: 32 });
-        this.load.spritesheet('pirateb', 'assets/art/PirateBSheet.png', { frameWidth: 32, frameHeight: 32 });
+        this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 48, frameHeight: 48 });
+        this.load.spritesheet('cannon', 'assets/art/Cannon.png', { frameWidth: 192, frameHeight: 96 });
+        this.load.spritesheet('pirateb', 'assets/art/PirateBSheet.png', { frameWidth: 96, frameHeight: 96 });
 
     }
     
@@ -50,9 +50,7 @@ class MyScene extends Phaser.Scene {
         //Copied from phaser timer example.
         pirateTimer = this.time.addEvent({ delay: 1000, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
         cannonTimer = this.time.addEvent({ delay: 500, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
-        timer = this.time.addEvent({ delay: 500, callback: this.addScore, callbackScope: this, repeat: -1, paused: true });
-
-
+        timer = this.time.addEvent({ delay: 1000, callback: this.addScore, callbackScope: this, repeat: -1, paused: true });
 
         //Copied from Create Animation From Sprite Sheet
         this.anims.create({
