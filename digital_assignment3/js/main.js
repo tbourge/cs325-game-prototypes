@@ -31,7 +31,7 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        ball = new Ball(this);
+        ball = new Ball(this, 400, 300);
     }
     
     update() {
@@ -44,10 +44,7 @@ class MyScene extends Phaser.Scene {
 }
 
 class Ball extends Phaser.GameObjects.Sprite {
-    constructor(scene) {
-        let x = 400;
-        let y = 300;
-
+    constructor(scene, x, y) {
         super(scene, x, y, 'ball');
         scene.add.existing(this);
 
