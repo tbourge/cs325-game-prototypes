@@ -48,8 +48,8 @@ class MyScene extends Phaser.Scene {
 
 
         //Copied from phaser timer example.
-        pirateTimer = this.time.addEvent({ delay: 1000, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
-        cannonTimer = this.time.addEvent({ delay: 500, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
+        pirateTimer = this.time.addEvent({ delay: 500, callback: this.spawn, callbackScope: this, repeat: -1, paused: false });
+        cannonTimer = this.time.addEvent({ delay: 500, callback: this.shoot, callbackScope: this, repeat: -1, paused: false });
         timer = this.time.addEvent({ delay: 1000, callback: this.addScore, callbackScope: this, repeat: -1, paused: true });
 
         //Copied from Create Animation From Sprite Sheet
