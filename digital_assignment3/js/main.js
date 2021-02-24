@@ -53,7 +53,13 @@ class Ball extends Phaser.GameObjects.Sprite {
 
         this.play('roll');
         scene.physics.world.enableBody(this);
-        this.body.velocity.x = -20;
+        this.body.velocity.x = -60;
+    }
+
+    update() {
+        if (this.x < 0) {
+            this.destroy();
+        }
     }
 }
 
