@@ -113,7 +113,10 @@ class MyScene extends Phaser.Scene {
         new Pirate(-16, Math.random() * 36 + 32);
     }
 
-    impact()
+    impact(ball, pirate) {
+        pirate.destroy();
+        ball.destroy();
+    }
 }
 
 class Ball extends Phaser.GameObjects.Sprite {
