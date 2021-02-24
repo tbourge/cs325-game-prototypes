@@ -70,7 +70,7 @@ class MyScene extends Phaser.Scene {
         this.anims.create({
             key: 'fire',
             frames: this.anims.generateFrameNumbers('cannon', { frames: [2, 3, 2] }),
-            frameRate: 8,
+            frameRate: 6,
             repeat: 0
         });
 
