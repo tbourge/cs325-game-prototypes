@@ -48,8 +48,8 @@ class MyScene extends Phaser.Scene {
 
 
         //Copied from phaser timer example.
-        pirateTimer = this.time.addEvent({ delay: 500, callback: this.spawn, callbackScope: this, repeat: -1, paused: false });
-        cannonTimer = this.time.addEvent({ delay: 500, callback: this.shoot, callbackScope: this, repeat: -1, paused: false });
+        pirateTimer = this.time.addEvent({ delay: 3000, callback: this.spawn, callbackScope: this, repeat: -1, paused: false });
+        cannonTimer = this.time.addEvent({ delay: 3000, callback: this.shoot, callbackScope: this, repeat: -1, paused: false });
         timer = this.time.addEvent({ delay: 1000, callback: this.addScore, callbackScope: this, repeat: -1, paused: true });
 
         //Copied from Create Animation From Sprite Sheet
@@ -129,7 +129,7 @@ class MyScene extends Phaser.Scene {
     }
 }
 
-class Ball extends Phaser.GameObjects.Sprite {
+class Ball extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, 'ball');
         scene.add.existing(this);
@@ -146,7 +146,7 @@ class Ball extends Phaser.GameObjects.Sprite {
     }
 }
 
-class Pirate extends Phaser.GameObjects.Sprite {
+class Pirate extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, 'pirateb');
         scene.add.existing(this);
