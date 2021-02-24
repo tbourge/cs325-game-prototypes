@@ -37,7 +37,7 @@ class MyScene extends Phaser.Scene {
 
         this.anims.create({
             key: 'fire',
-            frames: this.anims.generateFrameNumbers('cannon', { frames: [2, 3] }),
+            frames: this.anims.generateFrameNumbers('cannon', { frames: [2, 3, 2] }),
             frameRate: 8,
             repeat: 0
         });
@@ -49,19 +49,26 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
-        this.add.sprite(400, 300, 'background');
+        this.add.sprite(0, 0, 'background');
 
-        let cannon = this.add.sprite(600, 300, 'cannon').play('fire');
+        let cannon = this.add.sprite(600, 300, 'cannon');
 
-        this.shoot(cannon.x, cannon.y);
+        this.shoot(cannon);
     }
     
     update() {
 
     }
 
-    shoot(x, y) {
+    shoot(cannon) {
+        let x = cannon.x;
+        let y = cannon.y;
+
+        cannon.play('fire');
+
         new Ball(this, x, y);
+
+        cannon.play('load');
     }
 }
 
