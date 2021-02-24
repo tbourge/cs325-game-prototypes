@@ -39,7 +39,7 @@ class MyScene extends Phaser.Scene {
         target = this.physics.add.image(400, 550, 'assets', 'target').setImmovable();
 
         this.input.on('pointermove', function (pointer) {          
-            this.target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
+            target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
         }, this);
 
         this.physics.add.collider(Ball, Pirate, this.impact, null, this);
