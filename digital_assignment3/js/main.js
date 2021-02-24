@@ -18,6 +18,7 @@ class MyScene extends Phaser.Scene {
     }
     
     preload() {
+        this.load.sprite('background', 'assets/art/background.png');
         //Copied from Create Animation From Sprite Sheet
         this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 64, frameHeight: 64 });
     }
@@ -30,6 +31,8 @@ class MyScene extends Phaser.Scene {
             frameRate: 8,
             repeat: -1
         });
+
+        this.add.sprite(400, 300, 'background');
 
         this.shoot(400, 300);
     }
