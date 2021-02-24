@@ -33,6 +33,8 @@ class MyScene extends Phaser.Scene {
     }
     
     create() {
+        this.add.sprite(0, 0, 'background');
+
         animNotDone = 1;
 
         //Copied from Phaser Breakout example.
@@ -80,8 +82,6 @@ class MyScene extends Phaser.Scene {
             frameRate: 8,
             repeat: 0
         });
-
-        this.add.sprite(0, 0, 'background');
 
         cannon = this.add.sprite(600, 300, 'cannon');
 
