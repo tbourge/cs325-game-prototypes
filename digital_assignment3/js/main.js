@@ -31,7 +31,7 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        ball = new Ball(this, 400, 300);
+        this.shoot(400, 300);
     }
     
     update() {
@@ -39,7 +39,7 @@ class MyScene extends Phaser.Scene {
     }
 
     shoot(x, y) {
-
+        new Ball(this, x, y);
     }
 }
 
