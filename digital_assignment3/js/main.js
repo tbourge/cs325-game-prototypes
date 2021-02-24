@@ -36,14 +36,12 @@ class MyScene extends Phaser.Scene {
         //Copied from
         target = this.physics.add.image(400, 550, 'assets', 'target').setImmovable();
 
-        this.input.on('pointermove', function (pointer) {
-
-            //  Keep the paddle within the game
+        this.input.on('pointermove', function (pointer) {          
             this.target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
         }, this);
 
         //Copied from phaser timer example.
-        pirateTimer = this.time.addEvent({ delay: 1000, callback: this., callbackScope: this, repeat: -1, paused: true });
+        pirateTimer = this.time.addEvent({ delay: 1000, callback: this.spawn(), callbackScope: this, repeat: -1, paused: true });
         cannonTimer = this.time.addEvent({ delay: 500, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
 
         //Copied from Create Animation From Sprite Sheet
@@ -81,7 +79,7 @@ class MyScene extends Phaser.Scene {
 
         cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
             if (animNotDone) {
-                new Ball(this, cannon.x, cannon.y);
+                new Ball(cannon.x - 32, cannon.y);
                 this.reload(cannon);
                 animNotDone--;
             }
@@ -103,15 +101,19 @@ class MyScene extends Phaser.Scene {
     reload(cannon) {
         cannon.play('load');
     }
+
+    spawn() {
+        new Pirate();
+    }
 }
 
 class Ball extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y) {
-        super(scene, x, y, 'ball');
-        scene.add.existing(this);
+    constructor(x, y) {
+        super(MyScene, x, y, 'ball');
+        MyScene.add.existing(this);
 
         this.play('roll');
-        scene.physics.world.enableBody(this);
+        MyScene.physics.world.enableBody(this);
         this.body.velocity.x = -60;
     }
 
@@ -123,7 +125,14 @@ class Ball extends Phaser.GameObjects.Sprite {
 }
 
 class Pirate extends Phaser.GameObjects.Sprite {
+    constructor(x, y) {
+        super(MyScene, x, y, 'pirateb');
+        MyScene.add.existing(this);
 
+        this.play('walk');
+        MyScene.physics.world.enableBody(this);
+        this.body.velocity.x = 30;
+    }
 }
 
 const game = new Phaser.Game({
