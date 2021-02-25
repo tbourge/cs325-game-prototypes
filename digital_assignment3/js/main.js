@@ -44,8 +44,10 @@ class MyScene extends Phaser.Scene {
             target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
         }, this);
 
-        this.physics.add.collider(Ball, Pirate, this.impact, null, this);
+        balls = this.physics.add.group({ key: 'ball', classType: Ball });
+        pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
 
+        this.physics.add.collider(balls, pirates, this.impact(ball, pirate));
 
         //Copied from phaser timer example.
         pirateTimer = this.time.addEvent({ delay: 3000, callback: this.spawn, callbackScope: this, repeat: -1, paused: false });
@@ -91,9 +93,6 @@ class MyScene extends Phaser.Scene {
             }
         }, this);
 
-        this.shoot();
-
-        this.spawn();
     }
     
     update() {
@@ -129,7 +128,7 @@ class MyScene extends Phaser.Scene {
     }
 }
 
-class Ball extends Phaser.Physics.Arcade.Sprite {
+class Ball extends Phaser.GameObject.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, 'ball');
         scene.add.existing(this);
@@ -146,7 +145,7 @@ class Ball extends Phaser.Physics.Arcade.Sprite {
     }
 }
 
-class Pirate extends Phaser.Physics.Arcade.Sprite {
+class Pirate extends Phaser.GameObject.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, 'pirateb');
         scene.add.existing(this);
