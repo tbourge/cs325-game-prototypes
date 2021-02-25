@@ -88,7 +88,7 @@ class MyScene extends Phaser.Scene {
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
 
-        // collideWorldBounds: true,
+        //collideWorldBounds: true,
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.setActive(false);
@@ -259,6 +259,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
         this.play('walk');
 
         scene.physics.world.enableBody(this);
+        this.collideWorldBounds = true;
         this.body.velocity.x = 30;
     }
 
