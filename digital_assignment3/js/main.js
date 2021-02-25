@@ -33,7 +33,7 @@ class MyScene extends Phaser.Scene {
     }
     
     create() {
-        this.add.sprite(0, 0, 'background');
+        this.add.image(400, 300, 'background');
 
         animNotDone = 1;
 
