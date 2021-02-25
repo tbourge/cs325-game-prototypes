@@ -112,7 +112,7 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
-        cannon = this.add.sprite(725, 300, 'cannon');
+        cannon = this.add.sprite(700, 300, 'cannon');
 
         cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
             if (animNotDone) {
