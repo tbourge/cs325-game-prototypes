@@ -45,7 +45,6 @@ class MyScene extends Phaser.Scene {
         scoreText = this.add.text(20, 20, { fontSize: 1000 });
         timeText = this.add.text(20, 50, { fontSize: 1000 });
 
-        scoreText.setText('Score: 0');
         timeText.setText('Time: 0');
 
         animNotDone = 1;
@@ -80,8 +79,6 @@ class MyScene extends Phaser.Scene {
             ball.setVisible(false);
 
             grunt.play();
-
-            //score += 100;
         });
 
         //Copied from phaser timer example.
@@ -144,7 +141,6 @@ class MyScene extends Phaser.Scene {
         }
 
         timeText.setText('Time: ' + time);
-        scoreText.setText('Score: ' + score);
     }
 
     shoot() {
