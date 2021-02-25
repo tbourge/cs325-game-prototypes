@@ -132,6 +132,8 @@ class Ball extends Phaser.GameObjects.Sprite {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, 'ball');
 
         this.play('roll');
+
+        scene.physics.world.enableBody(this);
         this.body.velocity.x = -60;
     }
 
@@ -148,6 +150,8 @@ class Pirate extends Phaser.GameObjects.Sprite {
         Phaser.GameObjects.Sprite.call(this, scene, x, y, 'pirateb');
 
         this.play('walk');
+
+        scene.physics.world.enableBody(this);
         this.body.velocity.x = 30;
     }
 }
