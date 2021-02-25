@@ -102,7 +102,7 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
-        cannon = this.add.sprite(600, 300, 'cannon');
+        cannon = this.add.sprite(750, 300, 'cannon');
 
         cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
             if (animNotDone) {
@@ -156,12 +156,12 @@ class MyScene extends Phaser.Scene {
 
 class Ball extends Phaser.GameObjects.Sprite {
     constructor(scene) {
-        super(scene, 0, 0, 'ball');
-        Phaser.GameObjects.Sprite.call(this, scene, 0, 0, 'ball');
+        super(scene, 800, 0, 'ball');
+        Phaser.GameObjects.Sprite.call(this, scene, 800, 0, 'ball');
     }
 
     make(scene) {
-        this.setPosition(cannon.x, cannon.y);
+        this.setPosition(cannon.x - 32, cannon.y);
 
         this.play('roll');
 
