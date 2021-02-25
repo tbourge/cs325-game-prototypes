@@ -98,7 +98,7 @@ class MyScene extends Phaser.Scene {
             grunt.play();
         });
 
-        //
+        //Copied from Phaser group world bounds example.
         Phaser.Actions.Call(pirates.getChildren(), function (pir) {
             pir.body.onWorldBounds = true;
         });
@@ -143,7 +143,7 @@ class MyScene extends Phaser.Scene {
 
         cannon = this.add.sprite(690, 300, 'cannon');
 
-        //Copied from ...
+        //Copied from Phaser On complete event example
         cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
             if (animNotDone) {
                 var ball = balls.get().setActive(true).setVisible(true);
