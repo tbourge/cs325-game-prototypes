@@ -47,7 +47,10 @@ class MyScene extends Phaser.Scene {
         let balls = this.physics.add.group({ key: 'ball', classType: Ball });
         let pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
 
-        this.physics.add.collider(balls, pirates, this.impact(ball, pirate));
+        this.physics.add.collider(balls, pirates, function (ball, pirate) {
+            pirate.destroy();
+            ball.destroy();
+        });
 
         //Copied from phaser timer example.
         pirateTimer = this.time.addEvent({ delay: 3000, callback: this.spawn, callbackScope: this, repeat: -1, paused: false });
@@ -116,11 +119,6 @@ class MyScene extends Phaser.Scene {
 
     spawn() {
         new Pirate(this, -16, Math.random() * 36 + 32);
-    }
-
-    impact(ball, pirate) {
-        pirate.destroy();
-        ball.destroy();
     }
 
     addScore() {
