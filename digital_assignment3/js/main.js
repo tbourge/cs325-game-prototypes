@@ -38,7 +38,7 @@ class MyScene extends Phaser.Scene {
         animNotDone = 1;
 
         //Copied from Phaser Breakout example.
-        target = this.physics.add.image(400, 550, 'assets', 'target').setImmovable();
+        target = this.physics.add.image(400, 550, 'target').setImmovable();
 
         this.input.on('pointermove', function (pointer) {          
             target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
