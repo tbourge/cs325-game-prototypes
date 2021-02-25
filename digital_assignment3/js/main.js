@@ -128,7 +128,7 @@ class MyScene extends Phaser.Scene {
     }
 }
 
-class Ball extends Phaser.GameObject.Sprite {
+class Ball extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, 'ball');
         scene.add.existing(this);
@@ -145,7 +145,7 @@ class Ball extends Phaser.GameObject.Sprite {
     }
 }
 
-class Pirate extends Phaser.GameObject.Sprite {
+class Pirate extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, 'pirateb');
         scene.add.existing(this);
