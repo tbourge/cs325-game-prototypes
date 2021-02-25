@@ -181,10 +181,11 @@ class MyScene extends Phaser.Scene {
     }
 
     spawn() {
-        var p = pirates.get().setActive(true).setVisible(true);
+        var p = pirates.get()
 
         if (p) {
             p.make(this);
+            p.setActive(true).setVisible(true);
         }
     }
 
