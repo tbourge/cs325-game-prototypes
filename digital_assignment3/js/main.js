@@ -11,12 +11,19 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
+//Boolean
 var animNotDone;
-var pirateTimer, cannonTimer, timer;
+//Timers
+var pirateTimer, cannonTimer, timer, winTimer;
+//Objects
 var target, cannon;
+//Groups
 var balls, pirates;
+//Ints
 var score, time;
+//Text
 var scoreText, timeText;
+//Sound
 var grunt;
 
 class MyScene extends Phaser.Scene {
@@ -42,8 +49,9 @@ class MyScene extends Phaser.Scene {
     create() {
         this.add.image(400, 300, 'background');
 
-        scoreText = this.add.text(20, 20, { fontSize: 1000 });
-        timeText = this.add.text(20, 50, { fontSize: 1000 });
+        scoreText = this.add.text(20, 20, { fontSize: 10000 });
+        scoreText.setVisible(false);
+        timeText = this.add.text(400, 300, { fontSize: 1000 });
 
         timeText.setText('Time: 0');
 
@@ -63,11 +71,18 @@ class MyScene extends Phaser.Scene {
         }, this);
 
         this.input.on('pointerup', function (pointer) {
-            timer.paused = false;
-            pirateTimer.paused = false;
-            cannonTimer.paused = false;
+            if (gameOver) {
+                this.scene.restart();
+            }
+            else {
+                timer.paused = false;
+                pirateTimer.paused = false;
+                cannonTimer.paused = false;
+                winTimer.paused = false;
+            }
         }, this);
 
+        //Copied from ...
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
 
@@ -85,8 +100,10 @@ class MyScene extends Phaser.Scene {
         pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
         cannonTimer = this.time.addEvent({ delay: 3000, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
         timer = this.time.addEvent({ delay: 1000, callback: this.addTime, callbackScope: this, repeat: -1, paused: true });
+        winTimer = this.time.addEvent({ delay: 180000, callback: this.win, callbackScope: this, repeat: 0, paused: true });
 
-        //Copied from Create Animation From Sprite Sheet
+
+        //Copied from Phaser Create Animation From Sprite Sheet example.
         this.anims.create({
             key: 'roll',
             frames: this.anims.generateFrameNumbers('ball', { frames: [0, 1, 2, 3] }),
@@ -117,6 +134,7 @@ class MyScene extends Phaser.Scene {
 
         cannon = this.add.sprite(700, 300, 'cannon');
 
+        //Copied from ...
         cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
             if (animNotDone) {
                 var ball = balls.get().setActive(true).setVisible(true);
@@ -165,12 +183,35 @@ class MyScene extends Phaser.Scene {
     addTime() {
         time++;  
     }
+
+    lose() {
+        timer.paused = true;
+        pirateTimer.paused = true;
+        cannonTimer.paused = true;
+        winTimer.paused = true;
+
+        timeText.setVisible(false)
+        scoreText.setVisible(true);
+        scoreText.setText('You survived for: ' + time + ' seconds.');
+    }
+
+    win() {
+        timer.paused = true;
+        pirateTimer.paused = true;
+        cannonTimer.paused = true;
+        winTimer.paused = true;
+
+        timeText.setVisible(false)
+        scoreText.setVisible(true);
+        score = time * 10;
+        pirates.clear(true);
+        scoreText.setText('You survived! Score: ' + score);
+    }
 }
 
 class Ball extends Phaser.GameObjects.Sprite {
     constructor(scene) {
         super(scene, 800, 0, 'ball');
-        //Phaser.GameObjects.Sprite.call(this, scene, 800, 0, 'ball');
     }
 
     make(scene) {
@@ -192,8 +233,6 @@ class Ball extends Phaser.GameObjects.Sprite {
 class Pirate extends Phaser.GameObjects.Sprite {
     constructor(scene,) {
         super(scene, 0, 0, 'pirateb');
-        //Phaser.GameObjects.Sprite.call(this, scene, 0, 0, 'pirateb');
-        this.setActive(false);
     }
 
     make(scene) {
@@ -210,7 +249,9 @@ class Pirate extends Phaser.GameObjects.Sprite {
     }
 
     update() {
-        //start here w/ lose
+        if (this.x > 650) {
+            scene.lose();
+        }
     }
 }
 
