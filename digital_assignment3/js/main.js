@@ -84,7 +84,7 @@ class MyScene extends Phaser.Scene {
             }
         }, this);
 
-        //Copied from ...
+        //Copied from Phaser Group vs Group example.
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
 
