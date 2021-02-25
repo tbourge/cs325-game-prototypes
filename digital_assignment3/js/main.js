@@ -44,8 +44,8 @@ class MyScene extends Phaser.Scene {
             target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
         }, this);
 
-        balls = this.physics.add.group({ key: 'ball', classType: Ball });
-        pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
+        let balls = this.physics.add.group({ key: 'ball', classType: Ball });
+        let pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
 
         this.physics.add.collider(balls, pirates, this.impact(ball, pirate));
 
