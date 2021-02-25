@@ -60,7 +60,7 @@ class MyScene extends Phaser.Scene {
         score = 0;
         time = 0;
 
-        this.cannonSound = this.sound.add('cannonSound', { volume: 0.5, rate: 0.9 });
+        this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.8 });
         this.gruntSound = this.sound.add('grunt');
         grunt = this.gruntSound;
 
