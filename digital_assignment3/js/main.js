@@ -17,6 +17,7 @@ var target, cannon;
 var balls, pirates;
 var score, time;
 var scoreText, timeText;
+var grunt;
 
 class MyScene extends Phaser.Scene {
     
@@ -53,6 +54,7 @@ class MyScene extends Phaser.Scene {
 
         this.cannonSound = this.sound.add('cannonSound');
         this.gruntSound = this.sound.add('grunt');
+        grunt = this.gruntSound;
 
         //Copied from Phaser Breakout example.
         target = this.physics.add.image(50, 300, 'target').setImmovable();
@@ -71,7 +73,7 @@ class MyScene extends Phaser.Scene {
             ball.setActive(false);
             ball.setVisible(false);
 
-            this.gruntSound.play();
+            grunt.play();
 
             score += 100;
         });
