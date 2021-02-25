@@ -87,7 +87,7 @@ class MyScene extends Phaser.Scene {
 
         cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
             if (animNotDone) {
-                new Ball(this, cannon.x - 32, cannon.y);
+                var ball = balls.get().setActive(true).setVisible(true);
                 this.reload(cannon);
                 animNotDone--;
             }
@@ -130,11 +130,9 @@ class MyScene extends Phaser.Scene {
 
 class Ball extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {
-        super(scene, x, y, 'ball');
-        scene.add.existing(this);
+        Phaser.GameObjects.sprite.call(this, scene, x, y, 'ball');
 
         this.play('roll');
-        scene.physics.world.enableBody(this);
         this.body.velocity.x = -60;
     }
 
