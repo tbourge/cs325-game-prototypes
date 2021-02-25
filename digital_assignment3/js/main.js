@@ -188,7 +188,8 @@ class Ball extends Phaser.GameObjects.Sprite {
 class Pirate extends Phaser.GameObjects.Sprite {
     constructor(scene,) {
         super(scene, 0, 0, 'pirateb');
-        Phaser.GameObjects.Sprite.call(this, scene, 0, 0, 'pirateb');
+        //Phaser.GameObjects.Sprite.call(this, scene, 0, 0, 'pirateb');
+        this.setActive(false);
     }
 
     make(scene) {
