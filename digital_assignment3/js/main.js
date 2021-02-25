@@ -14,6 +14,7 @@ import "./phaser.js";
 var animNotDone;
 var pirateTimer, cannonTimer, timer;
 var target, cannon;
+var balls, pirates;
 
 class MyScene extends Phaser.Scene {
     
@@ -44,8 +45,8 @@ class MyScene extends Phaser.Scene {
             target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
         }, this);
 
-        let balls = this.physics.add.group({ key: 'ball', classType: Ball });
-        let pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
+        balls = this.physics.add.group({ key: 'ball', classType: Ball });
+        pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.setActive(false);
