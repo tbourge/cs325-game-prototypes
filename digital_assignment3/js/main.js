@@ -50,9 +50,9 @@ class MyScene extends Phaser.Scene {
         this.add.image(400, 300, 'background');
 
         scoreText = this.add.text(400, 300, { fontSize: 10000 });
-        scoreText.setVisible(false);
+        scoreText.setText('Click to Start');
         timeText = this.add.text(20, 20, { fontSize: 1000 });
-
+  
         timeText.setText('Time: 0');
 
         gameOver = 0;
@@ -76,6 +76,7 @@ class MyScene extends Phaser.Scene {
                 this.scene.restart();
             }
             else {
+                scoreText.setVisible(false);
                 timer.paused = false;
                 pirateTimer.paused = false;
                 cannonTimer.paused = false;
