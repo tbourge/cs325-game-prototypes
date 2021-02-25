@@ -219,7 +219,15 @@ class MyScene extends Phaser.Scene {
     }
 
     onWorldBounds(pir) {
-        this.lose();        
+        timer.paused = true;
+        pirateTimer.paused = true;
+        cannonTimer.paused = true;
+        winTimer.paused = true;
+
+        timeText.setVisible(false)
+        scoreText.setVisible(true);
+        scoreText.setText('You survived for: ' + time + ' seconds.');
+        gameOver = 1;  
     }
 }
 
