@@ -52,7 +52,7 @@ class MyScene extends Phaser.Scene {
         score = 0;
         time = 0;
 
-        this.cannonSound = this.sound.add('cannonSound', { volume: 0.5 });
+        this.cannonSound = this.sound.add('cannonSound', { volume: 0.5, rate: 0.9 });
         this.gruntSound = this.sound.add('grunt');
         grunt = this.gruntSound;
 
@@ -79,8 +79,8 @@ class MyScene extends Phaser.Scene {
         });
 
         //Copied from phaser timer example.
-        pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: false });
-        cannonTimer = this.time.addEvent({ delay: 3000, callback: this.shoot, callbackScope: this, repeat: -1, paused: false });
+        pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
+        cannonTimer = this.time.addEvent({ delay: 3000, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
         timer = this.time.addEvent({ delay: 1000, callback: this.addTime, callbackScope: this, repeat: -1, paused: true });
 
         //Copied from Create Animation From Sprite Sheet
@@ -172,7 +172,7 @@ class Ball extends Phaser.GameObjects.Sprite {
     }
 
     make(scene) {
-        this.setPosition(cannon.x - 46, cannon.y);
+        this.setPosition(cannon.x - 55, cannon.y);
 
         this.play('roll');
 
@@ -196,19 +196,16 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
     make(scene) {
         if (Math.random() < 0.5) {
-            this.setPosition(-16, 150);
+            this.setPosition(-16, 145 + Math.random() * 10);
         }
         else {
-            this.setPosition(-16, 450);
+            this.setPosition(-16, 445 + Math.random() * 10);
         }
         this.play('walk');
 
         scene.physics.world.enableBody(this);
         this.body.velocity.x = 30;
     }
-
-
-
 }
 
 const game = new Phaser.Game({
