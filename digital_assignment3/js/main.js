@@ -86,7 +86,9 @@ class MyScene extends Phaser.Scene {
 
         //Copied from ...
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
-        pirates = this.physics.add.group({ collideWorldBounds: true, key: 'pirate', classType: Pirate });
+        pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
+
+        // collideWorldBounds: true,
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.setActive(false);
