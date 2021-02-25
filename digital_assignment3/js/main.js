@@ -133,7 +133,7 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
-        cannon = this.add.sprite(700, 300, 'cannon');
+        cannon = this.add.sprite(690, 300, 'cannon');
 
         //Copied from ...
         cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
@@ -183,18 +183,6 @@ class MyScene extends Phaser.Scene {
 
     addTime() {
         time++;  
-    }
-
-    lose() {
-        timer.paused = true;
-        pirateTimer.paused = true;
-        cannonTimer.paused = true;
-        winTimer.paused = true;
-
-        timeText.setVisible(false)
-        scoreText.setVisible(true);
-        scoreText.setText('You survived for: ' + time + ' seconds.');
-        gameOver = 1;
     }
 
     win() {
@@ -253,8 +241,20 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
     update() {
         if (this.x > 650) {
-            scene.lose();
+            this.lose();
         }
+    }
+
+    lose() {
+        timer.paused = true;
+        pirateTimer.paused = true;
+        cannonTimer.paused = true;
+        winTimer.paused = true;
+
+        timeText.setVisible(false)
+        scoreText.setVisible(true);
+        scoreText.setText('You survived for: ' + time + ' seconds.');
+        gameOver = 1;
     }
 }
 
