@@ -63,6 +63,12 @@ class MyScene extends Phaser.Scene {
             target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
         }, this);
 
+        this.input.on('pointerup', function (pointer) {
+            timer.paused = false;
+            pirateTimer.paused = false;
+            cannonTimer.paused = false;
+        }, this);
+
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
 
@@ -75,7 +81,7 @@ class MyScene extends Phaser.Scene {
 
             grunt.play();
 
-            score += 100;
+            //score += 100;
         });
 
         //Copied from phaser timer example.
@@ -205,6 +211,10 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
         scene.physics.world.enableBody(this);
         this.body.velocity.x = 30;
+    }
+
+    update() {
+        //start here w/ lose
     }
 }
 
