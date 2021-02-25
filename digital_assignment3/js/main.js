@@ -50,7 +50,9 @@ class MyScene extends Phaser.Scene {
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.setActive(false);
+            pirate.setVisible(false);
             ball.setActive(false);
+            ball.setVisible(false);
         });
 
         //Copied from phaser timer example.
