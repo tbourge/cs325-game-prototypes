@@ -103,7 +103,7 @@ class MyScene extends Phaser.Scene {
             pir.onWorldBounds = true;
         });
 
-        this.physics.world.on('worldbounds', onWorldBounds);
+        this.physics.world.on('worldbounds', this.onWorldBounds);
 
         //Copied from phaser timer example.
         pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
