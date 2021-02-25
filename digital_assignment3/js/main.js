@@ -206,18 +206,6 @@ class MyScene extends Phaser.Scene {
         gameOver = 1;
     }
 
-    lose() {
-        timer.paused = true;
-        pirateTimer.paused = true;
-        cannonTimer.paused = true;
-        winTimer.paused = true;
-
-        timeText.setVisible(false)
-        scoreText.setVisible(true);
-        scoreText.setText('You survived for: ' + time + ' seconds.');
-        gameOver = 1;
-    }
-
     onWorldBounds(pir) {
         timer.paused = true;
         pirateTimer.paused = true;
@@ -253,8 +241,9 @@ class Ball extends Phaser.GameObjects.Sprite {
 }
 
 class Pirate extends Phaser.GameObjects.Sprite {
-    constructor(scene,) {
-        super(scene, 0, 0, 'pirateb');
+    constructor(scene) {
+        super(scene, 400, 300, 'pirateb');
+        this.setActive(false);
     }
 
     make(scene) {
