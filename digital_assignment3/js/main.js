@@ -29,7 +29,7 @@ class MyScene extends Phaser.Scene {
         this.load.image('target', 'assets/art/Target.png');
 
         this.load.audio('cannonSound', 'assets/sound/Cannon.mp3');
-        this.load.audio('grunt', 'assets/sound/Grunt');
+        this.load.audio('grunt', 'assets/sound/Grunt.mp3');
 
         //Copied from Create Animation From Sprite Sheet
         this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 48, frameHeight: 48 });
