@@ -209,7 +209,7 @@ class MyScene extends Phaser.Scene {
         gameOver = 1;
     }
 
-    onWorldBounds(pir) {
+    onWorldBounds() {
         timer.paused = true;
         pirateTimer.paused = true;
         cannonTimer.paused = true;
@@ -259,7 +259,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
         this.play('walk');
 
         scene.physics.world.enableBody(this);
-        this.collideWorldBounds = true;
+        this.body.collideWorldBounds = true;
         this.body.velocity.x = 30;
     }
 
