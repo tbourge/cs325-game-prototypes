@@ -28,6 +28,9 @@ class MyScene extends Phaser.Scene {
         this.load.image('background', 'assets/art/Background.png');
         this.load.image('target', 'assets/art/Target.png');
 
+        this.load.audio('cannonSound', 'assets/sound/Cannon.mp3');
+        this.load.audio('grunt', 'assets/sound/Grunt');
+
         //Copied from Create Animation From Sprite Sheet
         this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet('cannon', 'assets/art/Cannon.png', { frameWidth: 192, frameHeight: 96 });
@@ -48,6 +51,9 @@ class MyScene extends Phaser.Scene {
         score = 0;
         time = 0;
 
+        this.cannonSound = this.sound.add('cannonSound');
+        this.gruntSound = this.sound.add('grunt');
+
         //Copied from Phaser Breakout example.
         target = this.physics.add.image(50, 300, 'target').setImmovable();
 
@@ -64,6 +70,8 @@ class MyScene extends Phaser.Scene {
 
             ball.setActive(false);
             ball.setVisible(false);
+
+            this.gruntSound.play();
 
             score += 100;
         });
@@ -133,6 +141,7 @@ class MyScene extends Phaser.Scene {
 
     shoot() {
         cannon.play('fire');
+        this.cannonSound.play();
 
         animNotDone = 1;
     }
