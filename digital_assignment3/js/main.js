@@ -206,8 +206,20 @@ class MyScene extends Phaser.Scene {
         gameOver = 1;
     }
 
+    lose() {
+        timer.paused = true;
+        pirateTimer.paused = true;
+        cannonTimer.paused = true;
+        winTimer.paused = true;
+
+        timeText.setVisible(false)
+        scoreText.setVisible(true);
+        scoreText.setText('You survived for: ' + time + ' seconds.');
+        gameOver = 1;
+    }
+
     onWorldBounds(pir) {
-        pir.lose();        
+        this.lose();        
     }
 }
 
@@ -239,10 +251,10 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
     make(scene) {
         if (Math.random() < 0.5) {
-            this.setPosition(32, 145 + Math.random() * 10);
+            this.setPosition(45, 145 + Math.random() * 10);
         }
         else {
-            this.setPosition(32, 445 + Math.random() * 10);
+            this.setPosition(45, 445 + Math.random() * 10);
         }
         this.play('walk');
 
@@ -251,21 +263,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
     }
 
     update() {
-        if (this.x > 650) {
-            this.lose();
-        }
-    }
-
-    lose() {
-        timer.paused = true;
-        pirateTimer.paused = true;
-        cannonTimer.paused = true;
-        winTimer.paused = true;
-
-        timeText.setVisible(false)
-        scoreText.setVisible(true);
-        scoreText.setText('You survived for: ' + time + ' seconds.');
-        gameOver = 1;
+        
     }
 }
 
