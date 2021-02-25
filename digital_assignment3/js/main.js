@@ -15,6 +15,8 @@ var animNotDone;
 var pirateTimer, cannonTimer, timer;
 var target, cannon;
 var balls, pirates;
+var score, time;
+var scoreText, timeText;
 
 class MyScene extends Phaser.Scene {
     
@@ -36,7 +38,15 @@ class MyScene extends Phaser.Scene {
     create() {
         this.add.image(400, 300, 'background');
 
+        scoreText = this.add.text(20, 20, { fontSize: 1000 });
+        timeText = this.add.text(20, 50, { fontSize: 1000 });
+
+        scoreText.setText('Score: 0');
+        timeText.setText('Time: 0');
+
         animNotDone = 1;
+        score = 0;
+        time = 0;
 
         //Copied from Phaser Breakout example.
         target = this.physics.add.image(50, 300, 'target').setImmovable();
@@ -51,14 +61,17 @@ class MyScene extends Phaser.Scene {
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.setActive(false);
             pirate.setVisible(false);
+
             ball.setActive(false);
             ball.setVisible(false);
+
+            score += 100;
         });
 
         //Copied from phaser timer example.
-        pirateTimer = this.time.addEvent({ delay: 3000, callback: this.spawn, callbackScope: this, repeat: -1, paused: false });
+        pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: false });
         cannonTimer = this.time.addEvent({ delay: 3000, callback: this.shoot, callbackScope: this, repeat: -1, paused: false });
-        timer = this.time.addEvent({ delay: 1000, callback: this.addScore, callbackScope: this, repeat: -1, paused: true });
+        timer = this.time.addEvent({ delay: 1000, callback: this.addTime, callbackScope: this, repeat: -1, paused: true });
 
         //Copied from Create Animation From Sprite Sheet
         this.anims.create({
@@ -113,6 +126,9 @@ class MyScene extends Phaser.Scene {
         else {
             cannon.y++;
         }
+
+        timeText.setText('Time: ' + time);
+        scoreText.setText('Score: ' + score);
     }
 
     shoot() {
@@ -133,8 +149,8 @@ class MyScene extends Phaser.Scene {
         }
     }
 
-    addScore() {
-
+    addTime() {
+        time++;  
     }
 }
 
