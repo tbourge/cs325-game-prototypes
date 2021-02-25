@@ -100,7 +100,7 @@ class MyScene extends Phaser.Scene {
 
         //
         Phaser.Actions.Call(pirates.getChildren(), function (pir) {
-            pir.onWorldBounds = true;
+            pir.body.onWorldBounds = true;
         });
 
         this.physics.world.on('worldbounds', this.onWorldBounds);
