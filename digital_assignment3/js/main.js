@@ -93,11 +93,7 @@ class MyScene extends Phaser.Scene {
                 var ball = balls.get().setActive(true).setVisible(true);
 
                 if (ball) {
-
-                    ball.play('roll');
-
-                    this.physics.world.enableBody(ball);
-                    ball.body.velocity.x = -60;
+                    ball.make(this);                    
                 }
 
                 this.reload(cannon);
@@ -127,13 +123,10 @@ class MyScene extends Phaser.Scene {
     }
 
     spawn() {
-        var p = Pirate(this, -16, Math.random() * 36 + 32);
+        var p = pirates.get().setActive(true).setVisible(true);
 
         if (p) {
-            p.play('walk');
-
-            this.physics.world.enableBody(p);
-            p.body.velocity.x = 30;
+            p.make(this);
         }
     }
 
@@ -148,6 +141,15 @@ class Ball extends Phaser.GameObjects.Sprite {
         Phaser.GameObjects.Sprite.call(this, scene, 0, 0, 'ball');
     }
 
+    make(scene) {
+        this.setPosition(cannon.x, cannon.y);
+
+        this.play('roll');
+
+        scene.physics.world.enableBody(this);
+        this.body.velocity.x = -60;
+    }
+
     update() {
         if (this.x < 0) {
             this.destroy();
@@ -160,6 +162,16 @@ class Pirate extends Phaser.GameObjects.Sprite {
         super(scene, 0, 0, 'pirateb');
         Phaser.GameObjects.Sprite.call(this, scene, 0, 0, 'pirateb');
     }
+
+    make(scene) {
+        this.setPosition(-16, Math.random() * 536 + 32);
+
+        this.play('walk');
+
+        scene.physics.world.enableBody(this);
+        this.body.velocity.x = 30;
+    }
+
 }
 
 const game = new Phaser.Game({
