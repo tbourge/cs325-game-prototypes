@@ -181,7 +181,7 @@ class MyScene extends Phaser.Scene {
     }
 
     spawn() {
-        var p = pirates.get(400, 300)
+        var p = pirates.get({ x: 400, y: 300 })
 
         if (p) {
             p.make(this);
