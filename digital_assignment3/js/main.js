@@ -12,7 +12,7 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 //Boolean
-var animNotDone;
+var animNotDone, gameOver;
 //Timers
 var pirateTimer, cannonTimer, timer, winTimer;
 //Objects
@@ -55,6 +55,7 @@ class MyScene extends Phaser.Scene {
 
         timeText.setText('Time: 0');
 
+        gameOver = 0;
         animNotDone = 1;
         score = 0;
         time = 0;
@@ -193,6 +194,7 @@ class MyScene extends Phaser.Scene {
         timeText.setVisible(false)
         scoreText.setVisible(true);
         scoreText.setText('You survived for: ' + time + ' seconds.');
+        gameOver = 1;
     }
 
     win() {
@@ -205,7 +207,8 @@ class MyScene extends Phaser.Scene {
         scoreText.setVisible(true);
         score = time * 10;
         pirates.clear(true);
-        scoreText.setText('You survived! Score: ' + score);
+        scoreText.setText('You survived! Score: ' + score + '<br>Click to restart');
+        gameOver = 1;
     }
 }
 
