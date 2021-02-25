@@ -251,7 +251,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
             this.setPosition(100, 145 + Math.random() * 10);
         }
         else {
-            this.setPosition(45, 445 + Math.random() * 10);
+            this.setPosition(100, 445 + Math.random() * 10);
         }
         this.play('walk');
 
