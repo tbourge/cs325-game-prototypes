@@ -49,7 +49,7 @@ class MyScene extends Phaser.Scene {
     create() {
         this.add.image(400, 300, 'background');
 
-        scoreText = this.add.text(400, 300, { fontSize: 10000 });
+        scoreText = this.add.text(350, 300, { fontSize: 10000 });
         scoreText.setText('Click to Start');
         timeText = this.add.text(20, 20, { fontSize: 1000 });
   
@@ -87,8 +87,6 @@ class MyScene extends Phaser.Scene {
         //Copied from ...
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
-
-        //collideWorldBounds: true,
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.setActive(false);
