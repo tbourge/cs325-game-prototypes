@@ -251,7 +251,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
     make(scene) {
         if (Math.random() < 0.5) {
-            this.setPosition(45, 145 + Math.random() * 10);
+            this.setPosition(100, 145 + Math.random() * 10);
         }
         else {
             this.setPosition(45, 445 + Math.random() * 10);
