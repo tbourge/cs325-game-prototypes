@@ -85,7 +85,7 @@ class MyScene extends Phaser.Scene {
 
         //Copied from ...
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
-        pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
+        pirates = this.physics.add.group({ collideWorldBounds: true, key: 'pirate', classType: Pirate });
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.setActive(false);
@@ -96,6 +96,13 @@ class MyScene extends Phaser.Scene {
 
             grunt.play();
         });
+
+        //
+        Phaser.Actions.Call(pirates.getChildren(), function (pir) {
+            pir.body.onWorldBounds = true;
+        });
+
+        this.physics.world.on('worldbounds', onWorldBounds);
 
         //Copied from phaser timer example.
         pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
@@ -148,7 +155,6 @@ class MyScene extends Phaser.Scene {
                 animNotDone--;
             }
         }, this);
-
     }
     
     update() {
@@ -198,6 +204,10 @@ class MyScene extends Phaser.Scene {
         scoreText.setText('You survived! Score: ' + score + '<br>Click to restart');
         gameOver = 1;
     }
+
+    onWorldBounds(pir) {
+        pir.lose();        
+    }
 }
 
 class Ball extends Phaser.GameObjects.Sprite {
@@ -228,10 +238,10 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
     make(scene) {
         if (Math.random() < 0.5) {
-            this.setPosition(-16, 145 + Math.random() * 10);
+            this.setPosition(32, 145 + Math.random() * 10);
         }
         else {
-            this.setPosition(-16, 445 + Math.random() * 10);
+            this.setPosition(32, 445 + Math.random() * 10);
         }
         this.play('walk');
 
