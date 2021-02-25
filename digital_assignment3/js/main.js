@@ -153,7 +153,7 @@ class Ball extends Phaser.GameObjects.Sprite {
 
     update() {
         if (this.x < 0) {
-            this.destroy();
+            this.setActive(false);
         }
     }
 }
