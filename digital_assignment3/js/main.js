@@ -128,7 +128,7 @@ class MyScene extends Phaser.Scene {
 
 class Ball extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {
-        Phaser.GameObjects.sprite.call(this, scene, x, y, 'ball');
+        Phaser.GameObjects.Sprite.call(this, scene, x, y, 'ball');
 
         this.play('roll');
         this.body.velocity.x = -60;
@@ -143,7 +143,7 @@ class Ball extends Phaser.GameObjects.Sprite {
 
 class Pirate extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {
-        Phaser.GameObjects.sprite.call(this, scene, x, y, 'pirateb');
+        Phaser.GameObjects.Sprite.call(this, scene, x, y, 'pirateb');
 
         this.play('walk');
         this.body.velocity.x = 30;
