@@ -170,7 +170,7 @@ class Ball extends Phaser.GameObjects.Sprite {
     }
 
     make(scene) {
-        this.setPosition(cannon.x - 32, cannon.y);
+        this.setPosition(cannon.x - 46, cannon.y);
 
         this.play('roll');
 
