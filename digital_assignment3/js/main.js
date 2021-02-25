@@ -145,11 +145,9 @@ class Ball extends Phaser.GameObjects.Sprite {
 
 class Pirate extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y) {
-        super(scene, x, y, 'pirateb');
-        scene.add.existing(this);
+        Phaser.GameObjects.sprite.call(this, scene, x, y, 'pirateb');
 
         this.play('walk');
-        scene.physics.world.enableBody(this);
         this.body.velocity.x = 30;
     }
 }
