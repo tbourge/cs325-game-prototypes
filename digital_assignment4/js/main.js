@@ -21,7 +21,7 @@ class MyScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("bg", "blurredGym.jpg");
+        this.load.image("bg", "assets/blurredGym.jpg");
     }
 
     create() {
