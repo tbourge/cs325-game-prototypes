@@ -49,27 +49,27 @@ class Bar {
     }
 
     draw() {
-        this.clear();
+        this.bar.clear();
 
         //  BG
-        this.fillStyle(0x000000);
-        this.fillRect(this.x, this.bar.y, 16, 80);
+        this.bar.fillStyle(0x000000);
+        this.bar.fillRect(this.x, this.bar.y, 16, 80);
 
         //  Health
 
-        this.fillStyle(0xffffff);
-        this.fillRect(this.x + 2, this.y + 2, 12, 76);
+        this.bar.fillStyle(0xffffff);
+        this.bar.fillRect(this.x + 2, this.y + 2, 12, 76);
 
         if (this.value < 30) {
-            this.fillStyle(0xff0000);
+            this.bar.fillStyle(0xff0000);
         }
         else {
-            this.fillStyle(0x00ff00);
+            this.bar.fillStyle(0x00ff00);
         }
 
         var d = Math.floor(this.p * this.value);
 
-        this.fillRect(this.x + 2, this.y + 2, d, 76);
+        this.bar.fillRect(this.x + 2, this.y + 2, d, 76);
     }
 
     change(amount) {
