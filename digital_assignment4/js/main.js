@@ -21,7 +21,7 @@ class MyScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("bg", "blurredGym.jpg")
+        this.load.image("bg", "blurredGym.jpg");
     }
 
     create() {
@@ -67,6 +67,22 @@ class MyScene extends Phaser.Scene {
         var d = Math.floor(this.bar.p * this.bar.value);
 
         this.bar.fillRect(this.bar.x + 2, this.bar.y + 2, d, 76);
+    }
+
+    change(amount) {
+        this.bar.value += amount;
+
+        if (this.bar.value < 0) {
+            this.bar.value = 0;
+        }
+
+        if (this.bar.value > 100) {
+            this.bar.value = 100;
+        }
+
+        this.draw();
+
+        return (this.bar.value === 0);
     }
 }
 
