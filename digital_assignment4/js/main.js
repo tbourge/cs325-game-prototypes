@@ -21,10 +21,11 @@ class MyScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("blurredGym.jpg")
+        this.load.image("bg", "blurredGym.jpg")
     }
 
     create() {
+        this.add.image()
         //Copied from Phaser health bar example
 
         this.bar = new Phaser.GameObjects.Graphics(this);
