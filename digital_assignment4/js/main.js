@@ -59,7 +59,7 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        let b = new Bar(this, 400, 300);
+        let b = new Bar(this, 20, 100);
 
         this.add.sprite(400, 300, "lift").play('lift');
     }
@@ -77,7 +77,7 @@ class Bar {
         this.x = x;
         this.y = y;
         this.value = 100;
-        this.p = 76 / 100;
+        this.p = 12 / 100;
 
         this.draw();
 
@@ -110,7 +110,7 @@ class Bar {
 
         var d = Math.floor(this.p * this.value);
 
-        this.bar.fillRect(this.x + 2, this.y + 2, d, 76);
+        this.bar.fillRect(this.x + 2, this.y + 2, d, 12);
     }
 
     change(amount) {
