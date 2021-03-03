@@ -36,6 +36,7 @@ class MyScene extends Phaser.Scene {
         this.bar.p = 76 / 100;
 
         this.draw();
+        this.change(100);
     }
 
     update() {
@@ -79,8 +80,6 @@ class MyScene extends Phaser.Scene {
         }
 
         this.draw();
-
-        return (this.bar.value === 0);
     }
 }
 
