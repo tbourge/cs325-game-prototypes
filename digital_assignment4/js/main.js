@@ -94,7 +94,7 @@ class Bar {
         //  Health
 
         this.bar.fillStyle(0xffffff);
-        this.bar.fillRect(this.x + 2, this.y + 2, 12, 40);
+        this.bar.fillRect(this.x + 2, this.y + 2, 12, 76);
 
         if (this.value < 30) {
             this.bar.fillStyle(0xff0000);
