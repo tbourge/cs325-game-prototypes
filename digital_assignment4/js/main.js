@@ -77,7 +77,7 @@ class Bar {
         this.x = x;
         this.y = y;
         this.value = 100;
-        this.p = 12 / 100;
+        this.p = 76 / 100;
 
         this.draw();
 
