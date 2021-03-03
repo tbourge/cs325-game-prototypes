@@ -11,13 +11,11 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
+
 class MyScene extends Phaser.Scene {
 
     constructor() {
         super();
-
-        this.bar;
-
     }
 
     preload() {
@@ -25,58 +23,64 @@ class MyScene extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(400, 300, "bg");
-        //Copied from Phaser health bar example
+        b = new Bar(this, 400, 300);
 
-        this.bar = new Phaser.GameObjects.Graphics(this);
 
-        this.bar.x = 400;
-        this.bar.y = 300;
-        this.bar.value = 100;
-        this.bar.p = 76 / 100;
-
-        this.draw();
-        this.change(100);
     }
 
     update() {
 
     }
+}
 
-    //Copied from Phaser health bar example
+//Copied from Phaser health bar example
+class Bar {
+    constructor(scene, x, y) {
+        this.bar = new Phaser.GameObjects.Graphics(scene);
+
+        this.x = x;
+        this.y = y;
+        this.value = 100;
+        this.p = 76 / 100;
+
+        this.draw();
+
+        scene.add.existing(this.bar);
+    }
+
     draw() {
-        this.bar.clear();
+        this.clear();
 
         //  BG
-        this.bar.fillStyle(0x000000);
-        this.bar.fillRect(this.bar.x, this.bar.y, 16, 80);
+        this.fillStyle(0x000000);
+        this.fillRect(this.x, this.bar.y, 16, 80);
 
         //  Health
 
-        this.bar.fillStyle(0xffffff);
-        this.bar.fillRect(this.bar.x + 2, this.bar.y + 2, 12, 76);
+        this.fillStyle(0xffffff);
+        this.fillRect(this.x + 2, this.y + 2, 12, 76);
 
         if (this.value < 30) {
-            this.bar.fillStyle(0xff0000);
+            this.fillStyle(0xff0000);
         }
         else {
-            this.bar.fillStyle(0x00ff00);
+            this.fillStyle(0x00ff00);
         }
 
-        var d = Math.floor(this.bar.p * this.bar.value);
+        var d = Math.floor(this.p * this.value);
 
-        this.bar.fillRect(this.bar.x + 2, this.bar.y + 2, d, 76);
+        this.fillRect(this.x + 2, this.y + 2, d, 76);
     }
 
     change(amount) {
-        this.bar.value += amount;
+        this.value += amount;
 
-        if (this.bar.value < 0) {
-            this.bar.value = 0;
+        if (this.value < 0) {
+            this.value = 0;
         }
 
-        if (this.bar.value > 100) {
-            this.bar.value = 100;
+        if (this.value > 100) {
+            this.value = 100;
         }
 
         this.draw();
