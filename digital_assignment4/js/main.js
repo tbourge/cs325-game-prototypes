@@ -30,7 +30,7 @@ class MyScene extends Phaser.Scene {
     create() {
         this.add.image(400, 300, "bg");
 
-        b = new Bar(this, 400, 300);
+        let b = new Bar(this, 400, 300);
 
         this.add.sprite(400, 500, "lift");
     }
