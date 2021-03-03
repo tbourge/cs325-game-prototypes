@@ -25,7 +25,7 @@ class MyScene extends Phaser.Scene {
     }
 
     create() {
-        this.bar = new Phaser.GameObjects.Graphics(scene);
+        this.bar = new Phaser.GameObjects.Graphics(this);
 
         this.bar.x = x;
         this.bar.y = y;
