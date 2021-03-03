@@ -21,14 +21,43 @@ class MyScene extends Phaser.Scene {
     preload() {
         this.load.image("bg", "assets/blurredGym.jpg");
 
-        this.load.spritesheet("lift", "assets/Weight lifter lift", { frameWidth: 96, frameHeight: 128 });
-        this.load.spritesheet("pant", "assets/Weight lifter pant", { frameWidth: 64, frameHeight: 128 });
-        this.load.spritesheet("sweat", "assets/Weight lifter sweat", { frameWidth: 64, frameHeight: 128 });
-        this.load.spritesheet("drop", "assets/Weight lifter drop", { frameWidth: 64, frameHeight: 128 });
+        this.load.spritesheet("lift", "assets/Weight lifter lift.png", { frameWidth: 96, frameHeight: 128 });
+        this.load.spritesheet("pant", "assets/Weight lifter pant.png", { frameWidth: 64, frameHeight: 128 });
+        this.load.spritesheet("sweat", "assets/Weight lifter sweat.png", { frameWidth: 64, frameHeight: 128 });
+        this.load.spritesheet("drop", "assets/Weight lifter drop.png", { frameWidth: 64, frameHeight: 128 });
     }
 
     create() {
         this.add.image(400, 300, "bg");
+
+        //Copied from Phaser Create Animation From Sprite Sheet example.
+        this.anims.create({
+            key: 'lift',
+            frames: this.anims.generateFrameNumbers('lift', { frames: [0, 1, 2, 3, 4, 5, 6, 7] }),
+            frameRate: 8,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: 'pant',
+            frames: this.anims.generateFrameNumbers('pant', { frames: [0, 1, 2, 3] }),
+            frameRate: 8,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'drop',
+            frames: this.anims.generateFrameNumbers('drop', { frames: [0, 1, 2, 3, 4, 5, 6] }),
+            frameRate: 8,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'lift',
+            frames: this.anims.generateFrameNumbers('lift', { frames: [2, 3, 4, 5] }),
+            frameRate: 8,
+            repeat: -1
+        });
 
         let b = new Bar(this, 400, 300);
 
@@ -71,7 +100,12 @@ class Bar {
             this.bar.fillStyle(0xff0000);
         }
         else {
-            this.bar.fillStyle(0x00ff00);
+            if (this.value > 60) {
+                this.bar.fillStyle(0xffff00);
+            }
+            else {
+                this.bar.fillStyle(0x00ff00);
+            }
         }
 
         var d = Math.floor(this.p * this.value);
