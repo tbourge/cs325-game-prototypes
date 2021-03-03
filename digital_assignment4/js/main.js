@@ -25,7 +25,7 @@ class MyScene extends Phaser.Scene {
     }
 
     create() {
-        this.add.image("bg");
+        this.add.image(400, 300, "bg");
         //Copied from Phaser health bar example
 
         this.bar = new Phaser.GameObjects.Graphics(this);
