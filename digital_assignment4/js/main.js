@@ -25,6 +25,8 @@ class MyScene extends Phaser.Scene {
     }
 
     create() {
+        //Copied from Phaser health bar example
+
         this.bar = new Phaser.GameObjects.Graphics(this);
 
         this.bar.x = x;
@@ -41,6 +43,7 @@ class MyScene extends Phaser.Scene {
 
     }
 
+    //Copied from Phaser health bar example
     draw() {
         this.bar.clear();
 
