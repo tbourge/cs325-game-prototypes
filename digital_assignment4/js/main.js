@@ -21,10 +21,10 @@ class MyScene extends Phaser.Scene {
     preload() {
         this.load.image("bg", "assets/blurredGym.jpg");
 
-        this.load.spritesheet("lift", "assets/Weight lifter lift.png", { frameWidth: 96, frameHeight: 128 });
-        this.load.spritesheet("pant", "assets/Weight lifter pant.png", { frameWidth: 64, frameHeight: 128 });
-        this.load.spritesheet("sweat", "assets/Weight lifter sweat.png", { frameWidth: 64, frameHeight: 128 });
-        this.load.spritesheet("drop", "assets/Weight lifter drop.png", { frameWidth: 64, frameHeight: 128 });
+        this.load.spritesheet("lift", "assets/Weight lifter lift.png", { frameWidth: 256, frameHeight: 512 });
+        this.load.spritesheet("pant", "assets/Weight lifter pant.png", { frameWidth: 256, frameHeight: 512 });
+        this.load.spritesheet("sweat", "assets/Weight lifter sweat.png", { frameWidth: 256, frameHeight: 512 });
+        this.load.spritesheet("drop", "assets/Weight lifter drop.png", { frameWidth: 256, frameHeight: 512 });
     }
 
     create() {
@@ -53,15 +53,15 @@ class MyScene extends Phaser.Scene {
         });
 
         this.anims.create({
-            key: 'lift',
-            frames: this.anims.generateFrameNumbers('lift', { frames: [2, 3, 4, 5] }),
+            key: 'sweat',
+            frames: this.anims.generateFrameNumbers('sweat', { frames: [2, 3, 4, 5] }),
             frameRate: 8,
             repeat: -1
         });
 
         let b = new Bar(this, 400, 300);
 
-        this.add.sprite(400, 500, "lift");
+        this.add.sprite(400, 500, "lift").play('lift');
     }
 
     update() {
