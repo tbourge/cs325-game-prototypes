@@ -59,7 +59,7 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        //let b = new Bar(this, 400, 300);
+        let b = new Bar(this, 400, 300);
 
         this.add.sprite(400, 300, "lift").play('lift');
     }
@@ -89,7 +89,7 @@ class Bar {
 
         //  BG
         this.bar.fillStyle(0x000000);
-        this.bar.fillRect(this.x, this.bar.y, 16, 80);
+        this.bar.fillRect(this.x, this.y, 16, 80);
 
         //  Health
 
