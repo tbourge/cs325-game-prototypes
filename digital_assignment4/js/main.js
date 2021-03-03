@@ -29,8 +29,8 @@ class MyScene extends Phaser.Scene {
 
         this.bar = new Phaser.GameObjects.Graphics(this);
 
-        this.bar.x = x;
-        this.bar.y = y;
+        this.bar.x = 400;
+        this.bar.y = 300;
         this.bar.value = 100;
         this.bar.p = 76 / 100;
 
