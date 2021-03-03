@@ -20,12 +20,19 @@ class MyScene extends Phaser.Scene {
 
     preload() {
         this.load.image("bg", "assets/blurredGym.jpg");
+
+        this.load.spritesheet("lift", "assets/Weight lifter lift", { frameWidth: 96, frameHeight: 128 });
+        this.load.spritesheet("pant", "assets/Weight lifter pant", { frameWidth: 64, frameHeight: 128 });
+        this.load.spritesheet("sweat", "assets/Weight lifter sweat", { frameWidth: 64, frameHeight: 128 });
+        this.load.spritesheet("drop", "assets/Weight lifter drop", { frameWidth: 64, frameHeight: 128 });
     }
 
     create() {
+        this.add.image(400, 300, "bg");
+
         b = new Bar(this, 400, 300);
 
-
+        this.add.sprite(400, 500, "lift");
     }
 
     update() {
