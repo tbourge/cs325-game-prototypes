@@ -11,6 +11,7 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
+var mode;
 
 class MyScene extends Phaser.Scene {
 
@@ -34,6 +35,8 @@ class MyScene extends Phaser.Scene {
 
     create() {
         this.add.image(400, 300, "bg");
+
+        mode = 0;
 
         //Copied from Phaser Create Animation From Sprite Sheet example.
         this.anims.create({
@@ -179,8 +182,8 @@ class Bar {
             this.add = !this.add;
         }
 
-        if (this.value > 100) {
-            this.value = 100;
+        if (this.value > 1000) {
+            this.value = 1000;
             this.add = !this.add;
         }
 
@@ -189,7 +192,7 @@ class Bar {
 
     update() {
         if (mode === 0) {
-            this.directChange(-0.1);
+            this.directChange(-1);
         }
         else {
             this.change();
