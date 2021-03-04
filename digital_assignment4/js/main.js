@@ -73,7 +73,7 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        let b = new Bar(this, 20, 550);
+        let b = new Bar(this, 20, 500);
 
         //Copied from phaser timer example.
         timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: b, repeat: 0, paused: true });
@@ -81,7 +81,7 @@ class MyScene extends Phaser.Scene {
         //Copied from phaser click on sprite example.
         var lift = this.add.sprite(400, 300, 'liftButton').setInteractive();
 
-        var start = this.add.sprite(400, 300, 'startButton').setInteractive();
+        var start = this.add.sprite(42, 550, 'startButton').setInteractive();
 
         start.on('pointerover', function (pointer) {
 
