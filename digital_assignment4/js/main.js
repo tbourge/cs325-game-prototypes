@@ -158,24 +158,37 @@ class Bar {
 
     change() {
         //My added check
-        if (add) {
-            this.value += 10;
+        if (this.add) {
+            this.directChange(10);
         }
         else {
-            this.value -= 10;
+            this.directChange(-10);
         }
+    }
+
+    directChange(num) {
+        this.value += num;
 
         if (this.value < 0) {
             this.value = 0;
-            add = !add;
+            this.add = !this.add;
         }
 
         if (this.value > 100) {
             this.value = 100;
-            add = !add;
+            this.add = !this.add;
         }
 
         this.draw();
+    }
+
+    update() {
+        if (mode === 0) {
+            this.directChange(-1);
+        }
+        else {
+            this.change();
+        }
     }
 }
 
