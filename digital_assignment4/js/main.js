@@ -76,7 +76,7 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        b = new Bar(this, 20, 500);
+        b = new Bar(this, 159, 500);
 
         //Copied from phaser timer example.
         timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: b, repeat: 0, paused: true });
@@ -164,7 +164,7 @@ class Bar {
         this.x = x;
         this.y = y;
         this.value = 0;
-        this.p = 76 / 100;
+        this.p = 400 / 100;
         //My var
         this.add = true;
 
@@ -179,12 +179,12 @@ class Bar {
 
         //  BG
         this.bar.fillStyle(0x000000);
-        this.bar.fillRect(this.x, this.y, -16, -80);
+        this.bar.fillRect(this.x, this.y, -100, -404);
 
         //  Health
 
         this.bar.fillStyle(0xffffff);
-        this.bar.fillRect(this.x - 2, this.y - 2, -12, -76);
+        this.bar.fillRect(this.x - 2, this.y - 2, -96, -400);
 
         if (this.value < 30 || this.value > 70) {
             this.bar.fillStyle(0xff0000);
@@ -200,7 +200,7 @@ class Bar {
 
         var d = Math.floor(this.p * this.value);
 
-        this.bar.fillRect(this.x - 2, this.y - 2, -12, -d);
+        this.bar.fillRect(this.x - 2, this.y - 2, -96, -d);
     }
 
      change() {
