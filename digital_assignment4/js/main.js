@@ -13,6 +13,7 @@ import "./phaser.js";
 
 var mode;
 var timer;
+var b;
 
 class MyScene extends Phaser.Scene {
 
@@ -73,7 +74,7 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        let b = new Bar(this, 20, 500);
+        b = new Bar(this, 20, 500);
 
         //Copied from phaser timer example.
         timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: b, repeat: 0, paused: true });
