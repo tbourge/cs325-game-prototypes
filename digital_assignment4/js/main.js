@@ -79,14 +79,14 @@ class MyScene extends Phaser.Scene {
 
         start.on('pointerover', function (pointer) {
 
-            this.setTint(0xdddddd);
+            this.setTint(0xcccccc);
 
         });
 
         //Copied from phaser click on sprite example.
         start.on('pointerdown', function (pointer) {
 
-            this.setTint(0x222222);
+            this.setTint(0x333333);
 
         });
 
