@@ -29,7 +29,7 @@ class MyScene extends Phaser.Scene {
         this.load.image("startButton", "assets/START.png");
         this.load.image("liftButton", "assets/LIFT.png");
         this.load.image("resetButton", "assets/RESET.png");
-
+        this.load.image("holdButton", "assets/HOLD.png");
 
         this.load.spritesheet("lift", "assets/Weight lifter lift.png", { frameWidth: 256, frameHeight: 512 });
         this.load.spritesheet("pant", "assets/Weight lifter pant.png", { frameWidth: 256, frameHeight: 512 });
@@ -134,7 +134,13 @@ class MyScene extends Phaser.Scene {
 
             l.setVisible(true);
             l.setActive(true);
-            l.play("start");
+
+            if (mode === 0) {
+                l.play("start");
+            }
+            else {
+                l.play("sweat");
+            }
 
             this.setActive(false);
             this.setVisible(false);
@@ -222,6 +228,7 @@ class MyScene extends Phaser.Scene {
 
                 case 3:
                     l.play("sweat");
+                    this.scene.cameras.main.shake(20);
                     break;
 
                 case 4:
@@ -278,13 +285,20 @@ class MyScene extends Phaser.Scene {
 
             animCount++;
 
-            text.setText("");
+            text.setText("Click the HOLD button when the bar is green to balance the weight");
             text.setVisible(true);
+
+            start.setActive(true);
+            start.setVisible(true);
+
+            lift.setTexture("holdButton");
         }
         else {
             text.setText("");
             text.setVisible(true);
         }
+
+        playing = false;
     }
 
     lose() {
