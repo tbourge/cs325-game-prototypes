@@ -100,6 +100,11 @@ class MyScene extends Phaser.Scene {
 
             this.setTint(0xcccccc);
 
+            this.timer.paused = false;
+
+            this.setActive(false);
+            this.setVisible(false);
+
         });
 
         this.add.sprite(400, 300, "lift").play('struggle');
@@ -184,7 +189,7 @@ class Bar {
 
     update() {
         if (mode === 0) {
-            this.directChange(-1);
+            this.directChange(-0.1);
         }
         else {
             this.change();
