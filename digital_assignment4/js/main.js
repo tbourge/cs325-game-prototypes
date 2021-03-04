@@ -234,13 +234,13 @@ class MyScene extends Phaser.Scene {
 
         if (b.value < 30 || b.value > 70) {
             winTimer.paused = true;
-            e.paused = false;
+            loseTimer.paused = false;
         }
         else {
             if (b.value > 39 && b.value < 61) {
 
                 winTimer.paused = false;
-                e.paused = true;
+                loseTimer.paused = true;
             }
             
         }
