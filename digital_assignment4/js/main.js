@@ -13,7 +13,7 @@ import "./phaser.js";
 
 var mode, animCount, reset;
 var winTimer, loseTimer;
-var b, l, restartButton;
+var b, l, restartButton, start;
 var text;
 var playing, isWin, isLose, isShake;
 
@@ -107,7 +107,7 @@ class MyScene extends Phaser.Scene {
         restartButton = this.add.sprite(400, 150, 'resetButton').setInteractive();
         restartButton.setVisible(false);
         restartButton.setActive(false);
-        var start = this.add.sprite(400, 150, 'startButton').setInteractive();
+        start = this.add.sprite(400, 150, 'startButton').setInteractive();
 
         start.on('pointerover', function (pointer) {
 
