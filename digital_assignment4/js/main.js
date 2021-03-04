@@ -315,7 +315,7 @@ class MyScene extends Phaser.Scene {
 
             animCount++;
 
-            text.setText("Click the HOLD button when the bar is green to balance the weight.");
+            text.setText("Click the HOLD button when the bar is green\nto balance the weight.\nClick START when you're ready.");
 
             start.setActive(true);
             start.setVisible(true);
