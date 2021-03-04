@@ -131,6 +131,7 @@ class MyScene extends Phaser.Scene {
             this.setTint(0xcccccc);
 
             playing = true;
+            lift.setActive(true);
 
             l.setVisible(true);
             l.setActive(true);
@@ -306,6 +307,8 @@ class MyScene extends Phaser.Scene {
 
     win() {
         playing = false;
+
+        lift.setActive(false);
 
         if (mode === 0) {
             loseTimer.paused = true;
