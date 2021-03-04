@@ -11,7 +11,7 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
-var mode, animCount;
+var mode, animCount, reset;
 var winTimer, loseTimer;
 var b, l, restartButton;
 var text;
@@ -35,14 +35,20 @@ class MyScene extends Phaser.Scene {
         this.load.spritesheet("pant", "assets/Weight lifter pant.png", { frameWidth: 256, frameHeight: 512 });
         this.load.spritesheet("sweat", "assets/Weight lifter sweat.png", { frameWidth: 256, frameHeight: 512 });
         this.load.spritesheet("drop", "assets/Weight lifter drop.png", { frameWidth: 256, frameHeight: 512 });
+
+        this.load.audio("music", "assets/disco.mp3");
     }
 
     create() {
         this.add.image(400, 300, "bg");
 
+        this.bgMusic = this.sound.add('music', { volume: 0.4 });
+        this.bgMusic.play();
+
         playing = false;
         animCount = 1;
         mode = 0;
+        reset = false;
 
         text = this.add.text(350, 550, { fontSize: 1000 });
         text.setVisible(false);
@@ -189,7 +195,7 @@ class MyScene extends Phaser.Scene {
 
             this.setTint(0xcccccc);
 
-            this.restart();
+            reset = true;
 
         });
 
@@ -255,6 +261,10 @@ class MyScene extends Phaser.Scene {
 
             }
         }
+
+        if (reset) {
+            this.scene.restart();
+        }
     }
 
     win() {
@@ -285,10 +295,6 @@ class MyScene extends Phaser.Scene {
 
         restartButton.setActive(true);
         restartButton.setVisible(true);
-    }
-
-    restart() {
-        this.scene.restart();                
     }
 }
 
