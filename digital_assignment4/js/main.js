@@ -136,7 +136,9 @@ class MyScene extends Phaser.Scene {
 
             this.setTint(0xcccccc);
 
-            b.directChange(20);
+            b.directChange(10);
+
+            this.scene.cameras.main.shake(100);
 
         });
 
