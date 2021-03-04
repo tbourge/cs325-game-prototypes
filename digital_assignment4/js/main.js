@@ -14,6 +14,7 @@ import "./phaser.js";
 var mode;
 var winTimer, loseTimer, e;
 var b, l, restartButton;
+var text;
 var playing;
 
 class MyScene extends Phaser.Scene {
@@ -41,6 +42,9 @@ class MyScene extends Phaser.Scene {
 
         playing = false;
         mode = 0;
+
+        text = this.add.text(350, 550, { fontSize: 1000 });
+        text.setVisible(false);
 
         //Copied from Phaser Create Animation From Sprite Sheet example.
         this.anims.create({
@@ -82,7 +86,7 @@ class MyScene extends Phaser.Scene {
 
         //Copied from phaser timer example.
         winTimer = this.time.addEvent({ delay: 5000, callback: this.win, callbackScope: this, repeat: 1, paused: true });
-        loseTimer = new Phaser.Time.TimerEvent({ delay: 7000 });
+        loseTimer = new Phaser.Time.TimerEvent({ delay: 7000, paused: true });
 
         e = this.time.addEvent(loseTimer);
 
@@ -145,8 +149,6 @@ class MyScene extends Phaser.Scene {
 
             b.directChange(15);
 
-            this.scene.cameras.main.shake(20);
-
         });
 
         restartButton.on('pointerover', function (pointer) {
@@ -188,27 +190,37 @@ class MyScene extends Phaser.Scene {
 
         if (b.value < 30 || b.value > 70) {
             winTimer.paused = true;
-            loseTimer.paused = false;
+            e.paused = false;
         }
         else {
             if (b.value > 39 && b.value < 61) {
 
                 winTimer.paused = false;
-                loseTimer.paused = true;
+                e.paused = true;
             }
             
         }
     }
 
     win() {
-        e.remove(false);
-        e = this.time.addEvent(loseTimer);
+        if (mode === 0) {
+            e.remove(false);
+            e = this.time.addEvent(loseTimer);
+
+            mode = 1;
+        }
+        else {
+            text.setText("");
+            text.setVisible(true);
+        }
     }
 
     lose() {
         winTimer.paused = true;
+        e.paused = true;
 
-        loseText.setVisible(true);
+        text.setText("");
+        text.setVisible(true);
 
         restartButton.setActive(true);
         restartButton.setVisible(true);
