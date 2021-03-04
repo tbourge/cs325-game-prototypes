@@ -77,7 +77,7 @@ class MyScene extends Phaser.Scene {
 
         var start = this.add.sprite(400, 300, 'start').setInteractive();
 
-        start.on('pointerin', function (pointer) {
+        start.on('pointerover', function (pointer) {
 
             this.setTint(0xdddddd);
 
