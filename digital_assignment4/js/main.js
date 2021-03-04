@@ -98,7 +98,7 @@ class MyScene extends Phaser.Scene {
 
         //Copied from phaser click on sprite example.
         var lift = this.add.sprite(106, 542, 'liftButton').setInteractive();
-        restartButton = this.add.sprite(106, 542, 'resetButton').setInteractive();
+        restartButton = this.add.sprite(400, 150, 'resetButton').setInteractive();
         restartButton.setVisible(false);
         restartButton.setActive(false);
         var start = this.add.sprite(400, 150, 'startButton').setInteractive();
