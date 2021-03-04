@@ -73,10 +73,13 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        let b = new Bar(this, 20, 100);
+        let b = new Bar(this, 20, 550);
 
         //Copied from phaser timer example.
-        timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: b, repeat: -1, paused: true });
+        timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: b, repeat: 0, paused: true });
+
+        //Copied from phaser click on sprite example.
+        var lift = this.add.sprite(400, 300, 'liftButton').setInteractive();
 
         var start = this.add.sprite(400, 300, 'startButton').setInteractive();
 
@@ -86,7 +89,6 @@ class MyScene extends Phaser.Scene {
 
         });
 
-        //Copied from phaser click on sprite example.
         start.on('pointerdown', function (pointer) {
 
             this.setTint(0x333333);
@@ -109,11 +111,41 @@ class MyScene extends Phaser.Scene {
 
         });
 
+        lift.on('pointerover', function (pointer) {
+
+            this.setTint(0xcccccc);
+
+        });
+
+        lift.on('pointerdown', function (pointer) {
+
+            this.setTint(0x333333);
+        });
+
+        lift.on('pointerout', function (pointer) {
+
+            this.clearTint();
+
+        });
+
+        lift.on('pointerup', function (pointer) {
+
+            this.setTint(0xcccccc);
+
+            b.directChange(20);
+
+        });
+
         this.add.sprite(400, 300, "lift").play('struggle');
     }
 
     update() {
-
+        if (mode === 0) {
+            b.directChange(-1);
+        }
+        else {
+            b.change();
+        }
     }
 }
 
@@ -125,7 +157,7 @@ class Bar {
         this.x = x;
         this.y = y;
         this.value = 0;
-        this.p = 76 / 1000;
+        this.p = 76 / 100;
         //My var
         this.add = true;
 
@@ -146,15 +178,16 @@ class Bar {
         this.bar.fillStyle(0xffffff);
         this.bar.fillRect(this.x - 2, this.y - 2, -12, -76);
 
-        if (this.value < 30) {
+        if (this.value < 30 || this.value > 70) {
             this.bar.fillStyle(0xff0000);
         }
         else {
-            if (this.value > 60 && this.value < 90) {
+            if ((this.value > 29 && this.value < 40) || (value > 60)) {
                 this.bar.fillStyle(0xffff00);
             }
             else {
                 this.bar.fillStyle(0x00ff00);
+                }
             }
         }
 
@@ -166,10 +199,10 @@ class Bar {
     change() {
         //My added check
         if (this.add) {
-            this.directChange(1);
+            this.directChange(10);
         }
         else {
-            this.directChange(-1);
+            this.directChange(-10);
         }
     }
 
@@ -181,8 +214,8 @@ class Bar {
             this.add = !this.add;
         }
 
-        if (this.value > 1000) {
-            this.value = 1000;
+        if (this.value > 100) {
+            this.value = 100;
             this.add = !this.add;
         }
 
@@ -190,12 +223,7 @@ class Bar {
     }
 
     update() {
-        if (mode === 0) {
-            this.directChange(-1);
-        }
-        else {
-            this.change();
-        }
+
     }
 }
 
