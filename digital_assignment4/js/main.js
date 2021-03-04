@@ -305,6 +305,8 @@ class MyScene extends Phaser.Scene {
     }
 
     win() {
+        playing = false;
+
         if (mode === 0) {
             loseTimer.paused = true;
             winTimer.paused = true;
@@ -326,8 +328,6 @@ class MyScene extends Phaser.Scene {
             restartButton.setActive(true);
             restartButton.setVisible(true);
         }
-
-        playing = false;
     }
 
     lose() {
