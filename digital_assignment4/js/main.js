@@ -12,7 +12,7 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 var mode, animCount;
-var winTimer, loseTimer, e;
+var winTimer, loseTimer;
 var b, l, restartButton;
 var text;
 var playing;
@@ -90,48 +90,11 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
-        //Copied from Phaser On complete event example
-        l.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
-            switch (animCount) {
-                case 0:
-                    l.play("start");
-                    animCount++;
-                    break;
-
-                case 1:
-                    l.play("struggle");
-                    break;
-
-                case 2:
-                    l.play("end");
-                    animCount++;
-                    break;
-
-                case 3:
-                    l.play("sweat");
-                    break;
-
-                case 4:
-                    l.play("drop");
-                    animCount++;
-                    break;
-
-                case 5:
-                    l.play("pant");
-                    break;
-
-                default:
-                    break;
-            }
-        }, this);
-
         b = new Bar(this, 159, 490);
 
         //Copied from phaser timer example.
         winTimer = this.time.addEvent({ delay: 5000, callback: this.win, callbackScope: this, repeat: 1, paused: true });
-        loseTimer = new Phaser.Time.TimerEvent({ delay: 7000, paused: true });
-
-        e = this.time.addEvent(loseTimer);
+        loseTimer = this.time.addEvent({ delay: 7000, callback: this.lose, callbackScope: this, repeat: 0, paused: true });
 
         //Copied from phaser click on sprite example.
         var lift = this.add.sprite(106, 542, 'liftButton').setInteractive();
@@ -162,7 +125,9 @@ class MyScene extends Phaser.Scene {
             this.setTint(0xcccccc);
 
             playing = true;
+
             l.setVisible(true);
+            l.setActive(true);
 
             this.setActive(false);
             this.setVisible(false);
@@ -219,8 +184,44 @@ class MyScene extends Phaser.Scene {
 
         });
 
-        l = this.add.sprite(400, 300, "lift").play('struggle');
+        l = this.add.sprite(400, 300, "lift");
         l.setVisible(false);
+        l.setActive(false);
+
+        //Copied from Phaser On complete event example
+        l.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
+            switch (animCount) {
+                case 0:
+                    l.play("start");
+                    animCount++;
+                    break;
+
+                case 1:
+                    l.play("struggle");
+                    break;
+
+                case 2:
+                    l.play("end");
+                    animCount++;
+                    break;
+
+                case 3:
+                    l.play("sweat");
+                    break;
+
+                case 4:
+                    l.play("drop");
+                    animCount++;
+                    break;
+
+                case 5:
+                    l.play("pant");
+                    break;
+
+                default:
+                    break;
+            }
+        }, this);
     }
 
     update() {
@@ -247,8 +248,8 @@ class MyScene extends Phaser.Scene {
 
     win() {
         if (mode === 0) {
-            e.remove(false);
-            e = this.time.addEvent(loseTimer);
+            loseTimer.paused = true;
+            winTimer.paused = true;
 
             mode = 1;
         }
@@ -260,7 +261,6 @@ class MyScene extends Phaser.Scene {
 
     lose() {
         winTimer.paused = true;
-        e.paused = true;
 
         text.setText("");
         text.setVisible(true);
