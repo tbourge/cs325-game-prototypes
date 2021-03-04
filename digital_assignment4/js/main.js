@@ -15,7 +15,7 @@ var mode, animCount, reset;
 var winTimer, loseTimer;
 var b, l, restartButton;
 var text;
-var playing;
+var playing, isWin, isLose, isShake;
 
 class MyScene extends Phaser.Scene {
 
@@ -51,7 +51,7 @@ class MyScene extends Phaser.Scene {
         reset = false;
 
         text = this.add.text(350, 550, { fontSize: 1000 });
-        text.setVisible(false);
+        text.setText("Rapidly click the LIFT button to fill the bar. Keep the bar green to lift the weight.<br>Click start when you're ready.")
 
         //Copied from Phaser Create Animation From Sprite Sheet example.
         this.anims.create({
@@ -172,10 +172,25 @@ class MyScene extends Phaser.Scene {
 
         lift.on('pointerup', function (pointer) {
 
-            if (playing && mode === 0) {
-                this.setTint(0xcccccc);
+            if (playing) {
+                if (mode === 0) {
+                    this.setTint(0xcccccc);
 
-                b.directChange(15);
+                    b.directChange(15);
+                }
+                else {
+                    if (b.value < 30 || b.value > 70) {
+                        isLose = true;
+                    }
+                    else {
+                        if (b.value < 40 || b.value > 60) {
+                            isShake = true;
+                        }
+                        else {
+                            isWin = true;
+                        }
+                    }
+                }
             }
 
         });
@@ -228,7 +243,6 @@ class MyScene extends Phaser.Scene {
 
                 case 3:
                     l.play("sweat");
-                    this.scene.cameras.main.shake(20);
                     break;
 
                 case 4:
@@ -250,23 +264,35 @@ class MyScene extends Phaser.Scene {
         if (playing) {
             if (mode === 0) {
                 b.directChange(-1);
+
+                if (b.value < 30 || b.value > 70) {
+                    winTimer.paused = true;
+                    loseTimer.paused = false;
+                }
+                else {
+                    if (b.value > 39 && b.value < 61) {
+
+                        winTimer.paused = false;
+                        loseTimer.paused = true;
+                    }
+                }
             }
             else {
                 b.change();
-            }
 
-            if (b.value < 30 || b.value > 70) {
-                winTimer.paused = true;
-                loseTimer.paused = false;
-            }
-            else {
-                if (b.value > 39 && b.value < 61) {
-
-                    winTimer.paused = false;
-                    loseTimer.paused = true;
+                if (isWin) {
+                    this.win();
                 }
-
+                else {
+                    if (isLose) {
+                        this.lose();
+                    }
+                }
             }
+        }
+
+        if (isShake) {
+            this.scene.cameras.main.shake(20);
         }
 
         if (reset) {
@@ -285,8 +311,7 @@ class MyScene extends Phaser.Scene {
 
             animCount++;
 
-            text.setText("Click the HOLD button when the bar is green to balance the weight");
-            text.setVisible(true);
+            text.setText("Click the HOLD button when the bar is green to balance the weight.");
 
             start.setActive(true);
             start.setVisible(true);
@@ -294,8 +319,7 @@ class MyScene extends Phaser.Scene {
             lift.setTexture("holdButton");
         }
         else {
-            text.setText("");
-            text.setVisible(true);
+            text.setText("You did it!");
         }
 
         playing = false;
@@ -306,8 +330,7 @@ class MyScene extends Phaser.Scene {
 
         animCount = 4;
 
-        text.setText("");
-        text.setVisible(true);
+        text.setText("Oh no...");
 
         restartButton.setActive(true);
         restartButton.setVisible(true);
