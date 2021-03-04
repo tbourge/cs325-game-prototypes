@@ -74,7 +74,7 @@ class MyScene extends Phaser.Scene {
         let b = new Bar(this, 20, 100);
 
         //Copied from phaser timer example.
-        this.timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: this, repeat: -1, paused: false });
+        this.timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: b, repeat: -1, paused: false });
 
         var start = this.add.sprite(400, 300, 'startButton').setInteractive();
 
@@ -88,7 +88,6 @@ class MyScene extends Phaser.Scene {
         start.on('pointerdown', function (pointer) {
 
             this.setTint(0x333333);
-
         });
 
         start.on('pointerout', function (pointer) {
