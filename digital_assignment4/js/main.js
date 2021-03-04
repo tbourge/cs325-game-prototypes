@@ -138,7 +138,7 @@ class MyScene extends Phaser.Scene {
 
             b.directChange(10);
 
-            this.scene.cameras.main.shake(100);
+            this.scene.cameras.main.shake(10);
 
         });
 
