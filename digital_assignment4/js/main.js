@@ -83,7 +83,7 @@ class Bar {
         this.y = y;
         this.value = 0;
         this.p = 76 / 100;
-        //My addition
+        //My var
         this.add = true;
 
         this.draw();
@@ -101,7 +101,7 @@ class Bar {
         //  Health
 
         this.bar.fillStyle(0xffffff);
-        this.bar.fillRect(this.x + 2, this.y + 2, 12, 76);
+        this.bar.fillRect(this.x + 2, this.y + 2, -12, -76);
 
         if (this.value < 30) {
             this.bar.fillStyle(0xff0000);
@@ -117,16 +117,18 @@ class Bar {
 
         var d = Math.floor(this.p * this.value);
 
-        this.bar.fillRect(this.x + 2, this.y + 2, 12, d);
+        this.bar.fillRect(this.x + 2, this.y + 2, -12, -d);
     }
 
     change() {
+        //My added check
         if (add) {
             this.value += 10;
         }
         else {
             this.value -= 10;
         }
+
         if (this.value < 0) {
             this.value = 0;
             add = !add;
