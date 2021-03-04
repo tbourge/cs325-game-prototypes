@@ -23,7 +23,7 @@ class MyScene extends Phaser.Scene {
     preload() {
         this.load.image("bg", "assets/blurredGym.jpg");
 
-        this.load.sprite("start", "assets/START.png");
+        this.load.image("start", "assets/START.png");
 
         this.load.spritesheet("lift", "assets/Weight lifter lift.png", { frameWidth: 256, frameHeight: 512 });
         this.load.spritesheet("pant", "assets/Weight lifter pant.png", { frameWidth: 256, frameHeight: 512 });
