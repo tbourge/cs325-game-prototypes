@@ -49,6 +49,8 @@ class MyScene extends Phaser.Scene {
         animCount = 1;
         mode = 0;
         reset = false;
+        isLose = false;
+        isWin = false;
 
         text = this.add.text(250, 550, { fontSize: 1000 }).setColor('#0000ff');
         text.setText("Rapidly click the LIFT button to fill the bar.\nKeep the bar green to lift the weight.\nClick START when you're ready.")
