@@ -12,7 +12,7 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 var mode;
-var timer;
+var winTimer, loseTimer;
 var b, l;
 var playing;
 
@@ -79,7 +79,8 @@ class MyScene extends Phaser.Scene {
         b = new Bar(this, 159, 500);
 
         //Copied from phaser timer example.
-        timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: b, repeat: 0, paused: true });
+        winTimer = this.time.addEvent({ delay: 5000, callback: this.win, callbackScope: this, repeat: 1, paused: true });
+        loseTimer = this.time.addEvent({ delay: 7000, callback: this.lose, callbackScope: this, repeat: 0, paused: true });
 
         //Copied from phaser click on sprite example.
         var lift = this.add.sprite(106, 542, 'liftButton').setInteractive();
