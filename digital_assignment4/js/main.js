@@ -166,10 +166,10 @@ class Bar {
     change() {
         //My added check
         if (this.add) {
-            this.directChange(10);
+            this.directChange(1);
         }
         else {
-            this.directChange(-10);
+            this.directChange(-1);
         }
     }
 
