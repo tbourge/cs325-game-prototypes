@@ -42,7 +42,7 @@ class MyScene extends Phaser.Scene {
     create() {
         this.add.image(400, 300, "bg");
 
-        this.bgMusic = this.sound.add('music', { volume: 0.4 });
+        this.bgMusic = this.sound.add('music', { volume: 0.1 });
         this.bgMusic.play();
 
         playing = false;
@@ -263,6 +263,8 @@ class MyScene extends Phaser.Scene {
         }
 
         if (reset) {
+            this.bgMusic.stop();
+
             this.scene.restart();
         }
     }
@@ -348,10 +350,10 @@ class Bar {
      change() {
         //My added check
         if (this.add) {
-            this.directChange(10);
+            this.directChange(1);
         }
         else {
-            this.directChange(-10);
+            this.directChange(-1);
         }
     }
 
