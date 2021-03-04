@@ -334,6 +334,8 @@ class MyScene extends Phaser.Scene {
 
         restartButton.setActive(true);
         restartButton.setVisible(true);
+
+        playing = false;
     }
 }
 
