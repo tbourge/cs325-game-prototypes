@@ -63,6 +63,13 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
+        this.anims.create({
+            key: 'struggle',
+            frames: this.anims.generateFrameNumbers('lift', { frames: [4, 5, 6, 5, 4] }),
+            frameRate: 8,
+            repeat: -1
+        });
+
         let b = new Bar(this, 20, 100);
 
         //Copied from phaser timer example.
@@ -95,7 +102,7 @@ class MyScene extends Phaser.Scene {
 
         });
 
-        this.add.sprite(400, 300, "lift").play('lift');
+        this.add.sprite(400, 300, "lift").play('struggle');
     }
 
     update() {
