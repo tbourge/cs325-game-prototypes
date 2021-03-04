@@ -11,7 +11,7 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
-var mode;
+var mode, animCount;
 var winTimer, loseTimer, e;
 var b, l, restartButton;
 var text;
@@ -41,6 +41,7 @@ class MyScene extends Phaser.Scene {
         this.add.image(400, 300, "bg");
 
         playing = false;
+        animCount = 0;
         mode = 0;
 
         text = this.add.text(350, 550, { fontSize: 1000 });
@@ -48,8 +49,8 @@ class MyScene extends Phaser.Scene {
 
         //Copied from Phaser Create Animation From Sprite Sheet example.
         this.anims.create({
-            key: 'lift',
-            frames: this.anims.generateFrameNumbers('lift', { frames: [0, 1, 2, 3, 4, 5, 6, 7] }),
+            key: 'end',
+            frames: this.anims.generateFrameNumbers('lift', { frames: [4, 5, 6, 7] }),
             frameRate: 8,
             repeat: 0
         });
@@ -81,6 +82,48 @@ class MyScene extends Phaser.Scene {
             frameRate: 8,
             repeat: -1
         });
+
+        this.anims.create({
+            key: 'start',
+            frames: this.anims.generateFrameNumbers('lift', { frames: [0, 1, 2, 3, 4] }),
+            frameRate: 8,
+            repeat: 0
+        });
+
+        //Copied from Phaser On complete event example
+        l.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
+            switch (animCount) {
+                case 0:
+                    l.play("start");
+                    animCount++;
+                    break;
+
+                case 1:
+                    l.play("struggle");
+                    break;
+
+                case 2:
+                    l.play("end");
+                    animCount++;
+                    break;
+
+                case 3:
+                    l.play("sweat");
+                    break;
+
+                case 4:
+                    l.play("drop");
+                    animCount++;
+                    break;
+
+                case 5:
+                    l.play("pant");
+                    break;
+
+                default:
+                    break;
+            }
+        }, this);
 
         b = new Bar(this, 159, 490);
 
