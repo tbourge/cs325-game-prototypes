@@ -65,28 +65,28 @@ class MyScene extends Phaser.Scene {
             key: 'pant',
             frames: this.anims.generateFrameNumbers('pant', { frames: [0, 1, 2, 3] }),
             frameRate: 8,
-            repeat: -1
+            repeat: 0
         });
 
         this.anims.create({
             key: 'drop',
             frames: this.anims.generateFrameNumbers('drop', { frames: [0, 1, 2, 3, 4, 5, 6] }),
             frameRate: 8,
-            repeat: -1
+            repeat: 0
         });
 
         this.anims.create({
             key: 'sweat',
             frames: this.anims.generateFrameNumbers('sweat', { frames: [2, 3, 4, 5] }),
             frameRate: 8,
-            repeat: -1
+            repeat: 0
         });
 
         this.anims.create({
             key: 'struggle',
             frames: this.anims.generateFrameNumbers('lift', { frames: [4, 5, 6, 5, 4] }),
             frameRate: 8,
-            repeat: -1
+            repeat: 0
         });
 
         this.anims.create({
@@ -166,7 +166,7 @@ class MyScene extends Phaser.Scene {
 
         lift.on('pointerup', function (pointer) {
 
-            if (playing) {
+            if (playing && mode === 0) {
                 this.setTint(0xcccccc);
 
                 b.directChange(15);
