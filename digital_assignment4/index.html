@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Hello! Amaze!</title>
+<title>Dangerous Deadlift</title>
 <style>
 body
 {
@@ -19,27 +19,32 @@ body
 <body>
 <div id="game"></div>
 <div id="readme">
-<h2>Your game title</h2>
+<h2>Dangerous Deadlift</h2>
 
 <ul>
 <li><strong>Originality:</strong>
 What is original about your game?
+<br> The animation was done by me. I'm sure this exact concept has been used before, but I haven't seen it or don't remember seeing it other than in my own <br>games. 
 </li>
 
 <li><strong>Technical Merit:</strong>
 What is interesting about your game technology?
+<br>Using the actual power bar object to keep track of the win condition is unique.
 </li>
 
 <li><strong>Prototype Postmortem:</strong>
 What did you learn from this prototype?
-What was the easiest or hardest part of making it?
+<br>Music needs to be stopped and reset before resetting the game. Filling a vertical bar in the positive direction will cause the bar to fill from the top.
+<br>What was the easiest or hardest part of making it?
+<br>Easiest: Making sprites.
+<br>Hardest: Fixing scope issues.
 </li>
 
 <li><strong>Prototype Assets:</strong>
 Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
 <ul>
 <li>Background image: <a href="https://www.freepik.com/free-photo/blurred-cardio-machines_948961.htm#page=1&query=gym%20background&position=0">Blurred cardio machines Free Photo</a>.</li>
-<li>Disco Medusae by Kevin MacLeod: <a href="https://incompetech.filmmusic.io/song/3652-disco-medusae">Link</a>. <a href="https://filmmusic.io/standard-license">License</a></li>
+<li>Disco Medusae by Kevin MacLeod: <a href="https://incompetech.filmmusic.io/song/3652-disco-medusae">Link</a>. <a href="https://filmmusic.io/standard-license">License</a>.</li>
 <li>All other assets were made by me.</li>
 </ul>
 </li>
@@ -47,7 +52,7 @@ Did you make your prototype assets from scratch? Did you borrow them? Cite your 
 <li><strong>Prototype Closest Other Game:</strong>
 Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
 <br>This game feels a bit like a <a href="https://www.mariowiki.com/WarioWare_(series)">Wario Ware micro-game</a>.
-<br>It also has a similar structure to <a href="digital_assignment4">my 2nd game</a> although this is not an iteration of that game.
+<br>It also has a similar structure to <a href="https://tbourge.github.io/cs325-game-prototypes/digital_assignment2/">my 2nd game</a> although this is not an iteration of that game.
 <br>I borrowed code from:
 <ul>
 <li><a href="http://phaser.io/examples/v3/view/game-objects/graphics/health-bars-demo">Health Bars Demo Phaser Example</a></li>
@@ -61,6 +66,7 @@ Which other game most closely resembles your game? If you are borrowing code fro
 
 <li><strong>High Concept:</strong>
 A one-sentence summary of your game.
+<br>Lifting weights is hard work, use the right amount of force or you'll hurt your self.
 </li>
 
 <li><strong>Theme:</strong>
@@ -70,35 +76,48 @@ State which of the Storymatic themes you used.
 
 <li><strong>Mandated Variety:</strong>
 State which input, randomness, genre, and play style you used in this prototype.
+<br>Input: Clickable buttons
+<br>Randomness: Deterministic
+<br>Genre: Precision, timing
+<br>Play Style: Competitor
 </li>
 
 <li><strong>Prototype Goal:</strong>
 What game mechanic is this prototype evaluating?
+<br>The player's ability to time their input with an indicator.
 </li>
 
 <li><strong>Player Experience Goals:</strong>
 What experience do you want players to have when playing your game?
+<br>They should feel energized and excited while tapping quickly and more relaxed in phase 2.
 </li>
 
 <li><strong>Gameplay:</strong>
 A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
+<br>At the beginning of the game the player can click START to begin the game or read the instructions on the bottom.
+<br>Once they click START they can click LIFT to increase their power bar. Each time they click LIFT the bar will increase slightly, however, the bar will <br>constantly drain. The goal is to keep the bar halfway filled. If the player does not keep the bar sufficiently filled then they will drop the barbell and <br>lose. If they keep the bar adequately full they will lift the barbell above their head and enter phase 2. Before phase 2 the player can read the updated <br>instructions on the bottom of the screen and can click START when they are ready to begin. In phase 2 the player must click the HOLD button when the bar <br>is halfway full. If they click when the bar is green then they will succeed in holding the barbell and will win. If they click when the bar is red then <br>they will drop the barbell and lose. When the game ends, with either a win or loss, a reset button will appear that the player can click to restart the <br>game.
 </li>
 
 <li><strong>Strategies:</strong>
 What player strategies do you expect will be effective at playing this game?
+<br>Quick fingers and a little bit of patience. 
 </li>
 
 <li><strong>Story/Setting/Premise:</strong>
 A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
 How will the dramatic tension interact with the gameplay tension?
+<br>This game is about a man performing the dangerous task of lifting without a spotter. If he lifts the barbell improperly he could do some serious damage <br>to himself or others. There are other characters in this world that don't appear in the game, mainly other gym goers. The world is fairly mundane,
+<br>similar to ours.
 </li>
 
 <li><strong>Target Audience:</strong>
 A single sentence that describes the demographic you're trying to reach.
+<br>People who want a quick test of speed and precision.
 </li>
 
 <li><strong>Play Time:</strong>
 How long does your game take to play?
+<br> About 10 seconds.
 </li>
 
 </ul>
