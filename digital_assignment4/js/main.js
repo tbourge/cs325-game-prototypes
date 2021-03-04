@@ -13,7 +13,8 @@ import "./phaser.js";
 
 var mode;
 var timer;
-var b;
+var b, l;
+var playing;
 
 class MyScene extends Phaser.Scene {
 
@@ -36,6 +37,7 @@ class MyScene extends Phaser.Scene {
     create() {
         this.add.image(400, 300, "bg");
 
+        playing = false;
         mode = 0;
 
         //Copied from Phaser Create Animation From Sprite Sheet example.
@@ -105,7 +107,8 @@ class MyScene extends Phaser.Scene {
 
             this.setTint(0xcccccc);
 
-            timer.paused = false;
+            playing = true;
+            l.setVisible(true);
 
             this.setActive(false);
             this.setVisible(false);
@@ -137,7 +140,8 @@ class MyScene extends Phaser.Scene {
 
         });
 
-        this.add.sprite(400, 300, "lift").play('struggle');
+        l = this.add.sprite(400, 300, "lift").play('struggle');
+        l.setVisible(false);
     }
 
     update() {
