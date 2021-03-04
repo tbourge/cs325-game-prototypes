@@ -293,6 +293,8 @@ class MyScene extends Phaser.Scene {
 
         if (isShake) {
             this.scene.cameras.main.shake(20);
+
+            isShake = false;
         }
 
         if (reset) {
