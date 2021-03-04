@@ -51,7 +51,7 @@ class MyScene extends Phaser.Scene {
         reset = false;
 
         text = this.add.text(350, 550, { fontSize: 1000 });
-        text.setText("Rapidly click the LIFT button to fill the bar. Keep the bar green to lift the weight.<br>Click start when you're ready.")
+        text.setText("Rapidly click the LIFT button to fill the bar. Keep the bar green to lift the weight.<br>Click START when you're ready.")
 
         //Copied from Phaser Create Animation From Sprite Sheet example.
         this.anims.create({
@@ -220,7 +220,7 @@ class MyScene extends Phaser.Scene {
 
         });
 
-        l = this.add.sprite(400, 300, "lift");
+        l = this.add.sprite(400, 320, "lift");
         l.setVisible(false);
         l.setActive(false);
 
