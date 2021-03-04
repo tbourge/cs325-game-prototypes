@@ -12,13 +12,12 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 var mode;
+var timer;
 
 class MyScene extends Phaser.Scene {
 
     constructor() {
         super();
-
-        this.timer;
     }
 
     preload() {
@@ -77,7 +76,7 @@ class MyScene extends Phaser.Scene {
         let b = new Bar(this, 20, 100);
 
         //Copied from phaser timer example.
-        this.timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: b, repeat: -1, paused: false });
+        timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: b, repeat: -1, paused: true });
 
         var start = this.add.sprite(400, 300, 'startButton').setInteractive();
 
@@ -103,7 +102,7 @@ class MyScene extends Phaser.Scene {
 
             this.setTint(0xcccccc);
 
-            this.timer.paused = false;
+            timer.paused = false;
 
             this.setActive(false);
             this.setVisible(false);
@@ -126,7 +125,7 @@ class Bar {
         this.x = x;
         this.y = y;
         this.value = 0;
-        this.p = 76 / 100;
+        this.p = 76 / 1000;
         //My var
         this.add = true;
 
