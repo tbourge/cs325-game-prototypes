@@ -12,8 +12,8 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 var mode;
-var winTimer, loseTimer;
-var b, l;
+var winTimer, loseTimer, e;
+var b, l, restartButton;
 var playing;
 
 class MyScene extends Phaser.Scene {
@@ -27,6 +27,8 @@ class MyScene extends Phaser.Scene {
 
         this.load.image("startButton", "assets/START.png");
         this.load.image("liftButton", "assets/LIFT.png");
+        this.load.image("resetButton", "assets/RESET.png");
+
 
         this.load.spritesheet("lift", "assets/Weight lifter lift.png", { frameWidth: 256, frameHeight: 512 });
         this.load.spritesheet("pant", "assets/Weight lifter pant.png", { frameWidth: 256, frameHeight: 512 });
@@ -76,15 +78,19 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        b = new Bar(this, 159, 500);
+        b = new Bar(this, 159, 490);
 
         //Copied from phaser timer example.
         winTimer = this.time.addEvent({ delay: 5000, callback: this.win, callbackScope: this, repeat: 1, paused: true });
-        loseTimer = this.time.addEvent({ delay: 7000, callback: this.lose, callbackScope: this, repeat: 0, paused: true });
+        loseTimer = new Phaser.Time.TimerEvent({ delay: 7000 });
+
+        e = this.time.addEvent(loseTimer);
 
         //Copied from phaser click on sprite example.
         var lift = this.add.sprite(106, 542, 'liftButton').setInteractive();
-
+        restartButton = this.add.sprite(106, 542, 'resetButton').setInteractive();
+        restartButton.setVisible(false);
+        restartButton.setActive(false);
         var start = this.add.sprite(400, 150, 'startButton').setInteractive();
 
         start.on('pointerover', function (pointer) {
@@ -137,9 +143,34 @@ class MyScene extends Phaser.Scene {
 
             this.setTint(0xcccccc);
 
-            b.directChange(10);
+            b.directChange(15);
 
-            this.scene.cameras.main.shake(10);
+            this.scene.cameras.main.shake(20);
+
+        });
+
+        restartButton.on('pointerover', function (pointer) {
+
+            this.setTint(0xcccccc);
+
+        });
+
+        restartButton.on('pointerdown', function (pointer) {
+
+            this.setTint(0x333333);
+        });
+
+        restartButton.on('pointerout', function (pointer) {
+
+            this.clearTint();
+
+        });
+
+        restartButton.on('pointerup', function (pointer) {
+
+            this.setTint(0xcccccc);
+
+            this.restart();
 
         });
 
@@ -154,6 +185,37 @@ class MyScene extends Phaser.Scene {
         else {
             b.change();
         }
+
+        if (b.value < 30 || b.value > 70) {
+            winTimer.paused = true;
+            loseTimer.paused = false;
+        }
+        else {
+            if (b.value > 39 && b.value < 61) {
+
+                winTimer.paused = false;
+                loseTimer.paused = true;
+            }
+            
+        }
+    }
+
+    win() {
+        e.remove(false);
+        e = this.time.addEvent(loseTimer);
+    }
+
+    lose() {
+        winTimer.paused = true;
+
+        loseText.setVisible(true);
+
+        restartButton.setActive(true);
+        restartButton.setVisible(true);
+    }
+
+    restart() {
+        this.scene.restart();                
     }
 }
 
