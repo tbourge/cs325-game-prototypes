@@ -41,7 +41,7 @@ class MyScene extends Phaser.Scene {
         this.add.image(400, 300, "bg");
 
         playing = false;
-        animCount = 0;
+        animCount = 1;
         mode = 0;
 
         text = this.add.text(350, 550, { fontSize: 1000 });
@@ -128,6 +128,7 @@ class MyScene extends Phaser.Scene {
 
             l.setVisible(true);
             l.setActive(true);
+            l.play("start");
 
             this.setActive(false);
             this.setVisible(false);
@@ -136,26 +137,34 @@ class MyScene extends Phaser.Scene {
 
         lift.on('pointerover', function (pointer) {
 
-            this.setTint(0xcccccc);
+            if (playing) {
+                this.setTint(0xcccccc);
+            }
 
         });
 
         lift.on('pointerdown', function (pointer) {
 
-            this.setTint(0x333333);
+            if (playing) {
+                this.setTint(0x333333);
+            }
         });
 
         lift.on('pointerout', function (pointer) {
 
-            this.clearTint();
+            if (playing) {
+                this.clearTint();
+            }
 
         });
 
         lift.on('pointerup', function (pointer) {
 
-            this.setTint(0xcccccc);
+            if (playing) {
+                this.setTint(0xcccccc);
 
-            b.directChange(15);
+                b.directChange(15);
+            }
 
         });
 
@@ -225,24 +234,26 @@ class MyScene extends Phaser.Scene {
     }
 
     update() {
-        if (mode === 0) {
-            b.directChange(-1);
-        }
-        else {
-            b.change();
-        }
-
-        if (b.value < 30 || b.value > 70) {
-            winTimer.paused = true;
-            loseTimer.paused = false;
-        }
-        else {
-            if (b.value > 39 && b.value < 61) {
-
-                winTimer.paused = false;
-                loseTimer.paused = true;
+        if (playing) {
+            if (mode === 0) {
+                b.directChange(-1);
             }
-            
+            else {
+                b.change();
+            }
+
+            if (b.value < 30 || b.value > 70) {
+                winTimer.paused = true;
+                loseTimer.paused = false;
+            }
+            else {
+                if (b.value > 39 && b.value < 61) {
+
+                    winTimer.paused = false;
+                    loseTimer.paused = true;
+                }
+
+            }
         }
     }
 
@@ -252,6 +263,11 @@ class MyScene extends Phaser.Scene {
             winTimer.paused = true;
 
             mode = 1;
+
+            animCount++;
+
+            text.setText("");
+            text.setVisible(true);
         }
         else {
             text.setText("");
@@ -261,6 +277,8 @@ class MyScene extends Phaser.Scene {
 
     lose() {
         winTimer.paused = true;
+
+        animCount = 4;
 
         text.setText("");
         text.setVisible(true);
