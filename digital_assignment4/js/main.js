@@ -23,6 +23,8 @@ class MyScene extends Phaser.Scene {
     preload() {
         this.load.image("bg", "assets/blurredGym.jpg");
 
+        this.load.sprite("start", "assets/START.png");
+
         this.load.spritesheet("lift", "assets/Weight lifter lift.png", { frameWidth: 256, frameHeight: 512 });
         this.load.spritesheet("pant", "assets/Weight lifter pant.png", { frameWidth: 256, frameHeight: 512 });
         this.load.spritesheet("sweat", "assets/Weight lifter sweat.png", { frameWidth: 256, frameHeight: 512 });
@@ -64,7 +66,34 @@ class MyScene extends Phaser.Scene {
         let b = new Bar(this, 20, 100);
 
         //Copied from phaser timer example.
-        timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: this, repeat: -1, paused: true });
+        this.timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: this, repeat: -1, paused: true });
+
+        var start = this.add.sprite(400, 300, 'start').setInteractive();
+
+        start.on('pointerin', function (pointer) {
+
+            this.setTint(0xffffff);
+
+        });
+
+        //Copied from phaser click on sprite example.
+        start.on('pointerdown', function (pointer) {
+
+            this.setTint(0x000000);
+
+        });
+
+        start.on('pointerout', function (pointer) {
+
+            this.clearTint();
+
+        });
+
+        start.on('pointerup', function (pointer) {
+
+            this.clearTint();
+
+        });
 
         this.add.sprite(400, 300, "lift").play('lift');
     }
