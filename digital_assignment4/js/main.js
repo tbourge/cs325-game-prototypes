@@ -80,9 +80,9 @@ class MyScene extends Phaser.Scene {
         timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: b, repeat: 0, paused: true });
 
         //Copied from phaser click on sprite example.
-        var lift = this.add.sprite(42, 550, 'liftButton').setInteractive();
+        var lift = this.add.sprite(106, 542, 'liftButton').setInteractive();
 
-        var start = this.add.sprite(400, 300, 'startButton').setInteractive();
+        var start = this.add.sprite(400, 150, 'startButton').setInteractive();
 
         start.on('pointerover', function (pointer) {
 
