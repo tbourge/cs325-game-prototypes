@@ -137,13 +137,13 @@ class Bar {
         //  Health
 
         this.bar.fillStyle(0xffffff);
-        this.bar.fillRect(this.x + 2, this.y + 2, -12, -76);
+        this.bar.fillRect(this.x - 2, this.y - 2, -12, -76);
 
         if (this.value < 30) {
             this.bar.fillStyle(0xff0000);
         }
         else {
-            if (this.value > 60) {
+            if (this.value > 60 && this.value < 90) {
                 this.bar.fillStyle(0xffff00);
             }
             else {
@@ -153,7 +153,7 @@ class Bar {
 
         var d = Math.floor(this.p * this.value);
 
-        this.bar.fillRect(this.x + 2, this.y + 2, -12, -d);
+        this.bar.fillRect(this.x - 2, this.y - 2, -12, -d);
     }
 
     change() {
