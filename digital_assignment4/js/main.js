@@ -16,6 +16,8 @@ class MyScene extends Phaser.Scene {
 
     constructor() {
         super();
+
+        this.timer;
     }
 
     preload() {
@@ -61,6 +63,9 @@ class MyScene extends Phaser.Scene {
 
         let b = new Bar(this, 20, 100);
 
+        //Copied from phaser timer example.
+        timer = this.time.addEvent({ delay: 10, callback: b.change, callbackScope: this, repeat: -1, paused: true });
+
         this.add.sprite(400, 300, "lift").play('lift');
     }
 
@@ -76,8 +81,10 @@ class Bar {
 
         this.x = x;
         this.y = y;
-        this.value = 100;
+        this.value = 0;
         this.p = 76 / 100;
+        //My addition
+        this.add = true;
 
         this.draw();
 
@@ -113,15 +120,21 @@ class Bar {
         this.bar.fillRect(this.x + 2, this.y + 2, 12, d);
     }
 
-    change(amount) {
-        this.value += amount;
-
+    change() {
+        if (add) {
+            this.value += 10;
+        }
+        else {
+            this.value -= 10;
+        }
         if (this.value < 0) {
             this.value = 0;
+            add = !add;
         }
 
         if (this.value > 100) {
             this.value = 100;
+            add = !add;
         }
 
         this.draw();
