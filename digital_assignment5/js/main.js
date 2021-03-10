@@ -23,8 +23,8 @@ var balls, pirates;
 var score, time;
 //Text
 var scoreText, timeText;
-//Sound
-var grunt;
+//Sounds
+var grunt, music;
 
 class MyScene extends Phaser.Scene {
     
@@ -39,6 +39,8 @@ class MyScene extends Phaser.Scene {
 
         this.load.audio('cannonSound', 'assets/sound/Cannon.mp3');
         this.load.audio('grunt', 'assets/sound/Grunt.mp3');
+        this.load.audio('bgm', 'assets/sound/music.mp3');
+
 
         //Copied from Create Animation From Sprite Sheet
         this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 48, frameHeight: 48 });
@@ -65,13 +67,18 @@ class MyScene extends Phaser.Scene {
         this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.8 });
         this.gruntSound = this.sound.add('grunt');
         grunt = this.gruntSound;
+        this.bgm = this.sound.add('bgm', { volume: 0.5 });
+
+        if (!this.bgm.isPlaying) {
+
+        }
 
         //Copied from Phaser Breakout example.
         target = this.physics.add.image(150, 300, 'target').setImmovable();
 
         this.input.on('pointermove', function (pointer) {
             if (!gameOver) {
-                target.y = Phaser.Math.Clamp(pointer.y, 100, 500);
+                target.y = Phaser.Math.Clamp(pointer.y, 50, 550);
             }
         }, this);
 
