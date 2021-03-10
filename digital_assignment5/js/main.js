@@ -167,7 +167,7 @@ class MyScene extends Phaser.Scene {
             cannon.y++;
         }
 
-        this.physics.world.collide(target, balls, this.explode(target, ball));
+        this.physics.world.collide(target, balls, this.explode);
 
         timeText.setText('Time: ' + time);
     }
