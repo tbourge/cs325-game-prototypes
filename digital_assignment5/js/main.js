@@ -183,25 +183,25 @@ class MyScene extends Phaser.Scene {
             }
         }
 
-        this.physics.world.collide(target, balls, this.explode);
+        this.physics.world.collide(target, balls, this.explode(this));
 
         timeText.setText('Time: ' + time);
     }
 
-    explode(target, ball) {
+    explode(target, ball, scene) {
         target.setActive(false);
         target.body.setEnable(false);
         target.setVisible(false);
 
-        var ex = explosions.get().setActive(true).setVisible(true);
+        var ex = explosions.get();
 
         if (ex) {
-            ex.make(this, ball.x, ball.y);
+            ex.make(scene, ball.x, ball.y);
         }
 
         ball.explode();
 
-        this.lose();
+        scene.lose();
     }
 
     shoot() {
