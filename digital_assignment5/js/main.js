@@ -197,7 +197,7 @@ class MyScene extends Phaser.Scene {
 
         ball.explode();
 
-        scene.lose();
+        this.lose();
     }
 
     shoot() {
