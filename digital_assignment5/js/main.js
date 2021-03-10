@@ -160,11 +160,14 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {
-        if (cannon.y > target.y) {
-            cannon.y--;
-        }
-        else {
-            cannon.y++;
+
+        if (!gameOver) {
+            if (cannon.y > target.y) {
+                cannon.y--;
+            }
+            else {
+                cannon.y++;
+            }
         }
 
         this.physics.world.collide(target, balls, this.explode);
