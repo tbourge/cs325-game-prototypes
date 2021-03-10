@@ -68,7 +68,7 @@ class MyScene extends Phaser.Scene {
         this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.7 });
         this.gruntSound = this.sound.add('grunt');
         grunt = this.gruntSound;
-        this.bgm = this.sound.add('bgm', { volume: 0.5 });
+        this.bgm = this.sound.add('bgm', { volume: 0.2 });
         this.boomSound = this.sound.add('boom');
 
 
