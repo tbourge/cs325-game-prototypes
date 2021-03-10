@@ -116,7 +116,7 @@ class MyScene extends Phaser.Scene {
         pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
         cannonTimer = this.time.addEvent({ delay: 3000, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
         timer = this.time.addEvent({ delay: 1000, callback: this.addTime, callbackScope: this, repeat: -1, paused: true });
-        winTimer = this.time.addEvent({ delay: 45000, callback: this.win, callbackScope: this, repeat: 0, paused: true });
+        winTimer = this.time.addEvent({ delay: 60000, callback: this.win, callbackScope: this, repeat: 0, paused: true });
 
 
         //Copied from Phaser Create Animation From Sprite Sheet example.
@@ -183,21 +183,15 @@ class MyScene extends Phaser.Scene {
             }
         }
 
-        this.physics.world.collide(target, balls, this.explode(this));
+        this.physics.world.collide(target, balls, this.explode);
 
         timeText.setText('Time: ' + time);
     }
 
-    explode(target, ball, scene) {
+    explode(target, ball) {
         target.setActive(false);
         target.body.setEnable(false);
         target.setVisible(false);
-
-        var ex = explosions.get();
-
-        if (ex) {
-            ex.make(scene, ball.x, ball.y);
-        }
 
         ball.explode();
 
@@ -284,6 +278,13 @@ class Ball extends Phaser.GameObjects.Sprite {
     }
 
     explode() {
+        this.body.velocity.x = 0;
+        this.play('explosion');
+
+        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, this.die, this);
+    }
+
+    die() {
         this.body.setEnable(false);
         this.setActive(false);
         this.setVisible(false);
@@ -293,7 +294,7 @@ class Ball extends Phaser.GameObjects.Sprite {
         super.preUpdate(time, delta);
 
         if (this.x < 0) {
-            this.setActive(false);
+            this.die();
         }
     }
 }
