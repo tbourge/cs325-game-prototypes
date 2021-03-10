@@ -50,7 +50,7 @@ class MyScene extends Phaser.Scene {
     create() {
         this.add.image(400, 300, 'background');
 
-        scoreText = this.add.text(350, 300, { fontSize: 10000 });
+        scoreText = this.add.text(300, 300).setSize(100);
         scoreText.setText('Click to Start');
         timeText = this.add.text(20, 20, { fontSize: 1000 });
   
