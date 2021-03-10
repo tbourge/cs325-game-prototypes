@@ -18,7 +18,7 @@ var pirateTimer, cannonTimer, timer, winTimer;
 //Objects
 var target, cannon;
 //Groups
-var balls, pirates;
+var balls, pirates, explosions;
 //Ints
 var score, time;
 //Text
@@ -44,6 +44,7 @@ class MyScene extends Phaser.Scene {
         this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet('cannon', 'assets/art/Cannon.png', { frameWidth: 192, frameHeight: 96 });
         this.load.spritesheet('pirateb', 'assets/art/PirateBSheet.png', { frameWidth: 78, frameHeight: 84 });
+        this.load.spritesheet('exp', 'assets/art/Explosion.png', { frameWidth: 96, frameHeight: 96 });
 
     }
     
@@ -88,13 +89,18 @@ class MyScene extends Phaser.Scene {
         //Copied from Phaser Group vs Group example.
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
+        explosions = this.physics.add.group({ key: 'boom', classType: Explosion })
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
-            pirate.setActive(false);
-            pirate.body.setEnable(false);
-            pirate.setVisible(false);
+            pirate.explode();
 
             ball.explode();
+
+            grunt.play();
+        });
+
+        this.physics.add.collider(explosions, pirates, function (pirate) {
+            pirate.explode();
 
             grunt.play();
         });
@@ -142,6 +148,13 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
+        this.anims.create({
+            key: 'explosion',
+            frames: this.anims.generateFrameNumbers('exp', { frames: [0, 1, 2] }),
+            frameRate: 8,
+            repeat: 0
+        });
+
         cannon = this.add.sprite(690, 300, 'still');
 
         //Copied from Phaser On complete event example
@@ -180,7 +193,15 @@ class MyScene extends Phaser.Scene {
         target.body.setEnable(false);
         target.setVisible(false);
 
+        var ex = explosions.get().setActive(true).setVisible(true);
+
+        if (ex) {
+            ex.make(this, ball.x, ball.y);
+        }
+
         ball.explode();
+
+        this.lose();
     }
 
     shoot() {
@@ -263,9 +284,9 @@ class Ball extends Phaser.GameObjects.Sprite {
     }
 
     explode() {
+        this.body.setEnable(false);
         this.setActive(false);
         this.setVisible(false);
-        this.body.setEnable(false);
     }
 
     preUpdate(time, delta) {
@@ -274,6 +295,29 @@ class Ball extends Phaser.GameObjects.Sprite {
         if (this.x < 0) {
             this.setActive(false);
         }
+    }
+}
+
+class Explosion extends Phaser.GameObjects.Sprite {
+    constructor(scene) {
+        super(scene, - 200, -200, 'exp');
+    }
+
+    make(scene, x, y) {
+        this.setPosition(x, y);
+
+        this.play('explode');
+
+        scene.physics.world.enableBody(this);
+        this.body.setCircle(40);
+
+        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, this.explode, this);
+    }
+
+    explode() {
+        this.body.setEnable(false);
+        this.setActive(false);
+        this.setVisible(false);
     }
 }
 
@@ -307,6 +351,12 @@ class Pirate extends Phaser.GameObjects.Sprite {
         scoreText.setVisible(true);
         scoreText.setText('You survived for: ' + time + ' seconds.');
         gameOver = 1;
+    }
+
+    explode() {
+        this.setActive(false);
+        this.body.setEnable(false);
+        this.setVisible(false);
     }
 
     preUpdate(time, delta) {
