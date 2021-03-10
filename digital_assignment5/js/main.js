@@ -18,7 +18,7 @@ var pirateTimer, cannonTimer, timer, winTimer;
 //Objects
 var target, cannon;
 //Groups
-var balls, pirates, explosions;
+var balls, pirates;
 //Ints
 var score, time;
 //Text
@@ -91,7 +91,6 @@ class MyScene extends Phaser.Scene {
         //Copied from Phaser Group vs Group example.
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
-        explosions = this.physics.add.group({ key: 'boom', classType: Explosion })
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.explode();
@@ -100,19 +99,6 @@ class MyScene extends Phaser.Scene {
 
             grunt.play();
         });
-
-        this.physics.add.collider(explosions, pirates, function (pirate) {
-            pirate.explode();
-
-            grunt.play();
-        });
-
-        //Copied from Phaser group world bounds example.
-        Phaser.Actions.Call(pirates.getChildren(), function (pir) {
-            pir.body.onWorldBounds = true;
-        });
-
-        this.physics.world.on('worldbounds', this.onWorldBounds);
 
         //Copied from phaser timer example.
         pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
@@ -231,10 +217,11 @@ class MyScene extends Phaser.Scene {
         cannonTimer.paused = true;
         winTimer.paused = true;
 
-        timeText.setVisible(false)
+        timeText.setVisible(false);
         scoreText.setVisible(true);
         score = time * 10;
         pirates.clear(true);
+        balls.clear(true);
         scoreText.setText('You survived! Score: ' + score + ' Click to restart');
         gameOver = 1;
     }
