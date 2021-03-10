@@ -37,7 +37,6 @@ class MyScene extends Phaser.Scene {
         this.load.image('still', 'assets/art/CannonStill.png');
 
         this.load.audio('cannonSound', 'assets/sound/Cannon.mp3');
-        this.load.audio('grunt', 'assets/sound/Grunt.mp3');
         this.load.audio('bgm', 'assets/sound/music.mp3');
         this.load.audio('boom', 'assets/sound/explosionSound.mp3');
 
@@ -64,7 +63,6 @@ class MyScene extends Phaser.Scene {
         time = 0;
 
         this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.7 });
-        this.gruntSound = this.sound.add('grunt');
 
         this.bgm = this.sound.add('bgm', { volume: '0.2' });
         this.boomSound = this.sound.add('boom');
@@ -106,8 +104,6 @@ class MyScene extends Phaser.Scene {
             pirate.explode();
 
             ball.explode();
-
-            this.gruntSound.play();
 
             this.boomSound.play();
         }.bind(this));
@@ -210,7 +206,7 @@ class MyScene extends Phaser.Scene {
     }
 
     spawn() {
-        var p = pirates.get({ x: 400, y: 300 })
+        var p = pirates.get()
 
         if (p) {
             p.make(this);
