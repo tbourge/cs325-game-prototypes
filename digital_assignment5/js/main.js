@@ -96,6 +96,7 @@ class MyScene extends Phaser.Scene {
 
             ball.setActive(false);
             ball.setVisible(false);
+            ball.body.enable(false);
 
             grunt.play();
         });
@@ -249,7 +250,9 @@ class Ball extends Phaser.GameObjects.Sprite {
         this.body.velocity.x = -60;
     }
 
-    update() {
+    preUpdate() {
+        super.preUpdate();
+
         if (this.x < 0) {
             this.setActive(false);
         }
