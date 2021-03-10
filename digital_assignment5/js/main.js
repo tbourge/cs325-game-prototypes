@@ -90,6 +90,7 @@ class MyScene extends Phaser.Scene {
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.setActive(false);
+
             pirate.setVisible(false);
 
             ball.setActive(false);
@@ -286,7 +287,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
         gameOver = 1;
     }
 
-    update() {
+    preUpdate() {
         if (this.x > 500) {
             this.lose();
         }
