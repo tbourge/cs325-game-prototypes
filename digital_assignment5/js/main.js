@@ -23,8 +23,7 @@ var balls, pirates;
 var score, time;
 //Text
 var scoreText, timeText;
-//Sounds
-var grunt, music, boom;
+
 
 class MyScene extends Phaser.Scene {
     
@@ -57,7 +56,6 @@ class MyScene extends Phaser.Scene {
         scoreText = this.add.text(200, 300, "", { fontSize: "32px" });
         scoreText.setText('Click to Start');
         timeText = this.add.text(20, 20, '', { fontSize: 16 });
-  
         timeText.setText('Time: 0');
 
         gameOver = 0;
@@ -67,7 +65,7 @@ class MyScene extends Phaser.Scene {
 
         this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.7 });
         this.gruntSound = this.sound.add('grunt');
-        grunt = this.gruntSound;
+
         this.bgm = this.sound.add('bgm', { volume: '0.2' });
         this.boomSound = this.sound.add('boom');
 
@@ -109,7 +107,7 @@ class MyScene extends Phaser.Scene {
 
             ball.explode();
 
-            grunt.play();
+            this.gruntSound.play();
 
             this.boomSound.play();
         }.bind(this));
