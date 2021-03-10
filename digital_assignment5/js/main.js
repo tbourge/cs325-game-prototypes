@@ -186,6 +186,7 @@ class MyScene extends Phaser.Scene {
         if (p) {
             p.make(this);
             p.setActive(true).setVisible(true);
+            this.physics.moveToObject(p, cannon, 20);
         }
     }
 
@@ -262,7 +263,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
         scene.physics.world.enableBody(this);
         this.body.collideWorldBounds = true;
-        this.body.velocity.x = 30;
+        //this.body.velocity.x = 30;
     }
 
     lose() {
