@@ -250,8 +250,8 @@ class Ball extends Phaser.GameObjects.Sprite {
         this.body.velocity.x = -60;
     }
 
-    preUpdate() {
-        super.preUpdate();
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
 
         if (this.x < 0) {
             this.setActive(false);
@@ -291,8 +291,8 @@ class Pirate extends Phaser.GameObjects.Sprite {
         gameOver = 1;
     }
 
-    preUpdate() {
-        super.preUpdate();
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
 
         if (this.x > 600) {
             this.lose();
