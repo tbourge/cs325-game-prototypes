@@ -287,11 +287,11 @@ class Pirate extends Phaser.GameObjects.Sprite {
         gameOver = 1;
     }
 
-    preUpdate() {
-        if (this.x > 500) {
-            this.lose();
-        }
-    }
+//    preUpdate() {
+  //      if (this.x > 500) {
+    //        this.lose();
+      //  }
+    //}
 }
 
 const game = new Phaser.Game({
