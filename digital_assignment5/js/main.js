@@ -83,6 +83,10 @@ class MyScene extends Phaser.Scene {
 
         this.input.on('pointerup', function (pointer) {
             if (gameOver) {
+                if (this.bgm.isPlaying) {
+                    this.bgm.stop();
+                }
+
                 this.scene.restart();
             }
             else {
@@ -91,8 +95,12 @@ class MyScene extends Phaser.Scene {
                 pirateTimer.paused = false;
                 cannonTimer.paused = false;
                 winTimer.paused = false;
+
+                if (!this.bgm.isPlaying) {
+                    this.bgm.play();
+                }
             }
-        }, this);
+        }.bind(this) , this);
 
         //Copied from Phaser Group vs Group example.
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
@@ -182,10 +190,6 @@ class MyScene extends Phaser.Scene {
         this.physics.world.collide(target, balls, this.explode);
 
         timeText.setText('Time: ' + time);
-
-        if (!this.bgm.isPlaying) {
-            this.bgm.play();
-        }
     }
 
     explode(target, ball) {
