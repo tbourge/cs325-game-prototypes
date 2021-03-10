@@ -66,7 +66,7 @@ class MyScene extends Phaser.Scene {
         grunt = this.gruntSound;
 
         //Copied from Phaser Breakout example.
-        target = this.physics.add.image(50, 300, 'target').setImmovable();
+        target = this.physics.add.image(100, 300, 'target').setImmovable();
 
         this.input.on('pointermove', function (pointer) {          
             target.y = Phaser.Math.Clamp(pointer.y, 100, 748);
