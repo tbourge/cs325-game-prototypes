@@ -85,7 +85,7 @@ class MyScene extends Phaser.Scene {
             if (gameOver) {                
                 this.bgm.destroy(true);
                 
-                //this.scene.restart();
+                this.scene.restart();
             }
             else {
                 scoreText.setVisible(false);
