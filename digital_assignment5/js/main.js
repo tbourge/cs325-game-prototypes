@@ -188,7 +188,7 @@ class MyScene extends Phaser.Scene {
         if (p) {
             p.make(this);
             p.setActive(true).setVisible(true);
-            this.physics.moveToObject(p, cannon, 20);
+            this.physics.moveToObject(p, cannon, 25);
         }
     }
 
@@ -291,7 +291,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
     preUpdate() {
         super.preUpdate();
 
-        if (this.x > 500) {
+        if (this.x > 600) {
             this.lose();
         }
     }
