@@ -40,6 +40,7 @@ class MyScene extends Phaser.Scene {
         this.load.audio('cannonSound', 'assets/sound/Cannon.mp3');
         this.load.audio('grunt', 'assets/sound/Grunt.mp3');
         this.load.audio('bgm', 'assets/sound/music.mp3');
+        this.load.audio('boom', 'assets/sound/explosionSound.mp3');
 
 
         //Copied from Create Animation From Sprite Sheet
@@ -53,9 +54,9 @@ class MyScene extends Phaser.Scene {
     create() {
         this.add.image(400, 300, 'background');
 
-        scoreText = this.add.text(300, 300).setSize(100);
+        scoreText = this.add.text(200, 300, "", { fontSize: 1000 });
         scoreText.setText('Click to Start');
-        timeText = this.add.text(20, 20, { fontSize: 1000 });
+        timeText = this.add.text(20, 20, '', { fontSize: 1000 });
   
         timeText.setText('Time: 0');
 
@@ -68,10 +69,6 @@ class MyScene extends Phaser.Scene {
         this.gruntSound = this.sound.add('grunt');
         grunt = this.gruntSound;
         this.bgm = this.sound.add('bgm', { volume: 0.5 });
-
-        if (!this.bgm.isPlaying) {
-
-        }
 
         //Copied from Phaser Breakout example.
         target = this.physics.add.image(150, 300, 'target').setImmovable();
@@ -181,6 +178,10 @@ class MyScene extends Phaser.Scene {
         this.physics.world.collide(target, balls, this.explode);
 
         timeText.setText('Time: ' + time);
+
+        if (!this.bgm.isPlaying) {
+            this.bgm.play();
+        }
     }
 
     explode(target, ball) {
@@ -231,18 +232,6 @@ class MyScene extends Phaser.Scene {
         balls.clear(true);
         scoreText.setText('You survived! Score: ' + score + ' Click to restart');
         gameOver = 1;
-    }
-
-    onWorldBounds() {
-        timer.paused = true;
-        pirateTimer.paused = true;
-        cannonTimer.paused = true;
-        winTimer.paused = true;
-
-        timeText.setVisible(false);
-        scoreText.setVisible(true);
-        scoreText.setText('You survived for: ' + time + ' seconds.');
-        gameOver = 1;  
     }
 
     lose() {
