@@ -67,11 +67,11 @@ class MyScene extends Phaser.Scene {
         grunt = this.gruntSound;
 
         //Copied from Phaser Breakout example.
-        target = this.physics.add.image(100, 300, 'target').setImmovable();
+        target = this.physics.add.image(150, 300, 'target').setImmovable();
 
         this.input.on('pointermove', function (pointer) {
             if (!gameOver) {
-                target.y = Phaser.Math.Clamp(pointer.y, 100, 748);
+                target.y = Phaser.Math.Clamp(pointer.y, 150, 748);
             }
         }, this);
 
@@ -300,29 +300,6 @@ class Ball extends Phaser.GameObjects.Sprite {
     }
 }
 
-class Explosion extends Phaser.GameObjects.Sprite {
-    constructor(scene) {
-        super(scene, - 200, -200, 'exp');
-    }
-
-    make(scene, x, y) {
-        this.setPosition(x, y);
-
-        this.play('explode');
-
-        scene.physics.world.enableBody(this);
-        this.body.setCircle(40);
-
-        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, this.explode, this);
-    }
-
-    explode() {
-        this.body.setEnable(false);
-        this.setActive(false);
-        this.setVisible(false);
-    }
-}
-
 class Pirate extends Phaser.GameObjects.Sprite {
     constructor(scene) {
         super(scene, 400, 300, 'pirateb');
@@ -339,8 +316,6 @@ class Pirate extends Phaser.GameObjects.Sprite {
         this.play('walk');
 
         scene.physics.world.enableBody(this);
-        this.body.collideWorldBounds = true;
-        //this.body.velocity.x = 30;
     }
 
     lose() {
