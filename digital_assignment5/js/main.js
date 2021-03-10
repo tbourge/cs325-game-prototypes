@@ -69,8 +69,10 @@ class MyScene extends Phaser.Scene {
         //Copied from Phaser Breakout example.
         target = this.physics.add.image(100, 300, 'target').setImmovable();
 
-        this.input.on('pointermove', function (pointer) {          
-            target.y = Phaser.Math.Clamp(pointer.y, 100, 748);
+        this.input.on('pointermove', function (pointer) {
+            if (!gameOver) {
+                target.y = Phaser.Math.Clamp(pointer.y, 100, 748);
+            }
         }, this);
 
         this.input.on('pointerup', function (pointer) {
