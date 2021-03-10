@@ -210,7 +210,7 @@ class MyScene extends Phaser.Scene {
         if (p) {
             p.make(this);
             p.setActive(true).setVisible(true);
-            this.physics.moveToObject(p, cannon, 25);
+            this.physics.moveTo(p, 640, p.y, 25);
         }
     }
 
@@ -302,6 +302,10 @@ class Pirate extends Phaser.GameObjects.Sprite {
     constructor(scene) {
         super(scene, 400, 300, 'pirateb');
         this.setActive(false);
+
+        this.targetNotSet = true;
+        this.offPlank = false;
+        this.pointY = 0;
     }
 
     make(scene) {
@@ -336,6 +340,34 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
+
+        if (this.x > 150) {
+            this.offPlank = true;
+        }
+        else {
+            this.offPlank = false;
+        }
+
+        if (this.offPlank && this.targetNotSet) {
+            rand = Math.trunc(Math.random() * 3);
+
+            switch (rand) {
+                case 0:
+                    this.pointY = 300;
+                    break;
+
+                case 1:
+                    this.pointY = 300;
+                    break;
+
+                case 2:
+                    this.pointY = 300;
+                    break;
+
+                default:
+                    this.pointY = 300;
+            };
+        }
 
         if (this.x > 600) {
             this.lose();
