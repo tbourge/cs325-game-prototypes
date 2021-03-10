@@ -69,7 +69,7 @@ class MyScene extends Phaser.Scene {
         target = this.physics.add.image(50, 300, 'target').setImmovable();
 
         this.input.on('pointermove', function (pointer) {          
-            target.y = Phaser.Math.Clamp(pointer.y, 52, 748);
+            target.y = Phaser.Math.Clamp(pointer.y, 100, 748);
         }, this);
 
         this.input.on('pointerup', function (pointer) {
@@ -94,9 +94,7 @@ class MyScene extends Phaser.Scene {
             pirate.body.setEnable(false);
             pirate.setVisible(false);
 
-            ball.setActive(false);
-            ball.setVisible(false);
-            ball.body.setEnable(false);
+            ball.explode();
 
             grunt.play();
         });
@@ -169,7 +167,16 @@ class MyScene extends Phaser.Scene {
             cannon.y++;
         }
 
+        this.physics.world.collide(target, balls, this.explode(target, ball));
+
         timeText.setText('Time: ' + time);
+    }
+
+    explode(target, ball) {
+        target.setActive(false);
+        target.setVisible(false);
+
+        ball.explode();
     }
 
     shoot() {
@@ -249,6 +256,12 @@ class Ball extends Phaser.GameObjects.Sprite {
         scene.physics.world.enableBody(this);
         this.body.velocity.x = -60;
         this.body.setCircle(50);
+    }
+
+    explode() {
+        this.setActive(false);
+        this.setVisible(false);
+        this.body.setEnable(false);
     }
 
     preUpdate(time, delta) {
