@@ -35,6 +35,7 @@ class MyScene extends Phaser.Scene {
     preload() {
         this.load.image('background', 'assets/art/Background.png');
         this.load.image('target', 'assets/art/Target.png');
+        this.load.image('still', 'assets/art/CannonStill.png');
 
         this.load.audio('cannonSound', 'assets/sound/Cannon.mp3');
         this.load.audio('grunt', 'assets/sound/Grunt.mp3');
@@ -142,7 +143,7 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
-        cannon = this.add.sprite(690, 300, 'cannon');
+        cannon = this.add.sprite(690, 300, 'still');
 
         //Copied from Phaser On complete event example
         cannon.on(Phaser.Animations.Events.ANIMATION_COMPLETE, function () {
