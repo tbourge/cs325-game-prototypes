@@ -259,7 +259,7 @@ class Ball extends Phaser.GameObjects.Sprite {
 
         scene.physics.world.enableBody(this);
         this.body.velocity.x = -60;
-        this.body.setCircle(50);
+        this.body.setCircle(40);
     }
 
     explode() {
