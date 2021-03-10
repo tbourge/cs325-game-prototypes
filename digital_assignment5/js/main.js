@@ -54,7 +54,7 @@ class MyScene extends Phaser.Scene {
     create() {
         this.add.image(400, 300, 'background');
 
-        scoreText = this.add.text(200, 300, "", { fontSize: 1000 });
+        scoreText = this.add.text(200, 300, "", { fontSize: "1000px" });
         scoreText.setText('Click to Start');
         timeText = this.add.text(20, 20, '', { fontSize: 1000 });
   
@@ -70,6 +70,7 @@ class MyScene extends Phaser.Scene {
         grunt = this.gruntSound;
         this.bgm = this.sound.add('bgm', { volume: 0.5 });
         this.boomSound = this.sound.add('boom');
+
 
         //Copied from Phaser Breakout example.
         target = this.physics.add.image(150, 300, 'target').setImmovable();
@@ -109,7 +110,7 @@ class MyScene extends Phaser.Scene {
         pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
         cannonTimer = this.time.addEvent({ delay: 3000, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
         timer = this.time.addEvent({ delay: 1000, callback: this.addTime, callbackScope: this, repeat: -1, paused: true });
-        winTimer = this.time.addEvent({ delay: 60000, callback: this.win, callbackScope: this, repeat: 0, paused: true });
+        winTimer = this.time.addEvent({ delay: 120000, callback: this.win, callbackScope: this, repeat: 0, paused: true });
 
 
         //Copied from Phaser Create Animation From Sprite Sheet example.
