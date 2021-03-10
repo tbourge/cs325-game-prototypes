@@ -44,7 +44,7 @@ class MyScene extends Phaser.Scene {
         this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet('cannon', 'assets/art/Cannon.png', { frameWidth: 192, frameHeight: 96 });
         this.load.spritesheet('pirateb', 'assets/art/PirateBSheet.png', { frameWidth: 78, frameHeight: 84 });
-        this.load.spritesheet('exp', 'assets/art/Explosion.png', { frameWidth: 96, frameHeight: 96 });
+        this.load.spritesheet('exp', 'assets/art/Explosion.png', { frameWidth: 128, frameHeight: 128 });
 
     }
     
@@ -197,7 +197,7 @@ class MyScene extends Phaser.Scene {
 
         ball.explode();
 
-        this.lose();
+        ball.lose();
     }
 
     shoot() {
@@ -290,6 +290,18 @@ class Ball extends Phaser.GameObjects.Sprite {
         this.body.setEnable(false);
         this.setActive(false);
         this.setVisible(false);
+    }
+
+    lose() {
+        timer.paused = true;
+        pirateTimer.paused = true;
+        cannonTimer.paused = true;
+        winTimer.paused = true;
+
+        timeText.setVisible(false);
+        scoreText.setVisible(true);
+        scoreText.setText('You survived for: ' + time + ' seconds.');
+        gameOver = 1;
     }
 
     preUpdate(time, delta) {
