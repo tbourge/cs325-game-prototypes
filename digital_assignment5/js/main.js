@@ -104,7 +104,9 @@ class MyScene extends Phaser.Scene {
             ball.explode();
 
             grunt.play();
-        });
+
+            this.boomSound.play();
+        }.bind(this));
 
         //Copied from phaser timer example.
         pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
