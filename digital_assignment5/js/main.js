@@ -40,7 +40,6 @@ class MyScene extends Phaser.Scene {
         this.load.audio('bgm', 'assets/sound/music.mp3');
         this.load.audio('boom', 'assets/sound/explosionSound.mp3');
 
-
         //Copied from Create Animation From Sprite Sheet
         this.load.spritesheet('ball', 'assets/art/Cannon ball.png', { frameWidth: 48, frameHeight: 48 });
         this.load.spritesheet('cannon', 'assets/art/Cannon.png', { frameWidth: 192, frameHeight: 96 });
@@ -73,7 +72,7 @@ class MyScene extends Phaser.Scene {
 
         this.input.on('pointermove', function (pointer) {
             if (!gameOver) {
-                target.y = Phaser.Math.Clamp(pointer.y, 50, 550);
+                target.y = Phaser.Math.Clamp(pointer.y, 60, 540);
             }
         }, this);
 
