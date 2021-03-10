@@ -174,6 +174,7 @@ class MyScene extends Phaser.Scene {
 
     explode(target, ball) {
         target.setActive(false);
+        target.body.setEnable(false);
         target.setVisible(false);
 
         ball.explode();
