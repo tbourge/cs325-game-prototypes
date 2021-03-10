@@ -91,12 +91,12 @@ class MyScene extends Phaser.Scene {
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.setActive(false);
-            pirate.body.enable(false);
+            pirate.body.setEnable(false);
             pirate.setVisible(false);
 
             ball.setActive(false);
             ball.setVisible(false);
-            ball.body.enable(false);
+            ball.body.setEnable(false);
 
             grunt.play();
         });
