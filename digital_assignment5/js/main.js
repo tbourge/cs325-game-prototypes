@@ -91,7 +91,7 @@ class MyScene extends Phaser.Scene {
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             pirate.setActive(false);
-
+            pirate.body.enable(false);
             pirate.setVisible(false);
 
             ball.setActive(false);
@@ -111,7 +111,7 @@ class MyScene extends Phaser.Scene {
         pirateTimer = this.time.addEvent({ delay: 3500, callback: this.spawn, callbackScope: this, repeat: -1, paused: true });
         cannonTimer = this.time.addEvent({ delay: 3000, callback: this.shoot, callbackScope: this, repeat: -1, paused: true });
         timer = this.time.addEvent({ delay: 1000, callback: this.addTime, callbackScope: this, repeat: -1, paused: true });
-        winTimer = this.time.addEvent({ delay: 180000, callback: this.win, callbackScope: this, repeat: 0, paused: true });
+        winTimer = this.time.addEvent({ delay: 45000, callback: this.win, callbackScope: this, repeat: 0, paused: true });
 
 
         //Copied from Phaser Create Animation From Sprite Sheet example.
