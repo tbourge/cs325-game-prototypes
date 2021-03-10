@@ -82,11 +82,9 @@ class MyScene extends Phaser.Scene {
         }, this);
 
         this.input.on('pointerup', function (pointer) {
-            if (gameOver) {
-                if (this.bgm.isPlaying) {
-                    this.bgm.stop();
-                }
-
+            if (gameOver) {                
+                this.bgm.destroy(true);
+                
                 //this.scene.restart();
             }
             else {
