@@ -24,7 +24,7 @@ var score, time;
 //Text
 var scoreText, timeText;
 //Sounds
-var grunt, music;
+var grunt, music, boom;
 
 class MyScene extends Phaser.Scene {
     
@@ -65,10 +65,11 @@ class MyScene extends Phaser.Scene {
         score = 0;
         time = 0;
 
-        this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.8 });
+        this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.7 });
         this.gruntSound = this.sound.add('grunt');
         grunt = this.gruntSound;
         this.bgm = this.sound.add('bgm', { volume: 0.5 });
+        this.boomSound = this.sound.add('boom');
 
         //Copied from Phaser Breakout example.
         target = this.physics.add.image(150, 300, 'target').setImmovable();
@@ -264,7 +265,9 @@ class Ball extends Phaser.GameObjects.Sprite {
 
     explode() {
         this.body.velocity.x = 0;
+
         this.play('explosion');
+
 
         this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, this.die, this);
     }
