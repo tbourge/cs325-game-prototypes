@@ -229,7 +229,8 @@ class MyScene extends Phaser.Scene {
         score = time * 10;
         pirates.clear(true);
         balls.clear(true);
-        scoreText.setText('You survived! Score: ' + score + ' Click to restart');
+        scoreText.setPosition()
+        scoreText.setText('You survived! Score: ' + score + '<br>Click to restart');
         gameOver = 1;
     }
 
