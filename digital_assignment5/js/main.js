@@ -71,7 +71,7 @@ class MyScene extends Phaser.Scene {
 
         this.input.on('pointermove', function (pointer) {
             if (!gameOver) {
-                target.y = Phaser.Math.Clamp(pointer.y, 150, 748);
+                target.y = Phaser.Math.Clamp(pointer.y, 100, 500);
             }
         }, this);
 
