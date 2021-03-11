@@ -100,7 +100,10 @@ class MyScene extends Phaser.Scene {
         //Copied from Phaser Group vs Group example.
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
-        pirates.x = -200;
+        pirates.forEach(function (p) {
+            p.setActive(false);
+            p.setVisible(false);
+        }, this);
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             if (gameStart) {
@@ -249,7 +252,7 @@ class MyScene extends Phaser.Scene {
 
         timeText.setVisible(false);
         scoreText.setVisible(true);
-        scoreText.setText("The pirates got you..." + '\n' + 'You survived for: ' + time + ' seconds.');
+        scoreText.setText("Your target was destroyed..." + '\n' + 'You survived for: ' + time + ' seconds' + '\n' + "Click to restart");
         gameOver = 1;  
     }
 }
@@ -339,7 +342,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
         timeText.setVisible(false);
         scoreText.setVisible(true);
-        scoreText.setText("The pirates got you..." + '\n' + 'You survived for: ' + time + ' seconds.');
+        scoreText.setText("The pirates got you..." + '\n' + 'You survived for: ' + time + ' seconds' + '\n' + "Click to restart");
         gameOver = 1;
     }
 
