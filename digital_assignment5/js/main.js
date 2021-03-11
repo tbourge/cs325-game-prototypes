@@ -100,7 +100,7 @@ class MyScene extends Phaser.Scene {
         //Copied from Phaser Group vs Group example.
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
-        pirates.group.forEach(function (p) {
+        pirates.getChildren().forEach(function (p) {
             p.setActive(false);
             p.setVisible(false);
         }, this, true);
