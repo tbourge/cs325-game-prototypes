@@ -119,6 +119,8 @@ class MyScene extends Phaser.Scene {
                 ball.explode();
 
                 this.boomSound.play();
+
+                score += 100;
             }
         }.bind(this));
 
@@ -195,7 +197,7 @@ class MyScene extends Phaser.Scene {
             this.physics.world.collide(target, balls, this.explode);
         }
 
-        timeText.setText('Time: ' + time);
+        timeText.setText('Time: ' + time + 'Score: ' + score);
     }
 
     explode(target, ball) {
