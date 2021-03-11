@@ -62,10 +62,10 @@ class MyScene extends Phaser.Scene {
         time = 0;
         gameStart = false;
 
-        this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.75 });
+        this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.8 });
 
         this.bgm = this.sound.add('bgm', { volume: '0.2' });
-        this.boomSound = this.sound.add('boom');
+        this.boomSound = this.sound.add('boom', { volume: '0.9' });
 
 
         //Copied from Phaser Breakout example.
