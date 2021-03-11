@@ -12,7 +12,7 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 //Boolean
-var animNotDone, gameOver;
+var animNotDone, gameOver, gameStart;
 //Timers
 var pirateTimer, cannonTimer, timer, winTimer;
 //Objects
@@ -60,6 +60,7 @@ class MyScene extends Phaser.Scene {
         animNotDone = 1;
         score = 0;
         time = 0;
+        gameStart = false;
 
         this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.7 });
 
@@ -88,6 +89,7 @@ class MyScene extends Phaser.Scene {
                 pirateTimer.paused = false;
                 cannonTimer.paused = false;
                 winTimer.paused = false;
+                gameStart = true;
 
                 if (!this.bgm.isPlaying) {
                     this.bgm.play();
@@ -100,11 +102,13 @@ class MyScene extends Phaser.Scene {
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
-            pirate.explode();
+            if (gameStart) {
+                pirate.explode();
 
-            ball.explode();
+                ball.explode();
 
-            this.boomSound.play();
+                this.boomSound.play();
+            }
         }.bind(this));
 
         //Copied from phaser timer example.
