@@ -310,7 +310,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
         this.targetNotSet = true;
         this.offPlank = false;
         this.pointY = 0;
-        this.move = true;
+        this.move = 0;
     }
 
     make(scene) {
@@ -346,7 +346,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
     }
 
     getPoint() {
-        rand = Math.trunc(Math.random() * 7);
+        var rand = Math.trunc(Math.random() * 7);
 
         switch (rand) {
             case 0:
@@ -402,7 +402,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
             this.getPoint();
         }
 
-        if (this.move && this.x < 600) {
+        if (this.move < 1 && this.x < 600) {
             this.x++;
 
             if (this.y < this.pointY) {
@@ -412,10 +412,10 @@ class Pirate extends Phaser.GameObjects.Sprite {
                 this.y--;
             }
 
-            this.move = false;
+            this.move = 2;
         }
         else {
-            this.move = true;
+            this.move--;
         }
     }
 }
