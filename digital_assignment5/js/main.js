@@ -62,7 +62,7 @@ class MyScene extends Phaser.Scene {
         time = 0;
         gameStart = false;
 
-        this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.7 });
+        this.cannonSound = this.sound.add('cannonSound', { volume: 0.4, rate: 0.75 });
 
         this.bgm = this.sound.add('bgm', { volume: '0.2' });
         this.boomSound = this.sound.add('boom');
@@ -100,6 +100,7 @@ class MyScene extends Phaser.Scene {
         //Copied from Phaser Group vs Group example.
         balls = this.physics.add.group({ key: 'ball', classType: Ball });
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
+        pirates.x = -200;
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             if (gameStart) {
@@ -214,6 +215,8 @@ class MyScene extends Phaser.Scene {
         if (p) {
             p.make(this);
             p.setActive(true).setVisible(true);
+
+            //Copied from Phaser moveto example
             this.physics.moveTo(p, 640, p.y, 25);
         }
     }
