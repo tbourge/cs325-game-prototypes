@@ -245,7 +245,7 @@ class MyScene extends Phaser.Scene {
 
         timeText.setVisible(false);
         scoreText.setVisible(true);
-        score = time * 10;
+        score += time * 10;
         pirates.clear(true);
         balls.clear(true);
         scoreText.setPosition(150, 300);
