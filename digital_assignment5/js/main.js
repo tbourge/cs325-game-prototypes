@@ -103,7 +103,7 @@ class MyScene extends Phaser.Scene {
         pirates.forEach(function (p) {
             p.setActive(false);
             p.setVisible(false);
-        }, this);
+        }, this, true);
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
             if (gameStart) {
