@@ -413,7 +413,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
                 this.y--;
             }
 
-            this.move = 2;
+            this.move = 3;
         }
         else {
             this.move--;
