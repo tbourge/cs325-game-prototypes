@@ -306,6 +306,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
         this.targetNotSet = true;
         this.offPlank = false;
         this.pointY = 0;
+        this.move = true;
     }
 
     make(scene) {
@@ -315,8 +316,10 @@ class Pirate extends Phaser.GameObjects.Sprite {
         else {
             this.setPosition(50, 445 + Math.random() * 10);
         }
-        this.play('walk');
 
+        this.play('walk');
+        this.offPlank = false;
+        this.targetNotSet = true;
         scene.physics.world.enableBody(this);
     }
 
@@ -338,6 +341,45 @@ class Pirate extends Phaser.GameObjects.Sprite {
         this.setVisible(false);
     }
 
+    getPoint() {
+        rand = Math.trunc(Math.random() * 7);
+
+        switch (rand) {
+            case 0:
+                this.pointY = 30;
+                break;
+
+            case 1:
+                this.pointY = 150;
+                break;
+
+            case 2:
+                this.pointY = 270;
+                break;
+
+            case 3:
+                this.pointY = 390;
+                break;
+
+            case 4:
+                this.pointY = 410;
+                break;
+
+            case 5:
+                this.pointY = 530;
+                break;
+
+            case 6:
+                this.pointY = 570;
+                break;
+
+            default:
+                this.pointY = cannon.y;
+        };
+
+        this.targetNotSet = false;
+    }
+
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
 
@@ -348,29 +390,28 @@ class Pirate extends Phaser.GameObjects.Sprite {
             this.offPlank = false;
         }
 
-        if (this.offPlank && this.targetNotSet) {
-            rand = Math.trunc(Math.random() * 3);
-
-            switch (rand) {
-                case 0:
-                    this.pointY = 300;
-                    break;
-
-                case 1:
-                    this.pointY = 300;
-                    break;
-
-                case 2:
-                    this.pointY = 300;
-                    break;
-
-                default:
-                    this.pointY = 300;
-            };
-        }
-
         if (this.x > 600) {
             this.lose();
+        }
+
+        if (this.offPlank && this.targetNotSet) {
+            this.getPoint();
+        }
+
+        if (this.move && this.x < 600) {
+            this.x++;
+
+            if (this.y < this.pointY) {
+                this.y++;
+            }
+            else {
+                this.y--;
+            }
+
+            this.move = false;
+        }
+        else {
+            this.move = true;
         }
     }
 }
