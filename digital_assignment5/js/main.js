@@ -354,7 +354,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
         switch (rand) {
             case 0:
-                this.pointY = 30;
+                this.pointY = 50;
                 break;
 
             case 1:
@@ -378,7 +378,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
                 break;
 
             case 6:
-                this.pointY = 570;
+                this.pointY = 550;
                 break;
 
             default:
