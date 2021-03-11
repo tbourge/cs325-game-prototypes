@@ -102,12 +102,14 @@ class MyScene extends Phaser.Scene {
         balls.getChildren().forEach(function (b) {
             b.setActive(false);
             b.setVisible(false);
+            b.body.enable = false;
         }, this, true);
 
         pirates = this.physics.add.group({ key: 'pirate', classType: Pirate });
         pirates.getChildren().forEach(function (p) {
             p.setActive(false);
             p.setVisible(false);
+            p.body.enable = false;
         }, this, true);
 
         this.physics.add.collider(balls, pirates, function (ball, pirate) {
