@@ -402,7 +402,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
             this.getPoint();
         }
 
-        if (this.move < 1 && this.x < 600) {
+        if (this.move < 1 && this.x < 600 && gameStart) {
             this.x++;
 
             if (this.y < this.pointY) {
