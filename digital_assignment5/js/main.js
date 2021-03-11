@@ -249,7 +249,7 @@ class MyScene extends Phaser.Scene {
 
         timeText.setVisible(false);
         scoreText.setVisible(true);
-        scoreText.setText('You survived for: ' + time + ' seconds.');
+        scoreText.setText("The pirates got you..." + '\n' + 'You survived for: ' + time + ' seconds.');
         gameOver = 1;  
     }
 }
@@ -292,7 +292,7 @@ class Ball extends Phaser.GameObjects.Sprite {
 
         timeText.setVisible(false);
         scoreText.setVisible(true);
-        scoreText.setText('You survived for: ' + time + ' seconds.');
+        scoreText.setText("The pirates got you..." + '\n' + 'You survived for: ' + time + ' seconds.');
         gameOver = 1;
     }
 
@@ -339,7 +339,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
 
         timeText.setVisible(false);
         scoreText.setVisible(true);
-        scoreText.setText('You survived for: ' + time + ' seconds.');
+        scoreText.setText("The pirates got you..." + '\n' + 'You survived for: ' + time + ' seconds.');
         gameOver = 1;
     }
 
