@@ -262,7 +262,7 @@ class MyScene extends Phaser.Scene {
         timeText.setVisible(false);
         scoreText.setVisible(true);
         scoreText.setPosition(120, 300);
-        scoreText.setText("Your target was destroyed..." + '\n' + 'You survived for: ' + time + ' seconds and your final score was: ' + score + '\n' + "Click to restart");
+        scoreText.setText("Your target was destroyed..." + '\n' + 'You survived for: ' + time + ' seconds\nFinal score: ' + score + '\n' + "Click to restart");
         gameOver = 1;  
     }
 }
@@ -306,7 +306,7 @@ class Ball extends Phaser.GameObjects.Sprite {
         timeText.setVisible(false);
         scoreText.setVisible(true);
         scoreText.setPosition(120, 300);
-        scoreText.setText("Your target was destroyed..." + '\n' + 'You survived for: ' + time + ' seconds and your final score was: ' + score + '\n' + "Click to restart");
+        scoreText.setText("Your target was destroyed..." + '\n' + 'You survived for: ' + time + ' seconds\nFinal score: ' + score + '\n' + "Click to restart");
         gameOver = 1;
     }
 
@@ -354,7 +354,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
         timeText.setVisible(false);
         scoreText.setVisible(true);
         scoreText.setPosition(120, 300);
-        scoreText.setText("The pirates got you..." + '\n' + 'You survived for: ' + time + ' seconds and your final score was: ' + score + '\n' + "Click to restart");
+        scoreText.setText("The pirates got you..." + '\n' + 'You survived for: ' + time + ' seconds\nFinal score: ' + score + '\n' + "Click to restart");
         gameOver = 1;
     }
 
