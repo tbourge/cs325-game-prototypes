@@ -306,6 +306,7 @@ class Pirate extends Phaser.GameObjects.Sprite {
     constructor(scene) {
         super(scene, 400, 300, 'pirateb');
         this.setActive(false);
+        this.setVisible(false);
 
         this.targetNotSet = true;
         this.offPlank = false;
