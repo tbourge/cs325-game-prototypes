@@ -36,8 +36,8 @@ class MyScene extends Phaser.Scene {
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
 
         for (var i = 0; i < 255; i+=20) {
-            this.cards.add(new Card(this, i, 'c'));
-            this.cards.add(new Card(this, i, 'c'));
+            this.cards.add(new Card(this, i, 'c').enableBody(true));
+            this.cards.add(new Card(this, i, 'c').enableBody(true));
         }
 
         this.cards.getFirstAlive().destroy();
@@ -52,7 +52,7 @@ class MyScene extends Phaser.Scene {
         this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        this.p = new Player(this, 64, 64, 0, 'pb');
+        this.p = new Player(this, 64, 64, 0, 'pb').enableBody(true);
 
         this.physics.add.overlap(this.p, this.cards, function (p, card) {
             console.log("overlap");
@@ -105,8 +105,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, sprite);
 
         this.pNum = num;
-
-        this.enableBody(true);
 
         scene.add.existing(this);
     }
