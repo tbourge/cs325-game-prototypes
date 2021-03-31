@@ -29,13 +29,13 @@ class MyScene extends Phaser.Scene {
     create() {
         this.p = new Player(this, 0, 'pb');
 
-        this.cards = this.add.group({
-            gridAlign: { width: 10, height: 6, cellWidth: 32, cellHeight: 32, x: 0, y: 0 }
-        });
+        this.cards = this.physics.add.group({ key: 'card', classType: Card });
 
         for (var i = 0; i < 60; i++) {
             this.cards.add(new Card(this, i, 'c'));
         }
+
+
     }
     
     update() {
@@ -64,6 +64,8 @@ class Card extends Phaser.GameObjects.Sprite {
         super(scene, 400, 300, sprite);
 
         this.num = n;
+
+        scene.add.existing(this);
     }
 }
 
