@@ -83,7 +83,7 @@ class MyScene extends Phaser.Scene {
 
     pick(player, card) {
         //console.log("overlap");
-        if (this.space.isDown) {
+        if (Phaser.Input.Keyboard.JustDown(this.space)) {
 
             if (!card.isActive) {
                 console.log("pick");
