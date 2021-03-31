@@ -21,7 +21,9 @@ class MyScene extends Phaser.Scene {
         this.activeCards;
         this.inactiveCards;
 
-        this.up, this.down, this.left, this.right;
+        this.push = false;
+
+        this.up, this.down, this.left, this.right, this.space;
     }
     
     preload() {
@@ -48,6 +50,8 @@ class MyScene extends Phaser.Scene {
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
 
         this.p = new Player(this, 64, 64, 0, 'pb');
 
@@ -56,12 +60,31 @@ class MyScene extends Phaser.Scene {
     
     update() {
         if (Phaser.Input.Keyboard.JustDown(this.up)) {
-            this.p.y -= 64; 
+            this.p.y -= 96; 
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.left)) {
+            this.p.x -= 96;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.down)) {
+            this.p.y += 96;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.right)) {
+            this.p.x += 96;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.space)) {
+            this.push = true;
+        }
+        else {
+            this.push = false;
         }
     }
 
     pick(player, card) {
-        if (Phaser.Input.Keyboard.JustDown(this.down)) {
+        if(this.push) {
             player.cardActive = card;
             card.activate(player);
         }
