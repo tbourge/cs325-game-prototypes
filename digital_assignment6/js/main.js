@@ -56,7 +56,7 @@ class MyScene extends Phaser.Scene {
 
         this.p = new Player(this, 500, 64, 0, 'pb');
 
-        this.physics.add.overlap(this.p, this.cards, this.pick);
+        //this.physics.add.overlap(this.p, this.cards, this.pick);
     }
     
     update() {
@@ -106,6 +106,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.pNum = num;
 
+        scene.add.existing(this);
         scene.physics.add.existing(this);
     }
 
@@ -123,6 +124,7 @@ class Card extends Phaser.Physics.Arcade.Sprite {
 
         this.num = n;
 
+        scene.add.existing(this);
         scene.physics.add.existing(this);
     }
 
