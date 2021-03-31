@@ -18,6 +18,8 @@ class MyScene extends Phaser.Scene {
 
         this.p;
         this.cards;
+        this.activeCards;
+        this.inactiveCards;
     }
     
     preload() {
@@ -31,7 +33,7 @@ class MyScene extends Phaser.Scene {
 
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
 
-        for (var i = 0; i < 6; i++) {
+        for (var i = 0; i < 12; i++) {
             this.cards.add(new Card(this, i, 'c'));
         }
 
