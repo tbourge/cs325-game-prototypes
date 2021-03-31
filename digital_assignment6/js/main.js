@@ -40,7 +40,7 @@ class Player extends Phaser.GameObjects.Sprite {
 
         this.pNum = num;
 
-        scene.addExisting(this);
+        scene.add.existing(this);
     }
 }
 
