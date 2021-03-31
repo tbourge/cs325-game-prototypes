@@ -120,7 +120,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             return;
         }
         else {
-            console.log(this.card.num);
+            console.log(card.num);
 
             if (card.num === this.cardActive.num) {
                 this.score++;
