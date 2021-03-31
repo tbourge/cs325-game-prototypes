@@ -17,6 +17,7 @@ class MyScene extends Phaser.Scene {
         super();        
 
         this.p;
+        this.cards;
     }
     
     preload() {
@@ -25,6 +26,14 @@ class MyScene extends Phaser.Scene {
     
     create() {
         this.p = new Player(this, 0, 'pb');
+
+        this.cards = this.add.group({
+            gridAlign: { width: 10, height: 6, cellWidth: 32, cellHeight: 32, x: 0, y: 0 }
+        });
+
+        for (i = 0; i < 60; i++) {
+            this.cards.add(new Player(this, i, 'pb'));
+        }
     }
     
     update() {
@@ -33,7 +42,7 @@ class MyScene extends Phaser.Scene {
 }
 
 class Player extends Phaser.GameObjects.Sprite {
-    pNum;
+    pNum, cardActive;
 
     constructor(scene, num, sprite) {
         super(scene, 400, 300, sprite);
@@ -41,6 +50,16 @@ class Player extends Phaser.GameObjects.Sprite {
         this.pNum = num;
 
         scene.add.existing(this);
+    }
+}
+
+class Card extends Phaser.GameObjects.Sprite {
+    num, isActive;
+
+    constructor(scene, n, sprite) {
+        super(scene, 400, 300, sprite);
+
+        this.num = n;
     }
 }
 
