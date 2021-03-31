@@ -31,11 +31,11 @@ class MyScene extends Phaser.Scene {
 
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
 
-        for (var i = 0; i < 60; i++) {
+        for (var i = 0; i < 5; i++) {
             this.cards.add(new Card(this, i, 'c'));
         }
 
-
+        Phaser.Actions.SetXY(this.cards.getChildren(), 32, 100, 32);
     }
     
     update() {
