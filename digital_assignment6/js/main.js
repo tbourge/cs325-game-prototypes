@@ -33,7 +33,7 @@ class MyScene extends Phaser.Scene {
             gridAlign: { width: 10, height: 6, cellWidth: 32, cellHeight: 32, x: 0, y: 0 }
         });
 
-        for (i = 0; i < 60; i++) {
+        for (var i = 0; i < 60; i++) {
             this.cards.add(new Card(this, i, 'c'));
         }
     }
