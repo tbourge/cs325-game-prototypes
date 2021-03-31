@@ -42,7 +42,8 @@ class MyScene extends Phaser.Scene {
 }
 
 class Player extends Phaser.GameObjects.Sprite {
-    pNum, cardActive;
+    pNum;
+    cardActive;
 
     constructor(scene, num, sprite) {
         super(scene, 400, 300, sprite);
@@ -54,7 +55,8 @@ class Player extends Phaser.GameObjects.Sprite {
 }
 
 class Card extends Phaser.GameObjects.Sprite {
-    num, isActive;
+    num;
+    isActive;
 
     constructor(scene, n, sprite) {
         super(scene, 400, 300, sprite);
