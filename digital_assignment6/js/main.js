@@ -54,9 +54,9 @@ class MyScene extends Phaser.Scene {
         this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        this.p = new Player(this, 500, 64, 0, 'pb');
+        this.p = new Player(this, 64, 64, 0, 'pb');
 
-        //this.physics.add.overlap(this.p, this.cards, this.pick);
+        this.physics.add.overlap(this.p, this.cards, this.pick);
     }
     
     update() {
