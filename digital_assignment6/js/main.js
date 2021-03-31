@@ -22,6 +22,8 @@ class MyScene extends Phaser.Scene {
     
     preload() {
         this.load.image('pb', 'assets/PlayerB.png');
+        this.load.image('c', 'assets/Card.png');
+
     }
     
     create() {
@@ -32,7 +34,7 @@ class MyScene extends Phaser.Scene {
         });
 
         for (i = 0; i < 60; i++) {
-            this.cards.add(new Player(this, i, 'pb'));
+            this.cards.add(new Card(this, i, 'c'));
         }
     }
     
