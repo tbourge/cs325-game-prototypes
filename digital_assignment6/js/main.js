@@ -125,8 +125,6 @@ class Card extends Phaser.Physics.Arcade.Sprite {
 
         this.num = n;
 
-        this.enableBody(true);
-
         scene.add.existing(this);
     }
 
