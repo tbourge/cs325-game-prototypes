@@ -20,7 +20,7 @@ class MyScene extends Phaser.Scene {
     }
     
     preload() {
-        this.load.image('pb', 'assets/Player B.png');
+        this.load.image('pb', 'assets/PlayerB.png');
     }
     
     create() {
