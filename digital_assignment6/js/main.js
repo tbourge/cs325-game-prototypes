@@ -84,10 +84,10 @@ class MyScene extends Phaser.Scene {
     pick(player, card) {
         //console.log("overlap");
         if (this.space.isDown) {
-            console.log("pick");
 
             if (!card.isActive) {
-                player.cardActive = card;
+                console.log("pick");
+                player.check(card);
                 card.activate(player);
             }
         }
@@ -98,6 +98,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     pNum;
     cardActive = null;
     color = 0x0000ff;
+    score = 0;
 
     constructor(scene, x, y, num, sprite) {
         super(scene, x, y, sprite);
@@ -110,6 +111,25 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     getColor() {
         return this.color;
+    }
+
+    check(card) {
+        if (this.cardActive === null) {
+            this.cardActive = card;
+
+            return;
+        }
+
+        if (card.num === this.cardActive.num) {
+            this.score++;
+            this.cardActive = null;
+        }
+        else {
+            this.cardActive.deactivate();
+            card.deactivate();
+
+            this.cardActive = null;
+        }
     }
 }
 
@@ -130,6 +150,11 @@ class Card extends Phaser.Physics.Arcade.Sprite {
         this.setTint(player.getColor());
 
         this.isActive = true;
+    }
+
+    deactivate() {
+        this.isActive = false;
+        this.clearTint();
     }
 }
 
