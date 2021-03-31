@@ -20,6 +20,8 @@ class MyScene extends Phaser.Scene {
         this.cards;
         this.activeCards;
         this.inactiveCards;
+
+        this.up, this.down, this.left, this.right;
     }
     
     preload() {
@@ -33,7 +35,7 @@ class MyScene extends Phaser.Scene {
 
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
 
-        for (var i = 0; i < 12; i += 2) {
+        for (var i = 0; i < 12; i++) {
             this.cards.add(new Card(this, i, 'c'));
             this.cards.add(new Card(this, i, 'c'));
         }
@@ -43,10 +45,17 @@ class MyScene extends Phaser.Scene {
         Phaser.Actions.Shuffle(this.cards.getChildren());
 
         Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: 64, cellHeight: 64, x: 64, y: 64 });   
+
+        this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
     }
     
     update() {
-        this.p
+        if (Phaser.Input.Keyboard.JustDown(this.up)) {
+            this.p
+        }
     }
 }
 
