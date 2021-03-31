@@ -87,7 +87,7 @@ class MyScene extends Phaser.Scene {
     }
 
     pick(player, card) {
-        console.log("overlap");
+        //console.log("overlap");
         if (this.push) {
             console.log("pick");
             player.cardActive = card;
