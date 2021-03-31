@@ -76,6 +76,8 @@ class MyScene extends Phaser.Scene {
         }
 
         if (this.space.isDown) {
+            console.log("space");
+
             this.push = true;
         }
         else {
