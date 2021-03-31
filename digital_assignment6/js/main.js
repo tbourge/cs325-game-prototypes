@@ -40,7 +40,7 @@ class MyScene extends Phaser.Scene {
             this.cards.add(new Card(this, i, 'c'));
         }
 
-        this.cards.getFirstAlive().destroy();
+        //this.cards.getFirstAlive().destroy();
 
         Phaser.Actions.Shuffle(this.cards.getChildren());
 
