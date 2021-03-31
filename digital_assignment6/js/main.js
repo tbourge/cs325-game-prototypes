@@ -108,7 +108,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.pNum = num;
 
-        scene.add.existing(this);
+        scene.physics.add.existing(this);
     }
 
     getColor() {
@@ -125,7 +125,7 @@ class Card extends Phaser.Physics.Arcade.Sprite {
 
         this.num = n;
 
-        scene.add.existing(this);
+        scene.physics.add.existing(this);
     }
 
     activate(player) {
