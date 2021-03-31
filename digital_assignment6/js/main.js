@@ -34,8 +34,8 @@ class MyScene extends Phaser.Scene {
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
 
         for (var i = 0; i < 12; i++) {
-            this.cards.add(new Card(this, i, 'c').SetTint(0xffff00 + i));
-            this.cards.add(new Card(this, i, 'c').SetTint(0xffff00 + i));
+            this.cards.add(new Card(this, i, 'c').setTint(0xffff00 + i));
+            this.cards.add(new Card(this, i, 'c').setTint(0xffff00 + i));
         }
 
         this.cards.getFirstAlive().destroy();
