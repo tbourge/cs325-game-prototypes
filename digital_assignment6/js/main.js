@@ -31,8 +31,6 @@ class MyScene extends Phaser.Scene {
     }
     
     create() {
-        this.p = new Player(this, 0, 'pb');
-
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
 
         for (var i = 0; i < 12; i++) {
@@ -44,12 +42,14 @@ class MyScene extends Phaser.Scene {
 
         Phaser.Actions.Shuffle(this.cards.getChildren());
 
-        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: 64, cellHeight: 64, x: 64, y: 64 });   
+        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: 96, cellHeight: 96, x: 64, y: 64 });   
 
         this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
+        this.p = new Player(this, 0, 'pb');
     }
     
     update() {
