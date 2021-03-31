@@ -28,7 +28,7 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {
-
+        this.p
     }
 }
 
@@ -39,6 +39,8 @@ class Player extends Phaser.GameObjects.Sprite {
         super(scene, 400, 300, sprite);
 
         this.pNum = num;
+
+        scene.addExisting(this);
     }
 }
 
