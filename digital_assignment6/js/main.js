@@ -35,7 +35,7 @@ class MyScene extends Phaser.Scene {
     create() {
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
         this.physics.debug = true;
-        for (var i = 0; i < 255; i+=20) {
+        for (var i = 0; i < 10; i++) {
             this.cards.add(new Card(this, i, 'c'));
             this.cards.add(new Card(this, i, 'c'));
         }
@@ -45,8 +45,6 @@ class MyScene extends Phaser.Scene {
         Phaser.Actions.Shuffle(this.cards.getChildren());
 
         Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: 96, cellHeight: 96, x: 64, y: 64 }); 
-
-
 
         this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
@@ -84,7 +82,6 @@ class MyScene extends Phaser.Scene {
     pick(player, card) {
         //console.log("overlap");
         if (Phaser.Input.Keyboard.JustDown(this.space)) {
-
             if (!card.isActive) {
                 console.log("pick");
                 player.check(card);
