@@ -88,7 +88,6 @@ class MyScene extends Phaser.Scene {
             if (!card.isActive) {
                 console.log("pick");
                 player.check(card);
-                card.activate(player);
             }
         }
     }
@@ -116,7 +115,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     check(card) {
         if (this.cardActive === null) {
             this.cardActive = card;
-
+            this.cardActive.activate(this);
             return;
         }
 
