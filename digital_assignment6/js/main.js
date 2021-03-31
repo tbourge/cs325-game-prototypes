@@ -54,7 +54,7 @@ class MyScene extends Phaser.Scene {
     
     update() {
         if (Phaser.Input.Keyboard.JustDown(this.up)) {
-            this.p
+            this.p.y += 64; 
         }
     }
 }
