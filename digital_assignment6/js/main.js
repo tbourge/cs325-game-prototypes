@@ -37,9 +37,9 @@ class MyScene extends Phaser.Scene {
             this.cards.add(new Card(this, i, 'c'));
         }
 
-        this.cards.get(0).destroy();
-
         Phaser.Actions.SetXY(this.cards.getChildren(), 32, 100, 32);
+
+        this.cards.get(0).destroy();
     }
     
     update() {
