@@ -40,7 +40,7 @@ class MyScene extends Phaser.Scene {
 
         this.cards.getFirstAlive().destroy();
 
-        Phaser.Actions.SetXY(this.cards.getChildren(), 32, 100, 32);        
+        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: 64, cellHeight: 64, x: 64, y: 64 });   
     }
     
     update() {
