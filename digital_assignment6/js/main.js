@@ -75,7 +75,7 @@ class MyScene extends Phaser.Scene {
             this.p.x += 96;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.space)) {
+        if (Phaser.Input.Keyboard.Down(this.space)) {
             this.push = true;
         }
         else {
