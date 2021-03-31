@@ -106,6 +106,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.pNum = num;
 
+        this.enableBody(true);
+
         scene.add.existing(this);
     }
 
@@ -122,6 +124,8 @@ class Card extends Phaser.Physics.Arcade.Sprite {
         super(scene, 400, 300, sprite);
 
         this.num = n;
+
+        this.enableBody(true);
 
         scene.add.existing(this);
     }
