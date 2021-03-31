@@ -54,7 +54,9 @@ class MyScene extends Phaser.Scene {
 
         this.p = new Player(this, 64, 64, 0, 'pb');
 
-        this.physics.add.overlap(this.p, this.cards, this.pick);
+        this.physics.add.overlap(this.p, this.cards, function (p, card) {
+            console.log("overlap");
+        }.bind(this));
     }
     
     update() {
