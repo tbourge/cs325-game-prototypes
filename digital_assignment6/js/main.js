@@ -49,9 +49,9 @@ class MyScene extends Phaser.Scene {
         this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
-        this.physics.add.overlap(this.p, this.cards, this.pick);
-
         this.p = new Player(this, 64, 64, 0, 'pb');
+
+        this.physics.add.overlap(this.p, this.cards, this.pick);
     }
     
     update() {
@@ -71,7 +71,7 @@ class MyScene extends Phaser.Scene {
 class Player extends Phaser.GameObjects.Sprite {
     pNum;
     cardActive = null;
-    color = 0xffff00;
+    color = 0x0000ff;
 
     constructor(scene, x, y, num, sprite) {
         super(scene, x, y, sprite);
