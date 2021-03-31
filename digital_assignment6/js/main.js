@@ -94,7 +94,7 @@ class MyScene extends Phaser.Scene {
     }
 }
 
-class Player extends Phaser.GameObjects.Sprite {
+class Player extends Phaser.Physics.Arcade.Sprite {
     pNum;
     cardActive = null;
     color = 0x0000ff;
@@ -112,7 +112,7 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 }
 
-class Card extends Phaser.GameObjects.Sprite {
+class Card extends Phaser.Physics.Arcade.Sprite {
     num;
     isActive;
 
