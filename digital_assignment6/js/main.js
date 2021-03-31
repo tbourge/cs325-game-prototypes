@@ -33,13 +33,14 @@ class MyScene extends Phaser.Scene {
 
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
 
-        for (var i = 0; i < 12; i++) {
+        for (var i = 0; i < 12; i += 2) {
+            this.cards.add(new Card(this, i, 'c'));
             this.cards.add(new Card(this, i, 'c'));
         }
 
         Phaser.Actions.SetXY(this.cards.getChildren(), 32, 100, 32);
 
-        this.cards.get(0).y = 32;
+        this.cards.getFirstAlive().y = 32;
     }
     
     update() {
