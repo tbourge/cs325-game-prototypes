@@ -78,20 +78,18 @@ class MyScene extends Phaser.Scene {
 
         if (this.space.isDown) {
             console.log("space");
-
-            this.push = true;
-        }
-        else {
-            this.push = false;
         }
     }
 
     pick(player, card) {
         //console.log("overlap");
-        if (this.push) {
+        if (this.space.isDown) {
             console.log("pick");
-            player.cardActive = card;
-            card.activate(player);
+
+            if (!card.isActive) {
+                player.cardActive = card;
+                card.activate(player);
+            }
         }
     }
 }
