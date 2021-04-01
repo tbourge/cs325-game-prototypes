@@ -92,6 +92,9 @@ class MyScene extends Phaser.Scene {
         loseTimer = this.time.addEvent({ delay: 120000, callback: this.lose, callbackScope: this, repeat: 0, paused: true });
         timer = this.time.addEvent({ delay: 1000, callback: this.subTime, callbackScope: this, repeat: -1, paused: true });
 
+        this.text = this.add.text(100, 450, "You will have 3 seconds to memorize the board\n Click START when ready", { fontSize: 25 }).setColor('#ffffff');
+        this.timeText = this.add.text(550, 10, "Time: 0", { fontSize: 10 }).setColor('#ffffff');
+
         start = this.add.sprite(400, 300, 'startButton').setInteractive();
 
         restartButton = this.add.sprite(400, 300, 'resetButton').setInteractive();
@@ -158,9 +161,6 @@ class MyScene extends Phaser.Scene {
             this.scene.restart();
 
         }.bind(this));
-
-        this.text = this.add.text(100, 450, "You will have 3 seconds to memorize the board\n Click START when ready", { fontSize: 25 }).setColor('#ffffff');
-        this.timeText = this.add.text(550, 10, "Time: 0", { fontSize: 10 }).setColor('#ffffff');
     }
     
     update() {
