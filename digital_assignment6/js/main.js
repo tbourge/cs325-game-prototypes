@@ -11,7 +11,7 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
-var size1 = 64, size2 = 144;
+var size1 = 96, size2 = 144;
 
 class MyScene extends Phaser.Scene {
 
