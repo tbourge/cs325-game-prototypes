@@ -81,11 +81,11 @@ class MyScene extends Phaser.Scene {
             this.p.x -= size2;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.down) && this.p.y < 550) {
+        if (Phaser.Input.Keyboard.JustDown(this.down) && this.p.y < 500) {
             this.p.y += size2;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.right) && this.p.x < 550) {
+        if (Phaser.Input.Keyboard.JustDown(this.right) && this.p.x < 500) {
             this.p.x += size2;
         }
 
