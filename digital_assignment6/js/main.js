@@ -95,7 +95,7 @@ class MyScene extends Phaser.Scene {
         timer = this.time.addEvent({ delay: 1000, callback: this.subTime, callbackScope: this, repeat: -1, paused: true });
 
         this.text = this.add.text(100, 450, "You will have 3 seconds to memorize the board\n Click START when ready", { fontSize: 25 }).setColor('#ffffff');
-        this.timeText = this.add.text(580, 10, "Time: 0", { fontSize: 10 }).setColor('#ffffff');
+        this.timeText = this.add.text(700, 10, "Time: 0", { fontSize: 10 }).setColor('#ffffff');
 
         start = this.add.sprite(400, 300, 'startButton').setInteractive();
 
