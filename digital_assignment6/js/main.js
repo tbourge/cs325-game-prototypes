@@ -173,11 +173,12 @@ class Card extends Phaser.Physics.Arcade.Sprite {
     }
 
     show() {
-
+        this.setTexture(this.front);
     }
 
     hide() {
         this.isActive = false;
+        this.setTexture(this.back);
     }
 
     preUpdate(time, delta) {
