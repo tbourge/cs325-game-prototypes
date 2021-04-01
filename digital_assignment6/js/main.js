@@ -129,7 +129,7 @@ class MyScene extends Phaser.Scene {
             start.setVisible(false);
             start.setActive(false);
 
-            text.setVisible(false);
+            this.text.setVisible(false);
 
             this.cards.getChildren().forEach(function (c) {
                 c.turnOn();
