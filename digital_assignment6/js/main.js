@@ -55,11 +55,11 @@ class MyScene extends Phaser.Scene {
         }
 
         this.cards.getFirstAlive().destroy();
-
+        //
         Phaser.Actions.Shuffle(this.cards.getChildren());
-
+        //
         Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 5, cellWidth: size2, cellHeight: size2, x: size1, y: size1 }); 
-
+        //
         this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -67,24 +67,25 @@ class MyScene extends Phaser.Scene {
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.p = new Player(this, size1 - 50, size1 - 50, 0, 'pb');
-
+        //
         this.physics.add.overlap(this.p, this.cards, this.pick.bind(this));
     }
     
     update() {
-        if (Phaser.Input.Keyboard.JustDown(this.up)) {
+        //
+        if (Phaser.Input.Keyboard.JustDown(this.up) && this.p.y > 50) {
             this.p.y -= size2; 
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.left)) {
+        if (Phaser.Input.Keyboard.JustDown(this.left) && this.p.x > 50) {
             this.p.x -= size2;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.down)) {
+        if (Phaser.Input.Keyboard.JustDown(this.down) && this.p.y < 550) {
             this.p.y += size2;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.right)) {
+        if (Phaser.Input.Keyboard.JustDown(this.right) && this.p.x < 550) {
             this.p.x += size2;
         }
 
@@ -94,12 +95,9 @@ class MyScene extends Phaser.Scene {
     }
 
     pick(player, card) {
-        //console.log("overlap");
-        if (Phaser.Input.Keyboard.JustDown(this.space)) {
-            if (!card.isActive) {
-                console.log("pick");
-                player.check(card);
-            }
+        if (Phaser.Input.Keyboard.JustDown(this.space) && !card.isActive) {
+            console.log("pick");
+            player.check(card);            
         }
     }
 }
