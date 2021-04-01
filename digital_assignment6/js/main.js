@@ -176,7 +176,7 @@ class MyScene extends Phaser.Scene {
             console.log("space");
         }
 
-        if (p.score > 9) {
+        if (this.p.score > 9) {
             this.win();
         }
     }
