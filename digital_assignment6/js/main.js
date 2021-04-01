@@ -13,7 +13,7 @@ import "./phaser.js";
 
 var size1 = 96, size2 = 144;
 var flipSound, failSound, matchSound;
-var timer, loseTimer;
+var timer, startTimer, loseTimer;
 var start, restartButton;
 var playing = false;
 
@@ -29,6 +29,9 @@ class MyScene extends Phaser.Scene {
         this.inactiveCards;
 
         this.text;
+        this.timeText;
+
+        this.time = 120;
 
         this.up, this.down, this.left, this.right, this.space;
     }
@@ -60,8 +63,6 @@ class MyScene extends Phaser.Scene {
         matchSound = this.sound.add('match');
         failSound = this.sound.add('fail');
 
-        this.text = this.add.text(100, 450, "You will have 3 seconds to memorize the board\n Click START when ready", { fontSize: 25 }).setColor('#ffffff');
-
         let symbols = ['Z', 'H', 'G', 'X', 'I', 'A', 'C', 'B', 'D', 'E'];
 
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
@@ -87,8 +88,9 @@ class MyScene extends Phaser.Scene {
         //Overlap Group
         this.physics.add.overlap(this.p, this.cards, this.pick.bind(this));
 
-        timer = this.time.addEvent({ delay: 3000, callback: this.startGame, callbackScope: this, repeat: 0, paused: true });
+        startTimer = this.time.addEvent({ delay: 3000, callback: this.startGame, callbackScope: this, repeat: 0, paused: true });
         loseTimer = this.time.addEvent({ delay: 120000, callback: this.lose, callbackScope: this, repeat: 0, paused: true });
+        timer = this.time.addEvent({ delay: 1000, callback: this.subTime, callbackScope: this, repeat: -1, paused: true });
 
         start = this.add.sprite(400, 300, 'startButton').setInteractive();
 
@@ -119,10 +121,12 @@ class MyScene extends Phaser.Scene {
             playing = true;
 
             this.showCards();
-            timer.paused = false;
+            startTimer.paused = false;
 
             start.setVisible(false);
             start.setActive(false);
+
+            text.setVisible(false);
 
             this.cards.getChildren().forEach(function (c) {
                 c.turnOn();
@@ -155,6 +159,8 @@ class MyScene extends Phaser.Scene {
 
         }.bind(this));
 
+        this.text = this.add.text(100, 450, "You will have 3 seconds to memorize the board\n Click START when ready", { fontSize: 25 }).setColor('#ffffff');
+        this.timeText = this.add.text(550, 10, "Time: 0", { fontSize: 10 }).setColor('#ffffff');
     }
     
     update() {
@@ -182,6 +188,8 @@ class MyScene extends Phaser.Scene {
         if (this.p.score > 9) {
             this.win();
         }
+
+        this.timeText.setText("Time: " + this.time);
     }
 
     pick(player, card) {
@@ -207,6 +215,7 @@ class MyScene extends Phaser.Scene {
         this.hideCards();
 
         loseTimer.paused = false;
+        timer.paused = false;
 
         this.p.turnOn();
     }
@@ -224,6 +233,7 @@ class MyScene extends Phaser.Scene {
     endGame() {
         restartButton.setActive(true);
         restartButton.setVisible(true);
+        timer.paused = true;
     }
 
     win() {
@@ -232,6 +242,10 @@ class MyScene extends Phaser.Scene {
         loseTimer.paused = true;
 
         this.text.setText("You Won!");
+    }
+
+    subTime() {
+        this.time--;
     }
 }
 
