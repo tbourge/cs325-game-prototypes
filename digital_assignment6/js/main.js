@@ -60,7 +60,7 @@ class MyScene extends Phaser.Scene {
         matchSound = this.sound.add('match');
         failSound = this.sound.add('fail');
 
-        this.text = this.add.text(250, 550, "", { fontSize: 1000 }).setColor('#ffffff');
+        this.text = this.add.text(250, 550, "You will have 3 seconds to memorize the board\n Click START when ready", { fontSize: 1000 }).setColor('#ffffff');
 
         let symbols = ['Z', 'H', 'G', 'X', 'I', 'A', 'C', 'B', 'D', 'E'];
 
