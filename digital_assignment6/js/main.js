@@ -11,8 +11,11 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
+var size1 = 128, size2 = 144;
+
 class MyScene extends Phaser.Scene {
-    
+
+
     constructor() {
         super();        
 
@@ -49,8 +52,6 @@ class MyScene extends Phaser.Scene {
         this.cards.getFirstAlive().destroy();
 
         Phaser.Actions.Shuffle(this.cards.getChildren());
-
-        let size1 = 128, size2 = 144;
 
         Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: size2, cellHeight: size2, x: size1, y: size1 }); 
 
