@@ -28,7 +28,7 @@ class MyScene extends Phaser.Scene {
     
     preload() {
         this.load.image('pb', 'assets/PlayerB.png');
-        this.load.image('c', 'assets/Card.png');
+        this.load.image('c', 'assets/CardB.png');
         this.load.image('G', 'assets/G.png');
         this.load.image('H', 'assets/H.png');
         this.load.image('Z', 'assets/ZB.png');
