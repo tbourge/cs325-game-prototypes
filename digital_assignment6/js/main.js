@@ -50,7 +50,9 @@ class MyScene extends Phaser.Scene {
 
         Phaser.Actions.Shuffle(this.cards.getChildren());
 
-        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: 144, cellHeight: 144, x: 128, y: 128 }); 
+        let size1 = 128, size2 = 144;
+
+        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: size2, cellHeight: size2, x: size1, y: size1 }); 
 
         this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
@@ -58,26 +60,26 @@ class MyScene extends Phaser.Scene {
         this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        this.p = new Player(this, 64, 64, 0, 'pb');
+        this.p = new Player(this, size1, size1, 0, 'pb');
 
         this.physics.add.overlap(this.p, this.cards, this.pick.bind(this));
     }
     
     update() {
         if (Phaser.Input.Keyboard.JustDown(this.up)) {
-            this.p.y -= 96; 
+            this.p.y -= size2; 
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.left)) {
-            this.p.x -= 96;
+            this.p.x -= size2;
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.down)) {
-            this.p.y += 96;
+            this.p.y += size2;
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.right)) {
-            this.p.x += 96;
+            this.p.x += size2;
         }
 
         if (this.space.isDown) {
