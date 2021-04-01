@@ -189,11 +189,11 @@ class MyScene extends Phaser.Scene {
     }
 
     showCards() {
-        this.cards.getChildren().show();
+        this.cards.getChildren().forEach(show());        
     }
 
     hideCards() {
-        this.cards.getChildren().hide();
+        this.cards.getChildren().forEach(this.hide());
     }
 
     startGame() {
