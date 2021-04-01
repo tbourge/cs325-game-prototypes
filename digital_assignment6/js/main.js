@@ -29,15 +29,20 @@ class MyScene extends Phaser.Scene {
     preload() {
         this.load.image('pb', 'assets/PlayerB.png');
         this.load.image('c', 'assets/Card.png');
+        this.load.image('G', 'assets/G.png');
+        this.load.image('H', 'assets/H.png');
+        this.load.image('Z', 'assets/Z.png');
 
     }
     
     create() {
+        let symbols = ['G', 'H', 'Z'];
+
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
-        this.physics.debug = true;
-        for (var i = 0; i < 10; i++) {
-            this.cards.add(new Card(this, i, 'c'));
-            this.cards.add(new Card(this, i, 'c'));
+
+        for (var i = 0; i < 3; i++) {
+            this.cards.add(new Card(this, i, 'c', symbols[i]));
+            this.cards.add(new Card(this, i, 'c', symbols[i]));
         }
 
         this.cards.getFirstAlive().destroy();
@@ -137,10 +142,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 class Card extends Phaser.Physics.Arcade.Sprite {
     num;
     isActive;
+    willFlip = false;
+    count;
+    front;
+    back;
 
-    constructor(scene, n, sprite) {
-        super(scene, 400, 300, sprite);
+    constructor(scene, n, back, front) {
+        super(scene, 400, 300, back);
 
+        this.front = front;
+        this.back = back;
         this.num = n;
 
         scene.add.existing(this);
@@ -149,13 +160,37 @@ class Card extends Phaser.Physics.Arcade.Sprite {
 
     activate(player) {
         this.setTint(player.getColor());
-
         this.isActive = true;
+
+        this.show();
     }
 
     deactivate() {
-        this.isActive = false;
         this.clearTint();
+
+        this.willFlip = true;
+        this.count = 60;
+    }
+
+    show() {
+
+    }
+
+    hide() {
+        this.isActive = false;
+    }
+
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
+
+        if (this.willFlip) {
+            if (this.count < 1) {
+                this.hide();
+            }
+            else {
+                this.count--;
+            }
+        }
     }
 }
 
