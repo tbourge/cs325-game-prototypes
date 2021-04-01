@@ -124,7 +124,10 @@ class MyScene extends Phaser.Scene {
             start.setVisible(false);
             start.setActive(false);
 
-            this.cards.getChildren().turnOn();
+            this.cards.getChildren().forEach(function (c) {
+                c.turnOn();
+            });
+
         }.bind(this));
 
         restartButton.on('pointerover', function (pointer) {
