@@ -32,15 +32,16 @@ class MyScene extends Phaser.Scene {
         this.load.image('G', 'assets/G.png');
         this.load.image('H', 'assets/H.png');
         this.load.image('Z', 'assets/Z.png');
-
+        this.load.image('I', 'assets/I.png');
+        this.load.image('X', 'assets/X.png');
     }
     
     create() {
-        let symbols = ['G', 'H', 'Z'];
+        let symbols = ['G', 'H', 'Z', 'X', 'I'];
 
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
 
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 5; i++) {
             this.cards.add(new Card(this, i, 'c', symbols[i]));
             this.cards.add(new Card(this, i, 'c', symbols[i]));
         }
