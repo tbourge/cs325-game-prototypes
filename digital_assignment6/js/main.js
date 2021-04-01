@@ -31,7 +31,7 @@ class MyScene extends Phaser.Scene {
         this.text;
         this.timeText;
 
-        this.timeCount = 120;
+        this.timeCount;
 
         this.up, this.down, this.left, this.right, this.space;
     }
@@ -62,6 +62,8 @@ class MyScene extends Phaser.Scene {
         flipSound = this.sound.add('flip');
         matchSound = this.sound.add('match');
         failSound = this.sound.add('fail');
+
+        this.timeCount = 120;
 
         let symbols = ['Z', 'H', 'G', 'X', 'I', 'A', 'C', 'B', 'D', 'E'];
 
