@@ -12,6 +12,7 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 var size1 = 96, size2 = 144;
+var flipSound, failSound, matchSound;
 
 class MyScene extends Phaser.Scene {
 
@@ -42,9 +43,17 @@ class MyScene extends Phaser.Scene {
         this.load.image('B', 'assets/BB.png');
         this.load.image('D', 'assets/DB.png');
         this.load.image('E', 'assets/EB.png');
+
+        this.load.audio('flip', 'assets/flip.ogg');
+        this.load.audio('match', 'assets/match.ogg');
+        this.load.audio('fail', 'assets/fail.ogg');
     }
     
     create() {
+        flipSound = this.sound.add('flip');
+        matchSound = this.sound.add('match');
+        failSound = this.sound.add('fail');
+
         let symbols = ['Z', 'H', 'G', 'X', 'I', 'A', 'C', 'B', 'D', 'E'];
 
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
@@ -126,6 +135,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.cardActive = card;
             this.cardActive.activate(this);
             console.log(this.cardActive.num);
+            flipSound.play();
             return;
         }
         else {
@@ -134,10 +144,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
             if (card.num === this.cardActive.num) {
                 this.score++;
+                matchSound.play();
             }
             else {
                 this.cardActive.deactivate();
                 card.deactivate();
+                failSound.play();
             }
 
             this.cardActive = null;
