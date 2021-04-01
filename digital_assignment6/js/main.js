@@ -124,18 +124,17 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         else {
             console.log(card.num);
+            card.activate(this);
 
             if (card.num === this.cardActive.num) {
                 this.score++;
-                card.activate(this);
-                this.cardActive = null;
             }
             else {
                 this.cardActive.deactivate();
                 card.deactivate();
-
-                this.cardActive = null;
             }
+
+            this.cardActive = null;
         }
     }
 }
