@@ -13,6 +13,7 @@ import "./phaser.js";
 
 var size1 = 96, size2 = 144;
 var flipSound, failSound, matchSound;
+var timer;
 
 class MyScene extends Phaser.Scene {
 
@@ -78,6 +79,8 @@ class MyScene extends Phaser.Scene {
         this.p = new Player(this, size1 - 50, size1 - 50, 0, 'pb');
         //
         this.physics.add.overlap(this.p, this.cards, this.pick.bind(this));
+
+        timer = this.time.addEvent({ delay: 3000, callback: this.hideCards, callbackScope: this, repeat: 0, paused: true });
     }
     
     update() {
@@ -108,6 +111,14 @@ class MyScene extends Phaser.Scene {
             console.log("pick");
             player.check(card);            
         }
+    }
+
+    showCards() {
+        this.cards.getChildren.show();
+    }
+
+    hideCards() {
+        this.cards.getChildren.hide();
     }
 }
 
@@ -178,8 +189,6 @@ class Card extends Phaser.Physics.Arcade.Sprite {
 
     activate(player) {
         this.setTint(player.getColor());
-        this.isActive = true;
-
         this.show();
     }
 
@@ -191,6 +200,7 @@ class Card extends Phaser.Physics.Arcade.Sprite {
     }
 
     show() {
+        this.isActive = true;
         this.setTexture(this.front);
     }
 
