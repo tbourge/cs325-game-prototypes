@@ -63,6 +63,8 @@ class MyScene extends Phaser.Scene {
         matchSound = this.sound.add('match');
         failSound = this.sound.add('fail');
 
+        this.time = 120;
+
         let symbols = ['Z', 'H', 'G', 'X', 'I', 'A', 'C', 'B', 'D', 'E'];
 
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
