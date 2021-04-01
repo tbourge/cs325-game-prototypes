@@ -50,7 +50,7 @@ class MyScene extends Phaser.Scene {
 
         Phaser.Actions.Shuffle(this.cards.getChildren());
 
-        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: 144, cellHeight: 144, x: 64, y: 64 }); 
+        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: 144, cellHeight: 144, x: 72, y: 72 }); 
 
         this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
