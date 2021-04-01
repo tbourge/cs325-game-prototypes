@@ -31,29 +31,34 @@ class MyScene extends Phaser.Scene {
     
     preload() {
         this.load.image('pb', 'assets/PlayerB.png');
-        this.load.image('c', 'assets/CardB.png');
-        this.load.image('G', 'assets/G.png');
-        this.load.image('H', 'assets/H.png');
+        this.load.image('back', 'assets/CardB.png');
+        this.load.image('G', 'assets/GB.png');
+        this.load.image('H', 'assets/HB.png');
         this.load.image('Z', 'assets/ZB.png');
-        this.load.image('I', 'assets/I.png');
-        this.load.image('X', 'assets/X.png');
+        this.load.image('I', 'assets/IB.png');
+        this.load.image('X', 'assets/XB.png');
+        this.load.image('A', 'assets/AB.png');
+        this.load.image('C', 'assets/CB.png');
+        this.load.image('B', 'assets/BB.png');
+        this.load.image('D', 'assets/DB.png');
+        this.load.image('E', 'assets/EB.png');
     }
     
     create() {
-        let symbols = ['Z', 'H', 'G', 'X', 'I'];
+        let symbols = ['Z', 'H', 'G', 'X', 'I', 'A', 'C', 'B', 'D', 'E'];
 
         this.cards = this.physics.add.group({ key: 'card', classType: Card });
 
         for (var i = 0; i < 1; i++) {
-            this.cards.add(new Card(this, i, 'c', symbols[i]));
-            this.cards.add(new Card(this, i, 'c', symbols[i]));
+            this.cards.add(new Card(this, i, 'back', symbols[i]));
+            this.cards.add(new Card(this, i, 'back', symbols[i]));
         }
 
         this.cards.getFirstAlive().destroy();
 
         Phaser.Actions.Shuffle(this.cards.getChildren());
 
-        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 6, cellWidth: size2, cellHeight: size2, x: size1, y: size1 }); 
+        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 5, cellWidth: size2, cellHeight: size2, x: size1, y: size1 }); 
 
         this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
