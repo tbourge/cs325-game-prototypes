@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Hello! Amaze!</title>
+<title>Memory Mash</title>
 <style>
 body
 {
@@ -19,72 +19,99 @@ body
 <body>
 <div id="game"></div>
 <div id="readme">
-<h2>Your game title</h2>
+<h2>Memory Mash</h2>
 
 <ul>
 <li><strong>Originality:</strong>
 What is original about your game?
+<ul>
+<li>I made all the visual assets</li>
+</ul>
 </li>
 
 <li><strong>Technical Merit:</strong>
 What is interesting about your game technology?
+<ul>
+<li>Implemented grid-based movement</li>
+<li>Created player class that will be used to add multiplayer functionality in next iteration</li>
+</ul>
 </li>
 
 <li><strong>Prototype Postmortem:</strong>
 What did you learn from this prototype?
 What was the easiest or hardest part of making it?
+<ul>
+<li>I learned:</li>
+<li>Grid-based movement</li>
+<li>How to make a player class</li>
+<li>Easiest part: Adding sounds</li>
+<li>Hardest part: Fixing overlap bugs</li>
+</ul>
 </li>
 
 <li><strong>Prototype Assets:</strong>
 Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
 <ul>
-<li>Bouncing Phaser image: <a href="https://phaser.io/download/logo">Phaser logo</a></li>
+<li>Sounds: <a href="https://kenney.nl/assets/interface-sounds">Kenney Interface Sounds</a></li>
+<li>All other assets were made by me</li>
 </ul>
 </li>
 
 <li><strong>Prototype Closest Other Game:</strong>
 Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
+<ul>
+<li>My inspiration for this game was a Mario Party minigame called <a href="https://www.mariowiki.com/Memory_Match_(Mario_Party)">Memory Match</a>.</li>
+<li>I borrowed code from:</li>
+<li><a href="http://phaser.io/examples/v3/view/game-objects/group/shuffle">Phaser Shuffle Group Example</a></li>
+<li><a href="http://phaser.io/examples/v3/view/game-objects/group/destroy-child">Phaser Destroy Child of Group Example</a></li>
+<li><a href="http://phaser.io/examples/v3/view/input/keyboard/just-down">Phaser Just Down Example</a></li>
+<li><a href="http://phaser.io/examples/v3/view/physics/arcade/sprite-overlap-group">Phaser Sprite Overlap Group Example</a></li>
+<li><a href="https://phaser.io/examples/v3/view/physics/arcade/extending-arcade-sprite">Phaser Extending Arcade Sprite Example</a></li>
+</ul>
 </li>
 
 <li><strong>High Concept:</strong>
 A one-sentence summary of your game.
-</li>
-
-<li><strong>Theme:</strong>
-State which of the Storymatic themes you used.
-</li>
-
-<li><strong>Mandated Variety:</strong>
-State which input, randomness, genre, and play style you used in this prototype.
+<br>Memorize cards quickly to make as many matches as possible
 </li>
 
 <li><strong>Prototype Goal:</strong>
 What game mechanic is this prototype evaluating?
+<br>Having the player move their icon to choose cards quickly
 </li>
 
 <li><strong>Player Experience Goals:</strong>
 What experience do you want players to have when playing your game?
+<br>I want to have fun with my quick memory challenge
 </li>
 
 <li><strong>Gameplay:</strong>
 A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
+<br>Once the player clicks start the cards will appear faceup for 3 seconds. After the 3 seconds are up the cards will flip over and the player's token will <br>appear on the top left card. The player can move their token with the arrow keys (each movement requires its own button press) and can flip the card 
+<br>their token is on with spacebar. A flipped card will become highlighted with the player's color. If the player selects a card while they already have a <br>card selected then the cards will remain flipped and highlighted if they match, this will award one point to the player. If the cards do not match then <br>they will become unhighlighted and will flip back over after one second. The player wins if they match all the cards in 2 minutes.
+<br>
+<br>The next iteration is planned to have multiplayer functionality.
 </li>
 
 <li><strong>Strategies:</strong>
 What player strategies do you expect will be effective at playing this game?
+<br>Good memory and hand eye coordination
 </li>
 
 <li><strong>Story/Setting/Premise:</strong>
 A paragraph about the world your game is set in and who the characters are. What makes the game world and its occupants unique and interesting? Do the tokens represent something? If the game has a backstory, mention it here. If the game is abstract, then say so.
 How will the dramatic tension interact with the gameplay tension?
+<br>The game is abstract at the moment. I hope the player feels a sense of urgency as the timer counts down. I may add story in the next iteration.
 </li>
 
 <li><strong>Target Audience:</strong>
 A single sentence that describes the demographic you're trying to reach.
+<br>People who like quick memory games
 </li>
 
 <li><strong>Play Time:</strong>
 How long does your game take to play?
+<br>2 minutes
 </li>
 
 </ul>

@@ -13,7 +13,9 @@ import "./phaser.js";
 
 var size1 = 96, size2 = 144;
 var flipSound, failSound, matchSound;
-var timer;
+var timer, loseTimer;
+var start, restartButton;
+var playing = false;
 
 class MyScene extends Phaser.Scene {
 
@@ -26,7 +28,7 @@ class MyScene extends Phaser.Scene {
         this.activeCards;
         this.inactiveCards;
 
-        this.push = false;
+        this.text;
 
         this.up, this.down, this.left, this.right, this.space;
     }
@@ -45,6 +47,9 @@ class MyScene extends Phaser.Scene {
         this.load.image('D', 'assets/DB.png');
         this.load.image('E', 'assets/EB.png');
 
+        this.load.image("startButton", "assets/START.png");
+        this.load.image("resetButton", "assets/RESET.png");
+
         this.load.audio('flip', 'assets/flip.ogg');
         this.load.audio('match', 'assets/match.ogg');
         this.load.audio('fail', 'assets/fail.ogg');
@@ -54,6 +59,8 @@ class MyScene extends Phaser.Scene {
         flipSound = this.sound.add('flip');
         matchSound = this.sound.add('match');
         failSound = this.sound.add('fail');
+
+        this.text = this.add.text(250, 550, { fontSize: 1000 }).setColor('#ffffff');
 
         let symbols = ['Z', 'H', 'G', 'X', 'I', 'A', 'C', 'B', 'D', 'E'];
 
@@ -65,11 +72,11 @@ class MyScene extends Phaser.Scene {
         }
 
         this.cards.getFirstAlive().destroy();
-        //
+        //Shuffle
         Phaser.Actions.Shuffle(this.cards.getChildren());
-        //
+        //Destroy Child
         Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 5, cellWidth: size2, cellHeight: size2, x: size1, y: size1 }); 
-        //
+        //Just Down
         this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -77,14 +84,78 @@ class MyScene extends Phaser.Scene {
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
         this.p = new Player(this, size1 - 50, size1 - 50, 0, 'pb');
-        //
+        //Overlap Group
         this.physics.add.overlap(this.p, this.cards, this.pick.bind(this));
 
-        timer = this.time.addEvent({ delay: 3000, callback: this.hideCards, callbackScope: this, repeat: 0, paused: true });
+        timer = this.time.addEvent({ delay: 3000, callback: this.startGame, callbackScope: this, repeat: 0, paused: true });
+        loseTimer = this.time.addEvent({ delay: 120000, callback: this.lose, callbackScope: this, repeat: 0, paused: true });
+
+        start = this.add.sprite(400, 300, 'startButton').setInteractive();
+
+        restartButton = this.add.sprite(400, 300, 'resetButton').setInteractive();
+        restartButton.setVisible(false);
+        restartButton.setActive(false);
+
+        start.on('pointerover', function (pointer) {
+
+            this.setTint(0xcccccc);
+
+        });
+
+        start.on('pointerdown', function (pointer) {
+
+            this.setTint(0x333333);
+        });
+
+        start.on('pointerout', function (pointer) {
+
+            this.clearTint();
+        });
+
+        start.on('pointerup', function (pointer) {
+
+            start.setTint(0xcccccc);
+
+            playing = true;
+
+            this.showCards();
+            timer.paused = false;
+
+            start.setVisible(false);
+            start.setActive(false);
+
+            this.cards.getChildren().turnOn();
+        }.bind(this));
+
+        restartButton.on('pointerover', function (pointer) {
+
+            this.setTint(0xcccccc);
+
+        });
+
+        restartButton.on('pointerdown', function (pointer) {
+
+            this.setTint(0x333333);
+        });
+
+        restartButton.on('pointerout', function (pointer) {
+
+            this.clearTint();
+
+        });
+
+        restartButton.on('pointerup', function (pointer) {
+
+            restartButton.setTint(0xcccccc);
+
+            this.scene.restart();
+
+        }.bind(this));
+
     }
     
     update() {
-        //
+        //Just Down
         if (Phaser.Input.Keyboard.JustDown(this.up) && this.p.y > 50) {
             this.p.y -= size2; 
         }
@@ -104,6 +175,10 @@ class MyScene extends Phaser.Scene {
         if (this.space.isDown) {
             console.log("space");
         }
+
+        if (p.score > 9) {
+            this.win();
+        }
     }
 
     pick(player, card) {
@@ -114,11 +189,42 @@ class MyScene extends Phaser.Scene {
     }
 
     showCards() {
-        this.cards.getChildren.show();
+        this.cards.getChildren().show();
     }
 
     hideCards() {
-        this.cards.getChildren.hide();
+        this.cards.getChildren().hide();
+    }
+
+    startGame() {
+        this.hideCards();
+
+        loseTimer.paused = false;
+
+        this.p.turnOn();
+    }
+
+    lose() {
+        this.p.turnOff();
+
+        this.showCards();
+
+        this.endGame();
+
+        this.text.setText("You lost... You did earn " + this.p.score + " points though!");
+    }
+
+    endGame() {
+        restartButton.setActive(true);
+        restartButton.setVisible(true);
+    }
+
+    win() {
+        this.endGame();
+
+        loseTimer.paused = true;
+
+        this.text.setText("You Won!");
     }
 }
 
@@ -135,6 +241,18 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
+
+        this.turnOff();
+    }
+
+    turnOff() {
+        this.setVisible(false);
+        this.setActive(false);
+    }
+
+    turnOn() {
+        this.setVisible(true);
+        this.setActive(true);
     }
 
     getColor() {
@@ -185,6 +303,18 @@ class Card extends Phaser.Physics.Arcade.Sprite {
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
+
+        this.turnOff();
+    }
+
+    turnOff() {
+        this.setVisible(false);
+        this.setActive(false);
+    }
+
+    turnOn() {
+        this.setVisible(true);
+        this.setActive(true);
     }
 
     activate(player) {
