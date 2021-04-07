@@ -257,13 +257,15 @@ class MyScene extends Phaser.Scene {
     allFlipped() {
         let c = this.cards.getChildren();
 
+        let isAllFlipped = true;
+
         c.forEach(function (card) {
             if (!card.isActive) {
-                return false;
+                isAllFlipped = false;
             }
         });  
 
-        return true;
+        return isAllFlipped;
     }
 
     pick(player, card) {
