@@ -258,7 +258,6 @@ class MyScene extends Phaser.Scene {
         let c = this.cards.getChildren();
 
         c.forEach(function (card) {
-            console.log(card.isActive);
             if (!card.isActive) {
                 return false;
             }
