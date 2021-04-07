@@ -258,7 +258,7 @@ class MyScene extends Phaser.Scene {
         let c = this.cards.getChildren();
 
         c.forEach(function (card) {
-            console.log(c.isActive);
+            console.log(card.isActive);
             if (!card.isActive) {
                 return false;
             }
@@ -390,7 +390,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             return;
         }
         else {
-            console.log(card.num);
             card.activate(this);
 
             if (card.num === this.cardActive.num) {
