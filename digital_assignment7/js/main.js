@@ -251,10 +251,6 @@ class MyScene extends Phaser.Scene {
             console.log("ctrl");
         }
 
-        if (this.p1.score > 9) {
-            this.win();
-        }
-
         this.timeText.setText("Time: " + this.timeCount);
 
         if (this.allFlipped() && playing) {
@@ -415,7 +411,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
 class Card extends Phaser.Physics.Arcade.Sprite {
     num;
-    isActive;
+    isActive = false;
     willFlip = false;
     count;
     front;
