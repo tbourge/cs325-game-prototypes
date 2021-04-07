@@ -238,7 +238,9 @@ class MyScene extends Phaser.Scene {
 
         timer.paused = false;
 
-        this.p1.turnOn();
+        this.players.getChildren().forEach(function (p) {
+            p.turnOn();
+        });
     }
 
     lose() {
