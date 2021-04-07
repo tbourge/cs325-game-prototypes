@@ -37,7 +37,13 @@ class MyScene extends Phaser.Scene {
 
         this.timeCount;
 
-        this.up, this.down, this.left, this.right, this.space;
+        this.up, this.down, this.left, this.right, this.ctrl;
+
+        this.w, this.s, this.a, this.d, this.c;
+
+        this.i, this.k, this.j, this.l, this.n;
+
+        this.five, this.one, this.two, this.three, this.zero;
     }
     
     preload() {
@@ -93,7 +99,13 @@ class MyScene extends Phaser.Scene {
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         this.left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-        this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        this.ctrl = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.CTRL);
+
+        this.w = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        this.s = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        this.a = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        this.d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.c = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
         this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x2020ff);
         this.players.add(this.p1);
@@ -199,8 +211,24 @@ class MyScene extends Phaser.Scene {
             this.p1.x += size2;
         }
 
-        if (this.space.isDown) {
-            console.log("space");
+        if (Phaser.Input.Keyboard.JustDown(this.w) && this.p1.y > 50) {
+            this.p1.y -= size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.a) && this.p1.x > 50) {
+            this.p1.x -= size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.s) && this.p1.y < 450) {
+            this.p1.y += size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.d) && this.p1.x < 500) {
+            this.p1.x += size2;
+        }
+
+        if (this.ctrl.isDown) {
+            console.log("ctrl");
         }
 
         if (this.p1.score > 9) {
@@ -215,7 +243,7 @@ class MyScene extends Phaser.Scene {
     }
 
     pick(player, card) {
-        if (Phaser.Input.Keyboard.JustDown(this.space) && !card.isActive) {
+        if (((Phaser.Input.Keyboard.JustDown(this.n) && player.pNum === 2) || (Phaser.Input.Keyboard.JustDown(this.zero) && player.pNum === 3) || (Phaser.Input.Keyboard.JustDown(this.c) && player.pNum === 1) || (Phaser.Input.Keyboard.JustDown(this.ctrl) && player.pNum === 0)) && !card.isActive) {
             console.log("pick");
             player.check(card);            
         }
