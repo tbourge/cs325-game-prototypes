@@ -15,7 +15,7 @@ var size1 = 96, size2 = 144;
 var flipSound, failSound, matchSound, stealSound;
 var timer, startTimer;
 var start, restartButton;
-var playing = false;
+var playing;
 
 class MyScene extends Phaser.Scene {
 
@@ -81,6 +81,7 @@ class MyScene extends Phaser.Scene {
         stealSound = this.sound.add('steal');
 
         this.timeCount = 120;
+        playing = false;
 
         let symbols = ['Z', 'H', 'G', 'X', 'I', 'A', 'C', 'B', 'D', 'E'];
 
