@@ -107,6 +107,18 @@ class MyScene extends Phaser.Scene {
         this.d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.c = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
+      //  this.w = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        //this.s = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        //this.a = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        //this.d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.n = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
+
+    //    this.w = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+      //  this.s = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        //this.a = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        //this.d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.zero = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
+
         this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x2020ff);
         this.players.add(this.p1);
 
