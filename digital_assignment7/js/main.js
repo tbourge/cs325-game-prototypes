@@ -172,9 +172,6 @@ class MyScene extends Phaser.Scene {
         });
 
         start.on('pointerup', function (pointer) {
-
-            playing = true;
-
             this.showCards();
             startTimer.paused = false;
 
@@ -291,6 +288,8 @@ class MyScene extends Phaser.Scene {
 
     startGame() {
         this.hideCards();
+
+        playing = true;
 
         timer.paused = false;
 
