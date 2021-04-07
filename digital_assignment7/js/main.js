@@ -76,7 +76,7 @@ class MyScene extends Phaser.Scene {
         flipSound = this.sound.add('flip');
         matchSound = this.sound.add('match');
         failSound = this.sound.add('fail');
-        stealSound = this.sound.add('steal');
+        stealSound = this.sound.add('steal', {volume: 0.7});
 
         this.timeCount = 120;
         playing = false;
