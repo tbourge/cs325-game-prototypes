@@ -256,7 +256,7 @@ class MyScene extends Phaser.Scene {
 
     pick(player, card) {
         if (((Phaser.Input.Keyboard.JustDown(this.n) && player.pNum === 2) || (Phaser.Input.Keyboard.JustDown(this.zero) && player.pNum === 3) || (Phaser.Input.Keyboard.JustDown(this.c) && player.pNum === 1) || (Phaser.Input.Keyboard.JustDown(this.ctrl) && player.pNum === 0)) && !card.isActive) {
-            console.log("pick");
+            console.log(player.pNum);
             player.check(card);            
         }
     }
