@@ -317,11 +317,11 @@ class MyScene extends Phaser.Scene {
     }
 
     getWinner() {
-        let winner = null;
+        let ps = this.players.getChildren();
+
+        let winner = ps[0];
 
         let topScore = 0;
-
-        let ps = this.players.getChildren();
 
         ps.forEach(function (p) {
             if (p.score > topScore) {
