@@ -219,7 +219,6 @@ class MyScene extends Phaser.Scene {
     startGame() {
         this.hideCards();
 
-        loseTimer.paused = false;
         timer.paused = false;
 
         this.p.turnOn();
