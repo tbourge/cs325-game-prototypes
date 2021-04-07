@@ -127,16 +127,16 @@ class MyScene extends Phaser.Scene {
         //this.d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.zero = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
 
-        this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x2020ff);
+        this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x2020ff, 'Blue');
         this.players.add(this.p1);
 
-        this.p2 = new Player(this, size1 + 50, size1 - 50, 1, 'pr', 0xff2020);
+        this.p2 = new Player(this, size1 + 50, size1 - 50, 1, 'pr', 0xff2020, 'Red');
         this.players.add(this.p2);
 
-        this.p3 = new Player(this, size1 - 50, size1 + 50, 2, 'pg', 0x20ff20);
+        this.p3 = new Player(this, size1 - 50, size1 + 50, 2, 'pg', 0x20ff20, 'Green');
         this.players.add(this.p3);
 
-        this.p4 = new Player(this, size1 + 50, size1 + 50, 3, 'py', 0xffff20);
+        this.p4 = new Player(this, size1 + 50, size1 + 50, 3, 'py', 0xffff20, 'Yellow');
         this.players.add(this.p4);
 
         this.players.getFirstAlive().destroy();
@@ -257,9 +257,21 @@ class MyScene extends Phaser.Scene {
 
         this.timeText.setText("Time: " + this.timeCount);
 
-        if (this.timeCount === 0) {
-            this.lose();
+        if (this.allFlipped()) {
+            this.endGame();
         }
+    }
+
+    allFlipped() {
+        let c = this.cards.getChildren();
+
+        c.forEach(function (card) {
+            if (!card.isActive) {
+                return false;
+            }
+        });  
+
+        return true;
     }
 
     pick(player, card) {
@@ -291,30 +303,33 @@ class MyScene extends Phaser.Scene {
         });
     }
 
-    lose() {
-        this.p1.turnOff();
-
-        this.showCards();
-
-        this.endGame();
-
-        this.text.setText("You lost... You did earn " + this.p1.score + " points though!");
-    }
-
     endGame() {
+        let winner = this.getWinner();
+
         restartButton.setActive(true);
         restartButton.setVisible(true);
+
+        this.text.setText(winner.name + "is the winner!");
         this.text.setVisible(true);
-        this.text.setColor('#888888');
+        this.text.setColor(winner.getColor());
         timer.paused = true;
+        this.showCards();
     }
 
-    win() {
-        this.endGame();
+    getWinner() {
+        let winner = null;
 
-        loseTimer.paused = true;
+        let topScore = 0;
 
-        this.text.setText("You Won!");
+        let ps = this.players.getChildren();
+
+        ps.forEach(function (p) {
+            if (p.score > topScore) {
+                winner = p;
+            }
+        });
+
+        return winner;
     }
 
     subTime() {
@@ -327,8 +342,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     cardActive = null;
     color;
     score = 0;
+    name;
 
-    constructor(scene, x, y, num, sprite, color) {
+    constructor(scene, x, y, num, sprite, color, name) {
         super(scene, x, y, sprite);
 
         this.pNum = num;
@@ -337,6 +353,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.color = color;
+        this.name = name;
 
         this.turnOff();
     }
