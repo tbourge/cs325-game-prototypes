@@ -305,7 +305,7 @@ class MyScene extends Phaser.Scene {
         restartButton.setActive(true);
         restartButton.setVisible(true);
         this.text.setVisible(true);
-        this.text.setColor('#000fff');
+        this.text.setColor('#888888');
         timer.paused = true;
     }
 
