@@ -13,7 +13,7 @@ import "./phaser.js";
 
 var size1 = 96, size2 = 144;
 var flipSound, failSound, matchSound;
-var timer, startTimer, loseTimer;
+var timer, startTimer;
 var start, restartButton;
 var playing = false;
 
@@ -95,7 +95,6 @@ class MyScene extends Phaser.Scene {
         this.physics.add.overlap(this.players, this.cards, this.pick.bind(this));
 
         startTimer = this.time.addEvent({ delay: 3000, callback: this.startGame, callbackScope: this, repeat: 0, paused: true });
-        loseTimer = this.time.addEvent({ delay: 120000, callback: this.lose, callbackScope: this, repeat: 0, paused: true });
         timer = this.time.addEvent({ delay: 1000, callback: this.subTime, callbackScope: this, repeat: -1, paused: true });
 
         this.text = this.add.text(100, 450, "You will have 3 seconds to memorize the board\n Click START when ready", { fontSize: 25 }).setColor('#ffffff');
@@ -124,8 +123,6 @@ class MyScene extends Phaser.Scene {
         });
 
         start.on('pointerup', function (pointer) {
-
-            start.setTint(0xcccccc);
 
             playing = true;
 
@@ -162,8 +159,6 @@ class MyScene extends Phaser.Scene {
 
         restartButton.on('pointerup', function (pointer) {
 
-            restartButton.setTint(0xcccccc);
-
             this.scene.restart();
 
         }.bind(this));
@@ -196,6 +191,10 @@ class MyScene extends Phaser.Scene {
         }
 
         this.timeText.setText("Time: " + this.timeCount);
+
+        if (this.timeCount === 0) {
+            this.lose();
+        }
     }
 
     pick(player, card) {
