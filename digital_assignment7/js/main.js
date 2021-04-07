@@ -12,7 +12,7 @@ import "./phaser.js";
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
 var size1 = 96, size2 = 144;
-var flipSound, failSound, matchSound;
+var flipSound, failSound, matchSound, stealSound;
 var timer, startTimer;
 var start, restartButton;
 var playing = false;
@@ -71,12 +71,14 @@ class MyScene extends Phaser.Scene {
         this.load.audio('flip', 'assets/flip.ogg');
         this.load.audio('match', 'assets/match.ogg');
         this.load.audio('fail', 'assets/fail.ogg');
+        this.load.audio('steal', 'assets/steal.wav');
     }
     
     create() {
         flipSound = this.sound.add('flip');
         matchSound = this.sound.add('match');
         failSound = this.sound.add('fail');
+        stealSound = this.sound.add('steal');
 
         this.timeCount = 120;
 
@@ -358,11 +360,21 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     check(card) {
+        let m = card.match;
+
         if (this.cardActive === null) {
-            this.cardActive = card;
-            this.cardActive.activate(this);
-            console.log(this.cardActive.num);
-            flipSound.play();
+            if (m.isActive) {
+                m.activate(this);
+                card.activate(this);
+                stealSound.play();
+            }
+            else {
+                this.cardActive = card;
+                this.cardActive.activate(this);
+                console.log(this.cardActive.num);
+                flipSound.play();
+            }
+
             return;
         }
         else {
@@ -370,7 +382,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             card.activate(this);
 
             if (card.num === this.cardActive.num) {
-                this.score++;
+                this.score += 2;
                 matchSound.play();
             }
             else {
@@ -392,6 +404,7 @@ class Card extends Phaser.Physics.Arcade.Sprite {
     front;
     back;
     match;
+    activator = null;
 
     constructor(scene, n, back, front) {
         super(scene, 400, 300, back);
@@ -417,6 +430,7 @@ class Card extends Phaser.Physics.Arcade.Sprite {
     }
 
     activate(player) {
+        this.activator = player;
         this.setTint(player.getColor());
         this.show();
     }
