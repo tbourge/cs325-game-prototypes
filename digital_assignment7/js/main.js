@@ -24,6 +24,7 @@ class MyScene extends Phaser.Scene {
         super();        
 
         this.p1, this.p2, this.p3, this.p4;
+        this.c1, this.c2;
 
         this.cards;
         this.activeCards;
@@ -85,8 +86,13 @@ class MyScene extends Phaser.Scene {
         this.players = this.physics.add.group({ key: 'player', classType: Player });
 
         for (var i = 0; i < 10; i++) {
-            this.cards.add(new Card(this, i, 'back', symbols[i]));
-            this.cards.add(new Card(this, i, 'back', symbols[i]));
+            this.c1 = new Card(this, i, 'back', symbols[i]);
+            this.cards.add(this.c1);
+            this.c2 = new Card(this, i, 'back', symbols[i]);
+            this.cards.add(this.c2);
+
+            this.c1.match = this.c2;
+            this.c2.match = this.c1;
         }
 
         this.cards.getFirstAlive().destroy();
@@ -385,6 +391,7 @@ class Card extends Phaser.Physics.Arcade.Sprite {
     count;
     front;
     back;
+    match;
 
     constructor(scene, n, back, front) {
         super(scene, 400, 300, back);
