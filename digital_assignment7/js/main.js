@@ -444,6 +444,7 @@ class Card extends Phaser.Physics.Arcade.Sprite {
 
     activate(player) {
         this.activator = player;
+        this.isActive = true;
         this.setTint(player.getColor());
         this.show();
     }
@@ -456,7 +457,6 @@ class Card extends Phaser.Physics.Arcade.Sprite {
     }
 
     show() {
-        this.isActive = true;
         this.setTexture(this.front);
     }
 
