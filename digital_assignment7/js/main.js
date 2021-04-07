@@ -98,13 +98,13 @@ class MyScene extends Phaser.Scene {
         this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x2020ff);
         this.players.add(this.p1);
 
-        this.p2 = new Player(this, size1 - 50, size1 - 50, 1, 'pr', 0xff2020);
+        this.p2 = new Player(this, size1 + 50, size1 - 50, 1, 'pr', 0xff2020);
         this.players.add(this.p2);
 
-        this.p3 = new Player(this, size1 - 50, size1 - 50, 2, 'pg', 0x20ff20);
+        this.p3 = new Player(this, size1 - 50, size1 + 50, 2, 'pg', 0x20ff20);
         this.players.add(this.p3);
 
-        this.p4 = new Player(this, size1 - 50, size1 - 50, 3, 'py', 0xffff20);
+        this.p4 = new Player(this, size1 + 50, size1 + 50, 3, 'py', 0xffff20);
         this.players.add(this.p4);
 
         this.players.getFirstAlive().destroy();
