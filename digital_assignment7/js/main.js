@@ -269,7 +269,6 @@ class MyScene extends Phaser.Scene {
 
     pick(player, card) {
         if (((this.n.isDown && player.getNum() === 2) || (this.zero.isDown && player.getNum() === 3) || (this.c.isDown && player.getNum() === 1) || (this.ctrl.isDown && player.getNum() === 0)) && !card.isActive) {
-            console.log(player.getNum());
             player.check(card);            
         }
     }
@@ -309,6 +308,8 @@ class MyScene extends Phaser.Scene {
         this.text.setColor(winner.getColor());
         timer.paused = true;
         this.showCards();
+
+        playing = false;
     }
 
     getWinner() {
