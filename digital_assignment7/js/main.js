@@ -224,19 +224,19 @@ class MyScene extends Phaser.Scene {
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.w) && this.p1.y > 50) {
-            this.p1.y -= size2;
+            this.p2.y -= size2;
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.a) && this.p1.x > 50) {
-            this.p1.x -= size2;
+            this.p2.x -= size2;
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.s) && this.p1.y < 450) {
-            this.p1.y += size2;
+            this.p2.y += size2;
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.d) && this.p1.x < 500) {
-            this.p1.x += size2;
+            this.p2.x += size2;
         }
 
         if (this.ctrl.isDown) {
