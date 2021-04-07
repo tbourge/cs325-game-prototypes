@@ -23,12 +23,14 @@ class MyScene extends Phaser.Scene {
     constructor() {
         super();        
 
-        this.p;
+        this.p1, this.p2, this.p3, this.p4;
+
         this.cards;
         this.activeCards;
         this.inactiveCards;
 
         this.players;
+        this.numPlayers = 0;
 
         this.text;
         this.timeText;
@@ -40,6 +42,10 @@ class MyScene extends Phaser.Scene {
     
     preload() {
         this.load.image('pb', 'assets/PlayerB.png');
+        this.load.image('py', 'assets/PlayerY.png');
+        this.load.image('pr', 'assets/PlayerR.png');
+        this.load.image('pg', 'assets/PlayerG.png');
+
         this.load.image('back', 'assets/CardB.png');
         this.load.image('G', 'assets/GB.png');
         this.load.image('H', 'assets/HB.png');
@@ -89,8 +95,17 @@ class MyScene extends Phaser.Scene {
         this.right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-        this.p = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x2020ff);
-        this.players.add(this.p);
+        this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x2020ff);
+        this.players.add(this.p1);
+
+        this.p2 = new Player(this, size1 - 50, size1 - 50, 1, 'pr', 0xff2020);
+        this.players.add(this.p2);
+
+        this.p3 = new Player(this, size1 - 50, size1 - 50, 2, 'pg', 0x20ff20);
+        this.players.add(this.p3);
+
+        this.p4 = new Player(this, size1 - 50, size1 - 50, 3, 'py', 0xffff20);
+        this.players.add(this.p4);
 
         this.players.getFirstAlive().destroy();
         //Overlap Group
@@ -168,27 +183,27 @@ class MyScene extends Phaser.Scene {
     
     update() {
         //Just Down
-        if (Phaser.Input.Keyboard.JustDown(this.up) && this.p.y > 50) {
-            this.p.y -= size2; 
+        if (Phaser.Input.Keyboard.JustDown(this.up) && this.p1.y > 50) {
+            this.p1.y -= size2; 
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.left) && this.p.x > 50) {
-            this.p.x -= size2;
+        if (Phaser.Input.Keyboard.JustDown(this.left) && this.p1.x > 50) {
+            this.p1.x -= size2;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.down) && this.p.y < 450) {
-            this.p.y += size2;
+        if (Phaser.Input.Keyboard.JustDown(this.down) && this.p1.y < 450) {
+            this.p1.y += size2;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.right) && this.p.x < 500) {
-            this.p.x += size2;
+        if (Phaser.Input.Keyboard.JustDown(this.right) && this.p1.x < 500) {
+            this.p1.x += size2;
         }
 
         if (this.space.isDown) {
             console.log("space");
         }
 
-        if (this.p.score > 9) {
+        if (this.p1.score > 9) {
             this.win();
         }
 
@@ -223,24 +238,24 @@ class MyScene extends Phaser.Scene {
 
         timer.paused = false;
 
-        this.p.turnOn();
+        this.p1.turnOn();
     }
 
     lose() {
-        this.p.turnOff();
+        this.p1.turnOff();
 
         this.showCards();
 
         this.endGame();
 
-        this.text.setText("You lost... You did earn " + this.p.score + " points though!");
+        this.text.setText("You lost... You did earn " + this.p1.score + " points though!");
     }
 
     endGame() {
         restartButton.setActive(true);
         restartButton.setVisible(true);
         this.text.setVisible(true);
-        this.text.setColor('0x000fff');
+        this.text.setColor('#000fff');
         timer.paused = true;
     }
 
