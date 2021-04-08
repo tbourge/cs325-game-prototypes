@@ -126,16 +126,16 @@ class MyScene extends Phaser.Scene {
         this.three = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
         this.zero = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
 
-        this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x2020ff, 'Blue');
+        this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x3030ff, 'Blue');
         this.players.add(this.p1);
 
-        this.p2 = new Player(this, size1 + 50, size1 - 50, 1, 'pr', 0xff2020, 'Red');
+        this.p2 = new Player(this, size1 + 50, size1 - 50, 1, 'pr', 0xff3030, 'Red');
         this.players.add(this.p2);
 
-        this.p3 = new Player(this, size1 - 50, size1 + 50, 2, 'pg', 0x20ff20, 'Green');
+        this.p3 = new Player(this, size1 - 50, size1 + 50, 2, 'pg', 0x30ff30, 'Green');
         this.players.add(this.p3);
 
-        this.p4 = new Player(this, size1 + 50, size1 + 50, 3, 'py', 0xffff20, 'Yellow');
+        this.p4 = new Player(this, size1 + 50, size1 + 50, 3, 'py', 0xffff30, 'Yellow');
         this.players.add(this.p4);
 
         this.players.getFirstAlive().destroy();
@@ -333,12 +333,14 @@ class MyScene extends Phaser.Scene {
     endGame() {
         let winner = this.getWinner();
 
+        let colors = ["#3030ff", "#ff3030", "#30ff30", "#ffff30"];
+
         restartButton.setActive(true);
         restartButton.setVisible(true);
 
         this.text.setText(winner.name + "is the winner!");
         this.text.setVisible(true);
-        this.text.setColor(winner.getColor());
+        this.text.setColor(colors[winner.getNum()]);
         timer.paused = true;
         this.showCards();
 
