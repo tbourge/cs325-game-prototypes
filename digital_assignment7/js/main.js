@@ -127,7 +127,7 @@ class MyScene extends Phaser.Scene {
         Phaser.Actions.Shuffle(this.cards.getChildren());
         //Destroy Child
         Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 5, cellWidth: size2, cellHeight: size2, x: size1, y: size1 });
-        Phaser.Actions.GridAlign(this.scores, { width: 1, cellWidth: 1, cellHeight: 10, x: 760, y: 80 }); 
+        Phaser.Actions.GridAlign(this.scores, { width: 1, cellWidth: 1, cellHeight: 20, x: 760, y: 80 }); 
         //Just Down
         this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
