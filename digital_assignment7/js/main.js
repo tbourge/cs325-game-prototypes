@@ -281,7 +281,7 @@ class MyScene extends Phaser.Scene {
 
         this.timeText.setText("Time: " + this.timeCount);
 
-        if ((this.allFlipped() && playing) || this.timeCount === 0) {
+        if ((this.allFlipped() || this.timeCount === 0) && playing) {
             this.endGame();
         }
     }
