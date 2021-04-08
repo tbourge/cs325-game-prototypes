@@ -184,7 +184,7 @@ class MyScene extends Phaser.Scene {
 
         }.bind(this));
 
-        this.text = this.add.text(100, 450, "How many players?", { fontSize: 25 }).setColor('#ffffff');
+        this.text = this.add.text(100, 450, "       How many players?", { fontSize: 25 }).setColor('#ffffff');
         this.timeText = this.add.text(700, 10, "Time: 0", { fontSize: 10 }).setColor('#ffffff');
 
         start.on('pointerover', function (pointer) {
