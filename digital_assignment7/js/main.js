@@ -114,16 +114,16 @@ class MyScene extends Phaser.Scene {
         this.d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.c = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
-      //  this.w = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-        //this.s = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        //this.a = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        //this.d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.i = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.I);
+        this.k = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+        this.j = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.J);
+        this.l = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
         this.n = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
 
-    //    this.w = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-      //  this.s = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        //this.a = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        //this.d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        this.five = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FIVE);
+        this.two = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+        this.one = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+        this.three = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
         this.zero = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
 
         this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x2020ff, 'Blue');
@@ -231,16 +231,48 @@ class MyScene extends Phaser.Scene {
             this.p2.y -= size2;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.a) && this.p2.x > 100) {
+        if (Phaser.Input.Keyboard.JustDown(this.a) && this.p2.x > 150) {
             this.p2.x -= size2;
         }
-        console.log(this.p2.x + ',' + this.p2.y);
+        console.log(this.p3.x + ',' + this.p3.y);
         if (Phaser.Input.Keyboard.JustDown(this.s) && this.p2.y < 450) {
             this.p2.y += size2;
         }
 
         if (Phaser.Input.Keyboard.JustDown(this.d) && this.p2.x < 600) {
             this.p2.x += size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.i) && this.p3.y > 50) {
+            this.p3.y -= size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.j) && this.p3.x > 50) {
+            this.p3.x -= size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.k) && this.p3.y < 450) {
+            this.p3.y += size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.l) && this.p3.x < 500) {
+            this.p3.x += size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.five) && this.p4.y > 50) {
+            this.p4.y -= size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.one) && this.p4.x > 50) {
+            this.p4.x -= size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.two) && this.p4.y < 450) {
+            this.p4.y += size2;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(this.three) && this.p4.x < 500) {
+            this.p4.x += size2;
         }
 
         if (this.ctrl.isDown) {
