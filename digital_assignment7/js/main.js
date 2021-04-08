@@ -496,8 +496,7 @@ class MyScene extends Phaser.Scene {
         //}
 
         for (z = this.numPlayers; z < 4; z++) {
-            ps[z].destroy();
-            ps[z].destroy();
+            this.players.getFirstDead().destroy();
         }
     }
 }
