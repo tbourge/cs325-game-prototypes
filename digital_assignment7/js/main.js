@@ -486,17 +486,10 @@ class MyScene extends Phaser.Scene {
     }
 
     addPlayers() {
-        let ps = this.players.getChildren();
-
         var z;
 
-       // for (z = 0; z < this.numPlayers; z++) {
-         //   this.add.existing(ps[z]);
-           // this.physics.add.existing(ps[z]);
-        //}
-
         for (z = this.numPlayers; z < 4; z++) {
-            this.players.getFirstDead().destroy();
+            this.players.getLast().destroy();
         }
     }
 }
