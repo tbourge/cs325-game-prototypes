@@ -234,7 +234,7 @@ class MyScene extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.a) && this.p2.x > 150) {
             this.p2.x -= size2;
         }
-        console.log(this.p3.x + ',' + this.p3.y);
+        console.log(this.p4.x + ',' + this.p4.y);
         if (Phaser.Input.Keyboard.JustDown(this.s) && this.p2.y < 450) {
             this.p2.y += size2;
         }
@@ -243,7 +243,7 @@ class MyScene extends Phaser.Scene {
             this.p2.x += size2;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.i) && this.p3.y > 50) {
+        if (Phaser.Input.Keyboard.JustDown(this.i) && this.p3.y > 150) {
             this.p3.y -= size2;
         }
 
@@ -259,11 +259,11 @@ class MyScene extends Phaser.Scene {
             this.p3.x += size2;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.five) && this.p4.y > 50) {
+        if (Phaser.Input.Keyboard.JustDown(this.five) && this.p4.y > 150) {
             this.p4.y -= size2;
         }
 
-        if (Phaser.Input.Keyboard.JustDown(this.one) && this.p4.x > 50) {
+        if (Phaser.Input.Keyboard.JustDown(this.one) && this.p4.x > 150) {
             this.p4.x -= size2;
         }
 
@@ -281,7 +281,7 @@ class MyScene extends Phaser.Scene {
 
         this.timeText.setText("Time: " + this.timeCount);
 
-        if (this.allFlipped() && playing) {
+        if ((this.allFlipped() && playing) || this.timeCount === 0) {
             this.endGame();
         }
     }
