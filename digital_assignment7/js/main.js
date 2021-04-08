@@ -357,6 +357,7 @@ class MyScene extends Phaser.Scene {
         ps.forEach(function (p) {
             if (p.score > topScore) {
                 winner = p;
+                topScore = p.score;
             }
         });
 
