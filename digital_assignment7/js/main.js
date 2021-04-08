@@ -214,6 +214,8 @@ class MyScene extends Phaser.Scene {
                 c.turnOn();
             });
 
+            this.addPlayers();
+
         }.bind(this));
 
         bt2.on('pointerover', function (pointer) {
@@ -474,6 +476,17 @@ class MyScene extends Phaser.Scene {
     subTime() {
         this.timeCount--;
     }
+
+    addPlayers() {
+        let ps = this.players.getChildren();
+
+        var z;
+
+        for (z = 0; z < this.numPlayers; z++) {
+            this.add.existing(ps[z]);
+            this.physics.add.existing(ps[z]);
+        }
+    }
 }
 
 class Player extends Phaser.Physics.Arcade.Sprite {
@@ -487,9 +500,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, sprite);
 
         this.pNum = num;
-
-        scene.add.existing(this);
-        scene.physics.add.existing(this);
 
         this.color = color;
         this.name = name;
