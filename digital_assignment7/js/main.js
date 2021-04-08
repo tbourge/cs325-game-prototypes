@@ -145,14 +145,37 @@ class MyScene extends Phaser.Scene {
         startTimer = this.time.addEvent({ delay: 3000, callback: this.startGame, callbackScope: this, repeat: 0, paused: true });
         timer = this.time.addEvent({ delay: 1000, callback: this.subTime, callbackScope: this, repeat: -1, paused: true });
 
-        this.text = this.add.text(100, 450, "You will have 3 seconds to memorize the board\n Click START when ready", { fontSize: 25 }).setColor('#ffffff');
-        this.timeText = this.add.text(700, 10, "Time: 0", { fontSize: 10 }).setColor('#ffffff');
-
         start = this.add.sprite(400, 300, 'startButton').setInteractive();
 
         restartButton = this.add.sprite(400, 300, 'resetButton').setInteractive();
         restartButton.setVisible(false);
         restartButton.setActive(false);
+
+        restartButton.on('pointerover', function (pointer) {
+
+            this.setTint(0xcccccc);
+
+        });
+
+        restartButton.on('pointerdown', function (pointer) {
+
+            this.setTint(0x333333);
+        });
+
+        restartButton.on('pointerout', function (pointer) {
+
+            this.clearTint();
+
+        });
+
+        restartButton.on('pointerup', function (pointer) {
+
+            this.scene.restart();
+
+        }.bind(this));
+
+        this.text = this.add.text(100, 450, "You will have 3 seconds to memorize the board\n        Click START when ready", { fontSize: 25 }).setColor('#ffffff');
+        this.timeText = this.add.text(700, 10, "Time: 0", { fontSize: 10 }).setColor('#ffffff');
 
         start.on('pointerover', function (pointer) {
 
@@ -184,29 +207,6 @@ class MyScene extends Phaser.Scene {
             });
 
         }.bind(this));
-
-        restartButton.on('pointerover', function (pointer) {
-
-            this.setTint(0xcccccc);
-
-        });
-
-        restartButton.on('pointerdown', function (pointer) {
-
-            this.setTint(0x333333);
-        });
-
-        restartButton.on('pointerout', function (pointer) {
-
-            this.clearTint();
-
-        });
-
-        restartButton.on('pointerup', function (pointer) {
-
-            this.scene.restart();
-
-        }.bind(this));
     }
     
     update() {
@@ -234,7 +234,7 @@ class MyScene extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(this.a) && this.p2.x > 150) {
             this.p2.x -= size2;
         }
-        console.log(this.p4.x + ',' + this.p4.y);
+
         if (Phaser.Input.Keyboard.JustDown(this.s) && this.p2.y < 450) {
             this.p2.y += size2;
         }
@@ -333,14 +333,15 @@ class MyScene extends Phaser.Scene {
     endGame() {
         let winner = this.getWinner();
 
-        let colors = ["#3030ff", "#ff3030", "#30ff30", "#ffff30"];
+        let colors = ["#3030ff", "#ff3030", "#000000", "#ffff30"]; //30ff30
 
         restartButton.setActive(true);
         restartButton.setVisible(true);
 
-        this.text.setText(winner.name + "is the winner!");
+        this.text.setText(winner.name + " is the winner!");
         this.text.setVisible(true);
         this.text.setColor(colors[winner.getNum()]);
+        this.text.y -= 20;
         timer.paused = true;
         this.showCards();
 
