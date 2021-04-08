@@ -13,7 +13,7 @@ import "./phaser.js";
 
 var size1 = 96, size2 = 144;
 var flipSound, failSound, matchSound, stealSound;
-var timer, startTimer;
+var timer, startTimer, bt3, bt2, bt4;
 var start, restartButton;
 var playing;
 
@@ -65,6 +65,10 @@ class MyScene extends Phaser.Scene {
 
         this.load.image("startButton", "assets/START.png");
         this.load.image("resetButton", "assets/RESET.png");
+        this.load.image("2", "assets/2.png");
+        this.load.image("3", "assets/3.png");
+        this.load.image("4", "assets/4.png");
+
 
         this.load.audio('flip', 'assets/flip.ogg');
         this.load.audio('match', 'assets/match.ogg');
@@ -145,6 +149,10 @@ class MyScene extends Phaser.Scene {
         startTimer = this.time.addEvent({ delay: 3000, callback: this.startGame, callbackScope: this, repeat: 0, paused: true });
         timer = this.time.addEvent({ delay: 1000, callback: this.subTime, callbackScope: this, repeat: -1, paused: true });
 
+        bt2 = this.add.sprite(400-70, 300, '2').setInteractive();
+        bt3 = this.add.sprite(400, 300, '3').setInteractive();
+        bt4 = this.add.sprite(400+70, 300, '4').setInteractive();
+
         start = this.add.sprite(400, 300, 'startButton').setInteractive();
 
         restartButton = this.add.sprite(400, 300, 'resetButton').setInteractive();
@@ -206,6 +214,102 @@ class MyScene extends Phaser.Scene {
                 c.turnOn();
             });
 
+        }.bind(this));
+
+        bt2.on('pointerover', function (pointer) {
+
+            this.setTint(0xcccccc);
+
+        });
+
+        bt2.on('pointerdown', function (pointer) {
+
+            this.setTint(0x333333);
+        });
+
+        bt2.on('pointerout', function (pointer) {
+
+            this.clearTint();
+        });
+
+        bt2.on('pointerup', function (pointer) {
+            start.setVisible(true);
+            start.setActive(true);
+
+            bt2.setVisible(false);
+            bt2.setActive(false);
+
+            bt3.setVisible(false);
+            bt3.setActive(false);
+
+            bt4.setVisible(false);
+            bt4.setActive(false);
+
+            this.numPlayers = 2;
+        }.bind(this));
+
+        bt3.on('pointerover', function (pointer) {
+
+            this.setTint(0xcccccc);
+
+        });
+
+        bt3.on('pointerdown', function (pointer) {
+
+            this.setTint(0x333333);
+        });
+
+        bt3.on('pointerout', function (pointer) {
+
+            this.clearTint();
+        });
+
+        bt3.on('pointerup', function (pointer) {
+            start.setVisible(true);
+            start.setActive(true);
+
+            bt2.setVisible(false);
+            bt2.setActive(false);
+
+            bt3.setVisible(false);
+            bt3.setActive(false);
+
+            bt4.setVisible(false);
+            bt4.setActive(false);
+
+            this.numPlayers = 3;
+        }.bind(this));
+
+        bt4.on('pointerover', function (pointer) {
+
+            this.setTint(0xcccccc);
+
+        });
+
+        bt4.on('pointerdown', function (pointer) {
+
+            this.setTint(0x333333);
+        });
+
+        bt4.on('pointerout', function (pointer) {
+
+            this.clearTint();
+        });
+
+        bt4.on('pointerup', function (pointer) {
+            start.setVisible(true);
+            start.setActive(true);
+
+            bt2.setVisible(false);
+            bt2.setActive(false);
+
+            bt3.setVisible(false);
+            bt3.setActive(false);
+
+            bt4.setVisible(false);
+            bt4.setActive(false);
+
+            this.numPlayers = 4;
         }.bind(this));
     }
     
