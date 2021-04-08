@@ -99,7 +99,6 @@ class MyScene extends Phaser.Scene {
         var x;
 
         for (x = 0; x < 4; x++) {
-            this.scores[x].setColor(this.colors[x]);
             this.scores[x].setVisible(false);
         }
         
@@ -153,16 +152,16 @@ class MyScene extends Phaser.Scene {
         this.three = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
         this.zero = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ZERO);
 
-        this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x3030ff, 'Blue');
+        this.p1 = new Player(this, size1 - 50, size1 - 50, 0, 'pb', 0x3030ff, "#3030ff", 'Blue');
         this.players.add(this.p1);
 
-        this.p2 = new Player(this, size1 + 50, size1 - 50, 1, 'pr', 0xff3030, 'Red');
+        this.p2 = new Player(this, size1 + 50, size1 - 50, 1, 'pr', 0xff3030, "#ff3030", 'Red');
         this.players.add(this.p2);
 
-        this.p3 = new Player(this, size1 - 50, size1 + 50, 2, 'pg', 0x30ff30, 'Green');
+        this.p3 = new Player(this, size1 - 50, size1 + 50, 2, 'pg', 0x30ff30, "#30ff30", 'Green');
         this.players.add(this.p3);
 
-        this.p4 = new Player(this, size1 + 50, size1 + 50, 3, 'py', 0xffff30, 'Yellow');
+        this.p4 = new Player(this, size1 + 50, size1 + 50, 3, 'py', 0xffff30, "#ffff30", 'Yellow');
         this.players.add(this.p4);
 
         this.players.getFirstAlive().destroy();
@@ -419,9 +418,16 @@ class MyScene extends Phaser.Scene {
         this.timeText.setText("Time: " + this.timeCount);
 
         this.scoreText1.setText(this.p1.score);
+        this.scoreText1.setColor(this.p1.color2);
+
         this.scoreText2.setText(this.p2.score);
+        this.scoreText2.setColor(this.p2.color2);
+
         this.scoreText3.setText(this.p3.score);
+        this.scoreText3.setColor(this.p3.color2);
+
         this.scoreText4.setText(this.p4.score);
+        this.scoreText4.setColor(this.p4.color2);
 
         if ((this.allFlipped() || this.timeCount === 0) && playing) {
             this.endGame();
@@ -529,16 +535,18 @@ class MyScene extends Phaser.Scene {
 class Player extends Phaser.Physics.Arcade.Sprite {
     pNum;
     cardActive = null;
-    color;
+    color, color2;
     score = 0;
     name;
 
-    constructor(scene, x, y, num, sprite, color, name) {
+    constructor(scene, x, y, num, sprite, color, c2, name) {
         super(scene, x, y, sprite);
 
         this.pNum = num;
 
         this.color = color;
+        this.color2 = c2;
+
         this.name = name;
 
         scene.add.existing(this);
