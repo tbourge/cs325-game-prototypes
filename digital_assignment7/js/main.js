@@ -422,7 +422,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             else {
                 this.cardActive = card;
                 this.cardActive.activate(this);
-                console.log(this.cardActive.num);
                 flipSound.play();
             }
 
