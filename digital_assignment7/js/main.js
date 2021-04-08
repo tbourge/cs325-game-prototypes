@@ -461,6 +461,8 @@ class MyScene extends Phaser.Scene {
         timer.paused = true;
         this.showCards();
 
+        this.players.destroy();
+
         playing = false;
     }
 
