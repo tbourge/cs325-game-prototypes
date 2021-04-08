@@ -154,6 +154,8 @@ class MyScene extends Phaser.Scene {
         bt4 = this.add.sprite(400+70, 300, '4').setInteractive();
 
         start = this.add.sprite(400, 300, 'startButton').setInteractive();
+        start.setVisible(false);
+        start.setActive(false);
 
         restartButton = this.add.sprite(400, 300, 'resetButton').setInteractive();
         restartButton.setVisible(false);
