@@ -33,6 +33,13 @@ class MyScene extends Phaser.Scene {
 
         this.text;
         this.timeText;
+        this.scoreText1;
+        this.scoreText2;
+        this.scoreText3;
+        this.scoreText4;
+
+        this.scores;
+        this.colors = ["#3030ff", "#ff3030", "#000000", "#ffff30"]; //30ff30
 
         this.timeCount;
 
@@ -80,7 +87,22 @@ class MyScene extends Phaser.Scene {
         flipSound = this.sound.add('flip');
         matchSound = this.sound.add('match');
         failSound = this.sound.add('fail');
-        stealSound = this.sound.add('steal', {volume: 0.5});
+        stealSound = this.sound.add('steal', { volume: 0.5 });
+
+        this.scoreText1 = this.add.text(100, 450, "0", { fontSize: 15 });
+        this.scoreText2 = this.add.text(100, 450, "0", { fontSize: 15 });
+        this.scoreText3 = this.add.text(100, 450, "0", { fontSize: 15 });
+        this.scoreText4 = this.add.text(100, 450, "0", { fontSize: 15 });
+
+        this.scores = [this.scoreText1, this.scoreText2, this.scoreText3, this.scoreText4];
+
+        var x;
+
+        for (x = 0; x < 4; x++) {
+            this.scores[x].setColor(this.colors[x]);
+            this.scores[x].setVisible(false);
+        }
+        
 
         this.timeCount = 120;
         playing = false;
@@ -104,7 +126,8 @@ class MyScene extends Phaser.Scene {
         //Shuffle
         Phaser.Actions.Shuffle(this.cards.getChildren());
         //Destroy Child
-        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 5, cellWidth: size2, cellHeight: size2, x: size1, y: size1 }); 
+        Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 5, cellWidth: size2, cellHeight: size2, x: size1, y: size1 });
+        Phaser.Actions.GridAlign(this.scores, { width: 1, cellWidth: 1, cellHeight: 10, x: 780, y: 80 }); 
         //Just Down
         this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
@@ -395,6 +418,8 @@ class MyScene extends Phaser.Scene {
 
         this.timeText.setText("Time: " + this.timeCount);
 
+
+
         if ((this.allFlipped() || this.timeCount === 0) && playing) {
             this.endGame();
         }
@@ -447,14 +472,12 @@ class MyScene extends Phaser.Scene {
     endGame() {
         let winner = this.getWinner();
 
-        let colors = ["#3030ff", "#ff3030", "#000000", "#ffff30"]; //30ff30
-
         restartButton.setActive(true);
         restartButton.setVisible(true);
 
         this.text.setText(winner.name + " is the winner!");
         this.text.setVisible(true);
-        this.text.setColor(colors[winner.getNum()]);
+        this.text.setColor(this.colors[winner.getNum()]);
         this.text.y = 360;
         this.text.x = 290;
 
@@ -493,6 +516,10 @@ class MyScene extends Phaser.Scene {
         for (z = this.numPlayers; z < 4; z++) {
             this.players.getLast().destroy();
         }
+
+        for (z = 0; z < this.numPlayers; z++) {
+            this.scores[z].setVisible(true);
+        }        
     }
 }
 
