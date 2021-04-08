@@ -456,7 +456,7 @@ class MyScene extends Phaser.Scene {
         this.text.setVisible(true);
         this.text.setColor(colors[winner.getNum()]);
         this.text.y = 360;
-        this.text.x = 310;
+        this.text.x = 290;
 
         timer.paused = true;
         this.showCards();
