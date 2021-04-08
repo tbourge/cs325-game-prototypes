@@ -182,7 +182,7 @@ class MyScene extends Phaser.Scene {
 
         }.bind(this));
 
-        this.text = this.add.text(100, 450, "You will have 3 seconds to memorize the board\n        Click START when ready", { fontSize: 25 }).setColor('#ffffff');
+        this.text = this.add.text(100, 450, "How many players?", { fontSize: 25 }).setColor('#ffffff');
         this.timeText = this.add.text(700, 10, "Time: 0", { fontSize: 10 }).setColor('#ffffff');
 
         start.on('pointerover', function (pointer) {
@@ -248,6 +248,8 @@ class MyScene extends Phaser.Scene {
             bt4.setActive(false);
 
             this.numPlayers = 2;
+
+            this.text.setText("You will have 3 seconds to memorize the board\n        Click START when ready");
         }.bind(this));
 
         bt3.on('pointerover', function (pointer) {
@@ -280,6 +282,8 @@ class MyScene extends Phaser.Scene {
             bt4.setActive(false);
 
             this.numPlayers = 3;
+
+            this.text.setText("You will have 3 seconds to memorize the board\n        Click START when ready");
         }.bind(this));
 
         bt4.on('pointerover', function (pointer) {
@@ -312,6 +316,8 @@ class MyScene extends Phaser.Scene {
             bt4.setActive(false);
 
             this.numPlayers = 4;
+
+            this.text.setText("You will have 3 seconds to memorize the board\n        Click START when ready");
         }.bind(this));
     }
     
