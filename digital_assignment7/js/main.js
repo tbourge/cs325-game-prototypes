@@ -89,10 +89,10 @@ class MyScene extends Phaser.Scene {
         failSound = this.sound.add('fail');
         stealSound = this.sound.add('steal', { volume: 0.5 });
 
-        this.scoreText1 = this.add.text(100, 450, "0", { fontSize: 15 });
-        this.scoreText2 = this.add.text(100, 450, "0", { fontSize: 15 });
-        this.scoreText3 = this.add.text(100, 450, "0", { fontSize: 15 });
-        this.scoreText4 = this.add.text(100, 450, "0", { fontSize: 15 });
+        this.scoreText1 = this.add.text(100, 450, "0", { fontSize: 25 });
+        this.scoreText2 = this.add.text(100, 450, "0", { fontSize: 25 });
+        this.scoreText3 = this.add.text(100, 450, "0", { fontSize: 25 });
+        this.scoreText4 = this.add.text(100, 450, "0", { fontSize: 25 });
 
         this.scores = [this.scoreText1, this.scoreText2, this.scoreText3, this.scoreText4];
 
@@ -127,7 +127,7 @@ class MyScene extends Phaser.Scene {
         Phaser.Actions.Shuffle(this.cards.getChildren());
         //Destroy Child
         Phaser.Actions.GridAlign(this.cards.getChildren(), { width: 5, cellWidth: size2, cellHeight: size2, x: size1, y: size1 });
-        Phaser.Actions.GridAlign(this.scores, { width: 1, cellWidth: 1, cellHeight: 10, x: 780, y: 80 }); 
+        Phaser.Actions.GridAlign(this.scores, { width: 1, cellWidth: 1, cellHeight: 10, x: 760, y: 80 }); 
         //Just Down
         this.up = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         this.down = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
