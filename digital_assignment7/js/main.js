@@ -420,6 +420,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
                 m.activate(this);
                 card.activate(this);
                 stealSound.play();
+                this.score++;
             }
             else {
                 this.cardActive = card;
