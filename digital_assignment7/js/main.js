@@ -490,10 +490,10 @@ class MyScene extends Phaser.Scene {
 
         var z;
 
-        for (z = 0; z < this.numPlayers; z++) {
-            this.add.existing(ps[z]);
-            this.physics.add.existing(ps[z]);
-        }
+       // for (z = 0; z < this.numPlayers; z++) {
+         //   this.add.existing(ps[z]);
+           // this.physics.add.existing(ps[z]);
+        //}
 
         for (z = this.numPlayers; z < 4; z++) {
             ps[z].destroy();
@@ -516,6 +516,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.color = color;
         this.name = name;
+
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
 
         this.turnOff();
     }
