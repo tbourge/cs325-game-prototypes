@@ -535,7 +535,8 @@ class MyScene extends Phaser.Scene {
 class Player extends Phaser.Physics.Arcade.Sprite {
     pNum;
     cardActive = null;
-    color, color2;
+    color;
+    color2;
     score = 0;
     name;
 
