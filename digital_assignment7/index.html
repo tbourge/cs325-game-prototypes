@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Memory Mash</title>
+<title>Memory Mash 2.0</title>
 <style>
 body
 {
@@ -26,6 +26,7 @@ body
 What is original about your game?
 <ul>
 <li>I made all the visual assets</li>
+<li>The ability to steal a match from another player</li>
 </ul>
 </li>
 
@@ -33,7 +34,7 @@ What is original about your game?
 What is interesting about your game technology?
 <ul>
 <li>Implemented grid-based movement</li>
-<li>Created player class that will be used to add multiplayer functionality in next iteration</li>
+<li>Player class that allows multiplayer functionality</li>
 </ul>
 </li>
 
@@ -52,15 +53,15 @@ What was the easiest or hardest part of making it?
 <li><strong>Prototype Assets:</strong>
 Did you make your prototype assets from scratch? Did you borrow them? Cite your sources here.
 <ul>
-<li>Sounds: <a href="https://kenney.nl/assets/interface-sounds">Kenney Interface Sounds</a></li>
+<li>Flip, match and fail sounds: <a href="https://kenney.nl/assets/interface-sounds">Kenney Interface Sounds</a></li>
 <li>All other assets were made by me</li>
 </ul>
 </li>
 
 <li><strong>Prototype Closest Other Game:</strong>
 Which other game most closely resembles your game? If you are borrowing code from a Phaser Example, you must say so here. If you borrow code from elsewhere, you must say so here.
+<br>My inspiration for this game was a Mario Party minigame called <a href="https://www.mariowiki.com/Memory_Match_(Mario_Party)">Memory Match</a>. This is <br>an iteration on <a href="https://tbourge.github.io/cs325-game-prototypes/digital_assignment6/">my last digital game</a>.
 <ul>
-<li>My inspiration for this game was a Mario Party minigame called <a href="https://www.mariowiki.com/Memory_Match_(Mario_Party)">Memory Match</a>.</li>
 <li>I borrowed code from:</li>
 <li><a href="http://phaser.io/examples/v3/view/game-objects/group/shuffle">Phaser Shuffle Group Example</a></li>
 <li><a href="http://phaser.io/examples/v3/view/game-objects/group/destroy-child">Phaser Destroy Child of Group Example</a></li>
@@ -87,10 +88,8 @@ What experience do you want players to have when playing your game?
 
 <li><strong>Gameplay:</strong>
 A paragraph describing the actions the player can perform, the system dynamics, and the core mechanic. Include a concise explanation of the prototype’s inputs and their expected effects (how to play). You can also describe game play that is not in the prototype. You may include mock-up images for parts of the game not in the prototype.
-<br>Once the player clicks start the cards will appear faceup for 3 seconds. After the 3 seconds are up the cards will flip over and the player's token will <br>appear on the top left card. The player can move their token with the arrow keys (each movement requires its own button press) and can flip the card 
-<br>their token is on with spacebar. A flipped card will become highlighted with the player's color. If the player selects a card while they already have a <br>card selected then the cards will remain flipped and highlighted if they match, this will award one point to the player. If the cards do not match then <br>they will become unhighlighted and will flip back over after one second. The player wins if they match all the cards in 2 minutes.
-<br>
-<br>The next iteration is planned to have multiplayer functionality.
+<br>Once the player clicks start the cards will appear faceup for 3 seconds. After the 3 seconds are up the cards will flip over and the player tokens will appear on the top left card. The blue player can move their token with the arrow keys (each movement requires its own button press) and can flip the card 
+their token is on with control. The red player moves with WASD and flips cards with C. The green player moves with IJKL and flips cards with N. The yellow player moves with 5123 and flips cards with 0. A flipped card will become highlighted with the player's color. If the player selects a card while they already have a card selected then the cards will remain flipped and highlighted if they match, this will award two points to that player. If the cards do not match then they will become unhighlighted and will flip back over after one second. If a player flips over a card and a different player flips over the matching card then the 2nd player will acquire the match and earn one point. The player who gets the most points wins. The game ends when the timer runs out or all the cards are matched.
 </li>
 
 <li><strong>Strategies:</strong>
@@ -106,12 +105,12 @@ How will the dramatic tension interact with the gameplay tension?
 
 <li><strong>Target Audience:</strong>
 A single sentence that describes the demographic you're trying to reach.
-<br>People who like quick memory games
+<br>People who like quick memory games and competition with friends
 </li>
 
 <li><strong>Play Time:</strong>
 How long does your game take to play?
-<br>2 minutes
+<br>2 minutes or less
 </li>
 
 </ul>
