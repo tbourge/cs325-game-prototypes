@@ -418,7 +418,10 @@ class MyScene extends Phaser.Scene {
 
         this.timeText.setText("Time: " + this.timeCount);
 
-
+        this.scoreText1.setText(this.p1.score);
+        this.scoreText2.setText(this.p2.score);
+        this.scoreText3.setText(this.p3.score);
+        this.scoreText4.setText(this.p4.score);
 
         if ((this.allFlipped() || this.timeCount === 0) && playing) {
             this.endGame();
