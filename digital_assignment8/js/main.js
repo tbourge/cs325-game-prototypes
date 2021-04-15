@@ -38,7 +38,7 @@ class MyScene extends Phaser.Scene {
 
         this.tank = this.add.sprite(32, 32, 'tank').setAngle(180);
 
-        this.start = 
+        this.start = new Button(this, 400, 300, "startButton");
 
         console.log("beanz");
     }
