@@ -59,7 +59,7 @@ class Button extends Phaser.GameObjects.Sprite {
         this.on('pointerover', () => this.setTint(0xcccccc));
         this.on('pointerout', () => this.clearTint());
         this.on('pointerdown', () => this.setTint(0x333333));
-        this.on('pointerup', () =>   this.setTint(0xcccccc));
+        this.on('pointerup', () => this.setTint(0xcccccc));
     }
 
     preUpdate(time, delta) {
@@ -72,6 +72,12 @@ class StartButton extends Button {
         super(scene, x, y, "startButton");
 
         scene.add.existing(this);
+
+        this.on('pointerup', () => this.action());
+    }
+
+    action() {
+        console.log("start");
     }
 
     preUpdate(time, delta) {
