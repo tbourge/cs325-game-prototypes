@@ -17,10 +17,13 @@ class MyScene extends Phaser.Scene {
         super();
 
         this.board;
+
+        this.tank;
     }
     
     preload() {
-        this.load.image( 'space', 'assets/Square.png' );
+        this.load.image('space', 'assets/Square.png');
+        this.load.image('tank', 'assets/Tank.png');
     }
     
     create() {
@@ -29,6 +32,8 @@ class MyScene extends Phaser.Scene {
         let c = this.board.getChildren();
 
         Phaser.Actions.GridAlign(c, { width: 8, cellWidth: 64, cellHeight: 64, x: 32, y: 32 });
+
+        this.tank = this.add.sprite(26, 32, 'tank');
     }
     
     update() {
