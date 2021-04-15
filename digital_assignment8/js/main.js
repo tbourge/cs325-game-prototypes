@@ -56,8 +56,8 @@ class Button extends Phaser.GameObjects.Sprite {
         this.setTexture(sprite);
         this.setPosition(x, y);
         this.setInteractive();
-        this.on('pointerover', () => this.clearTint());
-        this.on('pointerout', () => this.setTint(0x333333));
+        this.on('pointerover', () => this.setTint(0xcccccc));
+        this.on('pointerout', () => this.clearTint());
         this.on('pointerdown', () => this.setTint(0x333333));
         this.on('pointerup', () => this.action());
 
