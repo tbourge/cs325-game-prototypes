@@ -24,7 +24,11 @@ class MyScene extends Phaser.Scene {
     }
     
     create() {
-        this.board = this.physics.add.group({ key: 'space', repeat: 13, setXY: { x: 32, y: 100, stepX: 62 } });
+        this.board = this.physics.add.group({ key: 'space', repeat: 64 });
+
+        let c = this.board.getChildren();
+
+        Phaser.Actions.GridAlign(c, { width: 8, cellWidth: 64, cellHeight: 64, x: 32, y: 32 });
     }
     
     update() {
