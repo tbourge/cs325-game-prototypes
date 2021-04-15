@@ -19,6 +19,8 @@ class MyScene extends Phaser.Scene {
         this.board;
 
         this.tank;
+
+        this.start;
     }
     
     preload() {
@@ -36,6 +38,8 @@ class MyScene extends Phaser.Scene {
 
         this.tank = this.add.sprite(32, 32, 'tank').setAngle(180);
 
+        this.start = 
+
         console.log("beanz");
     }
     
@@ -46,10 +50,10 @@ class MyScene extends Phaser.Scene {
 
 class Button extends Phaser.GameObjects.Sprite {
 
-    constructor(scene, x, y) {
+    constructor(scene, x, y, sprite) {
         super(scene, x, y);
 
-        this.setTexture('startButton');
+        this.setTexture(sprite);
         this.setPosition(x, y);
         this.setInteractive();
         this.on('pointerover', () => this.clearTint());
@@ -58,6 +62,10 @@ class Button extends Phaser.GameObjects.Sprite {
         this.on('pointerup', () => this.action());
 
         scene.add.existing(this);
+    }
+
+    action() {
+
     }
 
     preUpdate(time, delta) {
