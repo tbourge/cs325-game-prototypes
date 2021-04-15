@@ -24,7 +24,7 @@ class MyScene extends Phaser.Scene {
     }
     
     create() {
-        this.board = this.physics.add.group({ key: 'space', repeat: 64 });
+        this.board = this.physics.add.group({ key: 'space', repeat: 63 });
 
         let c = this.board.getChildren();
 
