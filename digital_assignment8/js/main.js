@@ -34,6 +34,8 @@ class MyScene extends Phaser.Scene {
         Phaser.Actions.GridAlign(c, { width: 8, cellWidth: 64, cellHeight: 64, x: 32, y: 32 });
 
         this.tank = this.add.sprite(26, 32, 'tank');
+
+        console.log("beanz");
     }
     
     update() {
