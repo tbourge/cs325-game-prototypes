@@ -24,6 +24,7 @@ class MyScene extends Phaser.Scene {
     preload() {
         this.load.image('space', 'assets/Square.png');
         this.load.image('tank', 'assets/Tank.png');
+        this.load.image("startButton", "assets/START.png");
     }
     
     create() {
@@ -39,7 +40,28 @@ class MyScene extends Phaser.Scene {
     }
     
     update() {
+        
+    }
+}
 
+class Button extends Phaser.GameObjects.Sprite {
+
+    constructor(scene, x, y) {
+        super(scene, x, y);
+
+        this.setTexture('startButton');
+        this.setPosition(x, y);
+        this.setInteractive();
+        this.on('pointerover', () => this.clearTint());
+        this.on('pointerout', () => this.setTint(0x333333));
+        this.on('pointerdown', () => this.setTint(0x333333));
+        this.on('pointerup', () => this.action());
+
+        scene.add.existing(this);
+    }
+
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
     }
 }
 
