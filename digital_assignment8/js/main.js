@@ -36,7 +36,7 @@ class MyScene extends Phaser.Scene {
 
         Phaser.Actions.GridAlign(c, { width: 8, cellWidth: 64, cellHeight: 64, x: 32, y: 32 });
 
-        this.tank = this.add.sprite(32, 32, 'tank').setAngle(180);
+        this.tank = new Tank(this, 32, 32);
 
         this.start = new StartButton(this, 400, 300, () => this.startAction());
 
@@ -93,6 +93,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, "tank");
 
         this.dir = 2;
+
+        scene.add.existing(this);
 
         //tset
         this.setInteractive();
