@@ -127,6 +127,13 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         super.preUpdate(time, delta);
 
         this.setAngle(this.dir * 90);
+
+        if (this.dir > 3) {
+            this.dir = 0;
+        }
+        else if (this.dir < 0) {
+            this.dir = 3;
+        }
     }
 }
 
