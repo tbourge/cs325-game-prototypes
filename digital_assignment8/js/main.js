@@ -16,6 +16,9 @@ class MyScene extends Phaser.Scene {
     constructor() {
         super();
 
+        this.tileSize = 68;
+        this.firstTile = this.tileSize / 2;
+
         this.board;
 
         this.tank;
@@ -34,7 +37,7 @@ class MyScene extends Phaser.Scene {
 
         let c = this.board.getChildren();
 
-        Phaser.Actions.GridAlign(c, { width: 8, cellWidth: 64, cellHeight: 64, x: 32, y: 32 });
+        Phaser.Actions.GridAlign(c, { width: 8, cellWidth: this.tileSize, cellHeight: this.tileSize, x: this.firstTile, y: this.firstTile });
 
         this.anims.create({
             key: 'tankFire',
@@ -43,7 +46,7 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
-        this.tank = new Tank(this, 32, 32);
+        this.tank = new Tank(this, this.firstTile, this.firstTile);
 
         this.start = new StartButton(this, 400, 300, () => this.startAction());
 
