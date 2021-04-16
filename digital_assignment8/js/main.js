@@ -86,6 +86,35 @@ class StartButton extends Button {
     }
 }
 
+class Tank extends Phaser.Physics.Arcade.Sprite {
+    dir;
+
+    constructor(scene, x, y) {
+        super(scene, x, y, "tank");
+
+        this.dir = 2;
+
+        //tset
+        this.setInteractive();
+        this.on('pointerout', () => this.turnLeft());
+        this.on('pointerdown', () => this.turnRight());
+    }
+
+    turnLeft() {
+        this.dir--;
+    }
+
+    turnRight() {
+        this.dir++;
+    }
+
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
+
+        this.setAngle(this.dir * 90);
+    }
+}
+
 const game = new Phaser.Game({
     type: Phaser.AUTO,
     parent: 'game',
