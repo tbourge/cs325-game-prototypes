@@ -38,7 +38,7 @@ class MyScene extends Phaser.Scene {
 
         this.tank = this.add.sprite(32, 32, 'tank').setAngle(180);
 
-        this.start = new StartButton(this, 400, 300);
+        this.start = new StartButton(this, 400, 300, () => this.start());
 
         console.log("beanz");
     }
@@ -46,11 +46,15 @@ class MyScene extends Phaser.Scene {
     update() {
         
     }
+
+    start() {
+        console.log("start");
+    }
 }
 
 class Button extends Phaser.GameObjects.Sprite {
 
-    constructor(scene, x, y, sprite) {
+    constructor(scene, x, y, sprite, action) {
         super(scene, x, y);
 
         this.setTexture(sprite);
@@ -59,7 +63,10 @@ class Button extends Phaser.GameObjects.Sprite {
         this.on('pointerover', () => this.setTint(0xcccccc));
         this.on('pointerout', () => this.clearTint());
         this.on('pointerdown', () => this.setTint(0x333333));
-        this.on('pointerup', () => this.setTint(0xcccccc));
+        this.on('pointerup', () => {
+            this.setTint(0xcccccc);
+            action();
+        });
     }
 
     preUpdate(time, delta) {
@@ -68,16 +75,10 @@ class Button extends Phaser.GameObjects.Sprite {
 }
 
 class StartButton extends Button {
-    constructor(scene, x, y) {
-        super(scene, x, y, "startButton");
+    constructor(scene, x, y, action) {
+        super(scene, x, y, "startButton", action);
 
         scene.add.existing(this);
-
-        this.on('pointerup', () => this.action());
-    }
-
-    action() {
-        console.log("start");
     }
 
     preUpdate(time, delta) {
