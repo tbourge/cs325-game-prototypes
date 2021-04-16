@@ -122,6 +122,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     endAnim() {
+        console.log(this.anims.currentKey);
         if (this.anims.currentKey === "tankMove") {
             this.move();
         }
