@@ -103,12 +103,16 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
         scene.add.existing(this);
 
-        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.frame = 0); 
+        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.resetSprite()); 
 
         //test
         this.setInteractive();
         this.on('pointerout', () => this.play("tankFire"));
         this.on('pointerdown', () => this.turnRight());
+    }
+
+    resetSprite() {
+        frame = 0;
     }
 
     turnLeft() {
