@@ -25,8 +25,8 @@ class MyScene extends Phaser.Scene {
     
     preload() {
         this.load.image('space', 'assets/Square.png');
-        this.load.image('tank', 'assets/Tank.png');
         this.load.image("startButton", "assets/START.png");
+        this.load.spritesheet('tank', 'assets/Tank.png', { frameWidth: 50, frameHeight: 62 });
     }
     
     create() {
