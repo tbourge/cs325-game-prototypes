@@ -122,12 +122,12 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     fixOrigin() {
-        this.setDisplayOrigin()
+        this.setDisplayOrigin(this.x+tileSize, this.y);
     }
 
     endAnim() {
-        console.log(this.anims.getName());
-        if (this.anims.currentKey === "tankMove") {
+        console.log();
+        if (this.anims.getName() === "tankMove") {
             this.move();
         }
 
@@ -147,6 +147,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     startMove() {
+        this.fixOrigin();
         this.play("tankMove");
     }
 
