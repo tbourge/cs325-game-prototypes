@@ -11,13 +11,12 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
+var tileSize = 68, firstTile = tileSize / 2;
+
 class MyScene extends Phaser.Scene {
     
     constructor() {
         super();
-
-        this.tileSize = 68;
-        this.firstTile = this.tileSize / 2;
 
         this.board;
 
@@ -37,7 +36,7 @@ class MyScene extends Phaser.Scene {
 
         let c = this.board.getChildren();
 
-        Phaser.Actions.GridAlign(c, { width: 8, cellWidth: this.tileSize, cellHeight: this.tileSize, x: this.firstTile, y: this.firstTile });
+        Phaser.Actions.GridAlign(c, { width: 8, cellWidth: tileSize, cellHeight: tileSize, x: firstTile, y: firstTile });
 
         this.anims.create({
             key: 'tankFire',
@@ -46,7 +45,7 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
-        this.tank = new Tank(this, this.firstTile, this.firstTile);
+        this.tank = new Tank(this, firstTile, firstTile);
 
         this.start = new StartButton(this, 400, 300, () => this.startAction());
 
@@ -110,8 +109,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
         //test
         this.setInteractive();
-        this.on('pointerout', () => this.play("tankFire"));
-        this.on('pointerdown', () => this.turnRight());
+        this.on('pointerdown', () => this.move());
+        this.on('pointerout', () => this.turnRight());
     }
 
     resetSprite() {
@@ -124,6 +123,26 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
     turnRight() {
         this.dir++;
+    }
+
+    move() {
+        switch (this.dir) {
+            case 0:
+                this.y -= tileSize;
+                break;
+
+            case 1:
+                this.x += tileSize;
+                break;
+
+            case 2:
+                this.y += tileSize;
+                break;
+
+            case 3:
+                this.x -= tileSize;
+                break;
+        }
     }
 
     preUpdate(time, delta) {
