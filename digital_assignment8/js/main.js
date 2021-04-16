@@ -120,12 +120,12 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         //test
         this.setInteractive();
         this.on('pointerdown', () => this.startMove());
-       // this.on('pointerover', () => this.turnRight());
+        this.on('pointerover', () => this.turnRight());
     }
 
     fixOrigin() {
-        if (this.displayOriginY != 64) {
-            this.setDisplayOrigin(25, 64);
+        if (this.displayOriginY != 55) {
+            this.setDisplayOrigin(25, 55);
         }
         else {
             this.setDisplayOrigin(25, -tileSize);
