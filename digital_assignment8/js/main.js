@@ -125,7 +125,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
     fixOrigin() {
         if (this.displayOriginY != 55) {
-            this.setDisplayOrigin(25, 55);
+            //this.setDisplayOrigin(25, 55);
         }
         else {
             this.setDisplayOrigin(25, -tileSize);
