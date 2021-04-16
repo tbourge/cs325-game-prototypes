@@ -29,6 +29,7 @@ class MyScene extends Phaser.Scene {
         this.load.image('space', 'assets/Square.png');
         this.load.image("startButton", "assets/START.png");
         this.load.spritesheet('tank', 'assets/Tank.png', { frameWidth: 50, frameHeight: 62 });
+        this.load.spritesheet('tankForward', 'assets/TankMove.png', { frameWidth: 50, frameHeight: 62 + tileSize });
     }
     
     create() {
@@ -39,8 +40,15 @@ class MyScene extends Phaser.Scene {
         Phaser.Actions.GridAlign(c, { width: 8, cellWidth: tileSize, cellHeight: tileSize, x: firstTile, y: firstTile });
 
         this.anims.create({
-            key: 'tankFire',
+            key: 'shoot',
             frames: this.anims.generateFrameNumbers('tank', { frames: [0, 1] }),
+            frameRate: 4,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: 'tankMove',
+            frames: this.anims.generateFrameNumbers('tankForward', { frames: [0, 1, 2, 3] }),
             frameRate: 4,
             repeat: 0
         });
@@ -123,6 +131,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
     turnRight() {
         this.dir++;
+    }
+
+    startMove() {
+        this.play("tankMove");
+        this.move();
     }
 
     move() {
