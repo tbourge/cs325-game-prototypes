@@ -28,6 +28,8 @@ class MyScene extends Phaser.Scene {
     preload() {
         this.load.image('space', 'assets/Square.png');
         this.load.image("startButton", "assets/START.png");
+        this.load.image("robot", "assets/Rob.png");
+        this.load.spritesheet('robotAnims', 'assets/Robot.png', { frameWidth: 192, frameHeight: 64 });
         this.load.spritesheet('tank', 'assets/Tank.png', { frameWidth: 50, frameHeight: 62 });
         this.load.spritesheet('tankForward', 'assets/TankMove.png', { frameWidth: 50, frameHeight: 62 + tileSize });
     }
@@ -122,7 +124,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     fixOrigin() {
-        this.setDisplayOrigin(firstTile + this.x, this.y);
+        this.setDisplayOrigin(0, 0);
     }
 
     endAnim() {
