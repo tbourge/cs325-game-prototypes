@@ -213,6 +213,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.up.pause();
         this.down.pause();
         this.left.pause();
+
+        console.log("!");
     }
 
     move() {
