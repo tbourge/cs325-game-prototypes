@@ -132,7 +132,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             y: this.y,
             ease: 'Power1',
             paused: true,
-            onComplete: afterTween,
+            onComplete: this.afterTween,
             duration: 3000
         });
 
@@ -142,7 +142,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             y: this.y + tileSize,
             ease: 'Power1',
             paused: true,
-            onComplete: afterTween,
+            onComplete: this.afterTween,
             duration: 3000
         });
 
@@ -152,7 +152,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             y: this.y + tileSize,
             ease: 'Power1',
             paused: true,
-            onComplete: afterTween,
+            onComplete: this.afterTween,
             duration: 3000
         });
 
@@ -162,7 +162,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             y: this.y,
             ease: 'Power1',
             paused: true,
-            onComplete: afterTween,
+            onComplete: this.afterTween,
             duration: 3000
         });
     }
