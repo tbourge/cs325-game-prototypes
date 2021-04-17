@@ -133,6 +133,7 @@ class StartButton extends Button {
 
 class Robot extends Phaser.Physics.Arcade.Sprite {
     dir;
+    anim;
     slide;
     fakex;
     fakey;
@@ -141,6 +142,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, "robot");
 
         this.dir = 0;
+        this.anim = -1;
 
         scene.add.existing(this);
 
@@ -176,18 +178,20 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     endAnim() {
-        switch (this.anims.name) {
-            case "rocketOut":
+        switch (this.anim) {
+            case 0:
                 this.rocketAway();
                 break;
 
-            case "hookOut":
+            case 1:
                 this.hookAway();
                 break;
 
             default:
                 this.setTexture("robot");
         }
+
+        this.anim = -1;
     }
 
     turnLeft() {
@@ -227,6 +231,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     rocketShoot() {
+        this.anim = 0;
         this.play("rocketOut");
     }
 
@@ -235,6 +240,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     hookShoot() {
+        this.anim = 1;
         this.play("hookOut");
     }
 
