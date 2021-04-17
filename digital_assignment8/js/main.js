@@ -11,7 +11,7 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
-var tileSize = 68, firstTile = tileSize / 2;
+var offset = 20, tileSize = 68, firstTile = tileSize / 2 + offset;
 
 class MyScene extends Phaser.Scene {
     
