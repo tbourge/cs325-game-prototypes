@@ -241,6 +241,9 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         else if (this.dir < 0) {
             this.dir = 3;
         }
+
+        this.right.updateTo('x', this.fakex, true);
+        this.right.updateTo('y', this.fakey, true);
     }
 }
 
