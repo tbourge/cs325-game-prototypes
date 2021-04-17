@@ -20,6 +20,7 @@ class MyScene extends Phaser.Scene {
 
         this.board;
 
+        this.robot;
         this.tank;
 
         this.start;
@@ -47,7 +48,36 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
-        this.tank = new Tank(this, firstTile, firstTile);
+        this.anims.create({
+            key: 'rocketOut',
+            frames: this.anims.generateFrameNumbers('robotAnims', { frames: [0, 8, 9, 10, 11, 12, 13, 14] }),
+            frameRate: 8,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: 'rocketIn',
+            frames: this.anims.generateFrameNumbers('robotAnims', { frames: [15, 16, 0] }),
+            frameRate: 8,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: 'hookOut',
+            frames: this.anims.generateFrameNumbers('robotAnims', { frames: [0, 7, 6, 5, 4, 3, 2] }),
+            frameRate: 8,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: 'hookIn',
+            frames: this.anims.generateFrameNumbers('robotAnims', { frames: [2, 3, 4, 5, 6, 7, 0] }),
+            frameRate: 8,
+            repeat: 0
+        });
+
+        this.tank = new Tank(this, this.getTile(0), this.getTile(0));
+        this.robot = new Robot(this, this.getTile(0), this.getTile(7))
 
         this.start = new StartButton(this, 400, 300, () => this.startAction());
 
@@ -56,6 +86,10 @@ class MyScene extends Phaser.Scene {
     
     update() {
         
+    }
+
+    getTile(num) {
+        return firstTile + tileSize * num;
     }
 
     startAction() {
@@ -94,6 +128,127 @@ class StartButton extends Button {
 
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
+    }
+}
+
+class Robot extends Phaser.Physics.Arcade.Sprite {
+    dir;
+    slide;
+    fakex;
+    fakey;
+
+    constructor(scene, x, y) {
+        super(scene, x, y, "robot");
+
+        this.dir = 0;
+
+        scene.add.existing(this);
+
+        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
+
+        //test
+        this.setInteractive();
+        this.on('pointerdown', () => this.move());
+        this.on('pointerover', () => this.turnRight());
+
+        this.fakex = x;
+        this.fakey = y;
+
+        this.slide = scene.tweens.add({
+            targets: this,
+            x: this.fakex,
+            y: this.fakey,
+            ease: 'Power1',
+            paused: true,
+            onComplete: this.afterTween,
+            callbackScope: this,
+            duration: 2000
+        });
+    }
+
+    endAnim() {
+        switch (this.anims.getCurrentKey()) {
+            case "rocketOut":
+                this.rocketAway();
+                break;
+
+            case "hookOut":
+                this.hookAway();
+                break;
+
+            default:
+                this.setTexture("robot");
+        }
+    }
+
+    turnLeft() {
+        this.dir--;
+    }
+
+    turnRight() {
+        this.dir++;
+    }
+
+    afterTween() {
+
+    }
+
+    move() {
+        if (!this.slide.isPlaying()) {
+            switch (this.dir) {
+                case 0:
+                    this.fakey -= tileSize;
+                    break;
+
+                case 1:
+                    this.fakex += tileSize;
+                    break;
+
+                case 2:
+                    this.fakey += tileSize;
+                    break;
+
+                case 3:
+                    this.fakex -= tileSize;
+                    break;
+            }
+
+            this.slide.play();
+        }
+    }
+
+    rocketShoot() {
+        this.play("rocketOut");
+    }
+
+    rocketAway() {
+        this.play("rocketIn");
+    }
+
+    hookShoot() {
+        this.play("hookOut");
+    }
+
+    hookAway() {
+        this.play("hookIn");
+    }
+
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
+
+        this.setAngle(this.dir * 90);
+
+        if (this.dir > 3) {
+            this.dir = 0;
+        }
+        else if (this.dir < 0) {
+            this.dir = 3;
+        }
+
+        if (this.slide.isPlaying()) {
+            this.slide.updateTo('x', this.fakex, true);
+            this.slide.updateTo('y', this.fakey, true);
+        }
     }
 }
 
