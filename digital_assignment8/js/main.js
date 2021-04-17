@@ -148,7 +148,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
 
         //test
         this.setInteractive();
-        this.on('pointerdown', () => this.attack(dir));
+        this.on('pointerdown', () => this.attack(this.dir));
         this.on('pointerover', () => this.turnRight());
 
         this.fakex = x;
