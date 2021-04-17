@@ -176,7 +176,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     endAnim() {
-        switch (this.name) {
+        switch (this.anims.name) {
             case "rocketOut":
                 this.rocketAway();
                 break;
