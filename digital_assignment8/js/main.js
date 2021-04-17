@@ -108,6 +108,9 @@ class StartButton extends Button {
 class Tank extends Phaser.Physics.Arcade.Sprite {
     dir;
     right;
+    up;
+    down;
+    left;
 
     constructor(scene, x, y) {
         super(scene, x, y, "tank");
@@ -129,35 +132,39 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             y: this.y,
             ease: 'Power1',
             paused: true,
-            onComplete: () => { this.x += tileSize },
+            onComplete: afterTween,
             duration: 3000
         });
-    }
 
-    fixOrigin() {
-        if (this.displayOriginY > 50 || this.displayOriginY === 31) {
-            this.setDisplayOrigin(25, firstTile);
-        }
-        else {
-            this.setDisplayOrigin(25, 55);
-        }
-        console.log(this.displayOriginX + "," + this.displayOriginY);
+        this.up = scene.tweens.add({
+            targets: this,
+            x: this.x,
+            y: this.y + tileSize,
+            ease: 'Power1',
+            paused: true,
+            onComplete: afterTween,
+            duration: 3000
+        });
 
-    }
+        this.down = scene.tweens.add({
+            targets: this,
+            x: this.x,
+            y: this.y + tileSize,
+            ease: 'Power1',
+            paused: true,
+            onComplete: afterTween,
+            duration: 3000
+        });
 
-    endAnim() {
-        if (this.anims.getName() === "tankMove") {
-            this.move();
-            this.fixOrigin();
-            this.resetSprite();
-            console.log("coords" + this.x + "," + this.y);
-        }
-
-        this.resetSprite();
-    }
-
-    resetSprite() {
-        this.setTexture("tank");
+        this.left = scene.tweens.add({
+            targets: this,
+            x: this.x - tileSize,
+            y: this.y,
+            ease: 'Power1',
+            paused: true,
+            onComplete: afterTween,
+            duration: 3000
+        });
     }
 
     turnLeft() {
@@ -168,15 +175,40 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.dir++;
     }
 
-    startMove() {
-        this.fixOrigin();
-        this.play("tankMove");
+    afterTween() {
+        switch (this.dir) {
+            case 0:
+                this.y -= tileSize;
+                break;
+
+            case 1:
+                this.x += tileSize;
+                break;
+
+            case 2:
+                this.y += tileSize;
+                break;
+
+            case 3:
+                this.x -= tileSize;
+                break;
+        }
+
+        this.right.x = this.x + tileSize;
+        this.up.x = this.x;
+        this.down.x = this.x;
+        this.left.x = this.x - tileSize;
+
+        this.right.y = this.y;
+        this.up.y = this.y - tileSize;
+        this.down.y = this.y + tileSize;
+        this.left.y = this.y;
     }
 
     move() {
         switch (this.dir) {
             case 0:
-                
+                this.up.resume();
                 break;
 
             case 1:
@@ -184,11 +216,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
                 break;
 
             case 2:
-
+                this.down.resume();
                 break;
 
             case 3:
-
+                this.left.resume();
                 break;
         }
     }
