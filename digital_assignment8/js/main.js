@@ -184,7 +184,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         }
 
         scene.tweens.add({
-            targets: image,
+            targets: this,
             x: movementx,
             y: movementy,
             ease: 'Power1',
