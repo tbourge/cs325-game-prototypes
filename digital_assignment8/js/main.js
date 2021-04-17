@@ -19,6 +19,7 @@ class MyScene extends Phaser.Scene {
         super();
 
         this.board;
+        this.rockets;
 
         this.robot;
         this.tank;
@@ -36,6 +37,7 @@ class MyScene extends Phaser.Scene {
         this.load.image('bullet', 'assets/Bullet.png', { frameWidth: 24, frameHeight: 24 });
         this.load.image('hook', 'assets/Hook.png', { frameWidth: 64, frameHeight: 64 });
         this.load.image('rope', 'assets/TinyRope.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.spritesheet('explosion', 'assets/Explosion.png', { frameWidth: 256, frameHeight: 256 });
     }
     
     create() {
@@ -44,6 +46,8 @@ class MyScene extends Phaser.Scene {
         let c = this.board.getChildren();
 
         Phaser.Actions.GridAlign(c, { width: 8, cellWidth: tileSize, cellHeight: tileSize, x: firstTile, y: firstTile });
+
+        this.rockets = this.physics.add.group({ key: 'rocket', classType: Rocket });
 
         this.anims.create({
             key: 'shoot',
@@ -80,8 +84,22 @@ class MyScene extends Phaser.Scene {
             repeat: 0
         });
 
+        this.anims.create({
+            key: 'explode',
+            frames: this.anims.generateFrameNumbers('explosion', { frames: [0, 1, 2, 3, 4] }),
+            frameRate: 8,
+            repeat: 0
+        });
+
+        this.anims.create({
+            key: 'fly',
+            frames: this.anims.generateFrameNumbers('rocket', { frames: [0, 1, 2, 3] }),
+            frameRate: 8,
+            repeat: -1
+        });
+
         this.tank = new Tank(this, this.getTile(0), this.getTile(0));
-        this.robot = new Robot(this, this.getTile(0), this.getTile(7))
+        this.robot = new Robot(this, this.getTile(0), this.getTile(7), this.rockets, null);
 
         this.start = new StartButton(this, 400, 300, () => this.startAction());
 
@@ -140,17 +158,15 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     slide;
     fakex;
     fakey;
+    robot;
 
-    constructor(scene, x, y, dir) {
+    constructor(scene, x, y) {
         super(scene, x, y, "rocket");
-
-        this.dir = dir;
-
-        scene.add.existing(this);
-        scene.physics.add.existing(this);
 
         this.fakex = x;
         this.fakey = y;
+
+        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
 
         this.slide = scene.tweens.add({
             targets: this,
@@ -159,7 +175,8 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
             ease: 'Power0',
             onComplete: this.renew,
             callbackScope: this,
-            duration: 2000
+            duration: 2000,
+            paused: true
         });
 
         switch (this.dir) {
@@ -184,8 +201,50 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    explode() {
+    make(scene, dir, robot) {
+        this.dir = dir;
+        this.robot = robot;
+
+        switch (dir) {
+            case 0:
+                this.x = robot.x + tileSize;
+                this.y = robot.y;
+                break;
+
+            case 1:
+                this.x = robot.x;
+                this.y = robot.y - tileSize;
+                break;
+
+            case 2:
+                this.x = robot.x - tileSize;
+                this.y = robot.y;
+                break;
+
+            case 3:
+                this.x = robot.x;
+                this.y = robot.y + tileSize;
+                break;
+
+            default:
+                this.explode();
+        }
+
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+
+        this.play("fly");
+
+        this.slide.play();
+    }
+
+    endAnim() {
+        this.robot.weaponGone();
         this.destroy();
+    }
+
+    explode() {
+        this.play('explode');
     }
 
     renew() {
@@ -203,7 +262,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 650) {
-            this.destroy();
+            this.explode();
         }
     }
 }
@@ -214,12 +273,20 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     slide;
     fakex;
     fakey;
+    attackDone;
+    rockets;
+    hooks;
+    scene;
 
-    constructor(scene, x, y) {
+    constructor(scene, x, y, rockets, hooks) {
         super(scene, x, y, "robot");
 
         this.dir = 0;
         this.anim = -1;
+        this.rockets = rockets;
+        this.hooks = hooks;
+        this.attackDone = true;
+        this.scene = scene;
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -247,6 +314,8 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     attack(dir) {
+        this.attackDone = false;
+
         if (dir < 2) {
             this.rocketShoot();
         }
@@ -255,7 +324,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
-    endAnim() {
+    weaponGone() {
         switch (this.anim) {
             case 0:
                 this.rocketAway();
@@ -264,12 +333,26 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
             case 1:
                 this.hookAway();
                 break;
+        }
+
+        this.anim = 2;
+    }
+
+    endAnim() {
+        switch (this.anim) {
+            case 0:
+                this.rocketSpawn();
+                break;
+
+            case 1:
+                this.hookSpawn();
+                break;
 
             default:
                 this.setTexture("robot");
+                this.anim = -1;
+                this.attackDone = true;
         }
-
-        this.anim = -1;
     }
 
     turnLeft() {
@@ -313,6 +396,10 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         this.play("rocketOut");
     }
 
+    rocketSpawn() {
+        this.rockets.getFirst().make(scene, this.dir, this);
+    }
+
     rocketAway() {
         this.play("rocketIn");
     }
@@ -320,6 +407,10 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     hookShoot() {
         this.anim = 1;
         this.play("hookOut");
+    }
+
+    hookSpawn() {
+
     }
 
     hookAway() {
