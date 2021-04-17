@@ -157,25 +157,27 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     move() {
-        switch (this.dir) {
-            case 0:
-                this.fakey -= tileSize;
-                break;
+        if (this.slide.isPaused()) {
+            switch (this.dir) {
+                case 0:
+                    this.fakey -= tileSize;
+                    break;
 
-            case 1:
-                this.fakex += tileSize;
-                break;
+                case 1:
+                    this.fakex += tileSize;
+                    break;
 
-            case 2:
-                this.fakey += tileSize;
-                break;
+                case 2:
+                    this.fakey += tileSize;
+                    break;
 
-            case 3:
-                this.fakex -= tileSize;
-                break;
+                case 3:
+                    this.fakex -= tileSize;
+                    break;
+            }
+
+            this.slide.play();
         }
-
-        this.slide.play();
     }
 
     preUpdate(time, delta) {
