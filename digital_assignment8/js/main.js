@@ -111,6 +111,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     up;
     down;
     left;
+    fakex;
+    fakey;
 
     constructor(scene, x, y) {
         super(scene, x, y, "tank");
@@ -125,6 +127,9 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.setInteractive();
         this.on('pointerdown', () => this.move());
         this.on('pointerover', () => this.turnRight());
+
+        this.fakex = x;
+        this.fakey = y;
 
         this.right = scene.tweens.add({
             targets: this,
@@ -178,31 +183,31 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     afterTween() {
         switch (this.dir) {
             case 0:
-                this.y -= tileSize;
+                this.fakey -= tileSize;
                 break;
 
             case 1:
-                this.x += tileSize;
+                this.fakex += tileSize;
                 break;
 
             case 2:
-                this.y += tileSize;
+                this.fakey += tileSize;
                 break;
 
             case 3:
-                this.x -= tileSize;
+                this.fakex -= tileSize;
                 break;
         }
 
-        this.right.updateTo('x', this.x + tileSize, true);
-        this.up.updateTo('x', this.x, true);
-        this.down.updateTo('x', this.x, true);
-        this.left.updateTo('x', this.x - tileSize, true);
+        this.right.updateTo('x', this.fakex + tileSize, true);
+        this.up.updateTo('x', this.fakex, true);
+        this.down.updateTo('x', this.fakex, true);
+        this.left.updateTo('x', this.fakex - tileSize, true);
 
-        this.right.updateTo('y', this.y, true);
-        this.up.updateTo('y', this.y - tileSize, true);
-        this.down.updateTo('y', this.y + tileSize, true);
-        this.left.updateTo('y', this.y, true);
+        this.right.updateTo('y', this.fakey, true);
+        this.up.updateTo('y', this.fakey - tileSize, true);
+        this.down.updateTo('y', this.fakey + tileSize, true);
+        this.left.updateTo('y', this.fakey, true);
 
         //this.right.restart();
         //this.up.restart();
@@ -214,7 +219,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         //this.down.pause();
         //this.left.pause();
 
-        console.log(this.x + ","+this.y);
+        console.log(this.x + "," + this.y);
+        console.log("fake" + this.fakex + "," + this.fakey);
     }
 
     move() {
