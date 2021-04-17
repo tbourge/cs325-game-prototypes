@@ -169,7 +169,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     attack(dir) {
-        if (dir > 1) {
+        if (dir < 2) {
             this.rocketShoot();
         }
         else {
