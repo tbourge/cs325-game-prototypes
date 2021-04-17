@@ -204,6 +204,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.down.updateTo('y', this.y + tileSize, true);
         this.left.updateTo('y', this.y, true);
 
+        this.right.pause();
+        this.up.pause();
+        this.down.pause();
+        this.left.pause();
+
         this.right.restart();
         this.up.restart();
         this.down.restart();
