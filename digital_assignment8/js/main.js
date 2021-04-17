@@ -107,6 +107,7 @@ class StartButton extends Button {
 
 class Tank extends Phaser.Physics.Arcade.Sprite {
     dir;
+    right;
 
     constructor(scene, x, y) {
         super(scene, x, y, "tank");
@@ -122,11 +123,12 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.on('pointerdown', () => this.move());
         this.on('pointerover', () => this.turnRight());
 
-        scene.tweens.add({
+        this.right = scene.tweens.add({
             targets: this,
             x: tileSize,
             y: 0,
             ease: 'Power1',
+            paused: true,
             duration: 3000
         });
     }
@@ -173,11 +175,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     move() {
         switch (this.dir) {
             case 0:
-                movementy = -tileSize;
+                
                 break;
 
             case 1:
-                movementx = tileSize;
+                this.right.resume();
                 break;
 
             case 2:
