@@ -157,7 +157,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     move() {
-        if (this.slide.isPaused()) {
+        if (!this.slide.isPlaying()) {
             switch (this.dir) {
                 case 0:
                     this.fakey -= tileSize;
