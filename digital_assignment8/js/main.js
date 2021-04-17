@@ -32,6 +32,10 @@ class MyScene extends Phaser.Scene {
         this.load.image("robot", "assets/Rob.png");
         this.load.spritesheet('robotAnims', 'assets/Robot.png', { frameWidth: 192, frameHeight: 64 });
         this.load.spritesheet('tank', 'assets/Tank.png', { frameWidth: 50, frameHeight: 62 });
+        this.load.spritesheet('rocket', 'assets/Rocket.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.image('bullet', 'assets/Bullet.png', { frameWidth: 24, frameHeight: 24 });
+        this.load.image('hook', 'assets/Hook.png', { frameWidth: 64, frameHeight: 64 });
+        this.load.image('rope', 'assets/TinyRope.png', { frameWidth: 64, frameHeight: 64 });
     }
     
     create() {
@@ -131,6 +135,79 @@ class StartButton extends Button {
     }
 }
 
+class Rocket extends Phaser.Physics.Arcade.Sprite {
+    dir;
+    slide;
+    fakex;
+    fakey;
+
+    constructor(scene, x, y, dir) {
+        super(scene, x, y, "rocket");
+
+        this.dir = dir;
+
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+
+        this.fakex = x;
+        this.fakey = y;
+
+        this.slide = scene.tweens.add({
+            targets: this,
+            x: this.fakex,
+            y: this.fakey,
+            ease: 'Power0',
+            onComplete: this.renew,
+            callbackScope: this,
+            duration: 2000
+        });
+
+        switch (this.dir) {
+            case 0:
+                this.fakey -= tileSize;
+                break;
+
+            case 1:
+                this.fakex += tileSize;
+                break;
+
+            case 2:
+                this.fakey += tileSize;
+                break;
+
+            case 3:
+                this.fakex -= tileSize;
+                break;
+
+            default:
+                this.explode();
+        }
+    }
+
+    explode() {
+        this.destroy();
+    }
+
+    renew() {
+        this.slide().play();
+    }
+
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
+
+        this.setAngle(this.dir * 90);
+
+        if (this.slide.isPlaying()) {
+            this.slide.updateTo('x', this.fakex, true);
+            this.slide.updateTo('y', this.fakey, true);
+        }
+
+        if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 650) {
+            this.destroy();
+        }
+    }
+}
+
 class Robot extends Phaser.Physics.Arcade.Sprite {
     dir;
     anim;
@@ -145,6 +222,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         this.anim = -1;
 
         scene.add.existing(this);
+        scene.physics.add.existing(this);
 
         this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
 
@@ -279,8 +357,9 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.dir = 1;
 
         scene.add.existing(this);
+        scene.physics.add.existing(this);
 
-        //this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
+        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
 
         //test
         this.setInteractive();
