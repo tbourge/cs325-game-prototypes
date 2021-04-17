@@ -130,8 +130,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
         this.slide = scene.tweens.add({
             targets: this,
-            x: this.x,
-            y: this.y,
+            x: this.fakex,
+            y: this.fakey,
             ease: 'Power1',
             paused: true,
             onComplete: this.afterTween.bind(this),
