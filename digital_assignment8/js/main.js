@@ -134,7 +134,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             y: this.fakey,
             ease: 'Power1',
             paused: true,
-            onComplete: this.afterTween.bind(this),
+            onStart: this.afterTween.bind(this),
             duration: 3000
         });
     }
@@ -148,7 +148,10 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     afterTween() {
-        console.log(this.x + "," + this.y);
+        this.slide.updateTo('x', this.fakex, true);
+        this.slide.updateTo('y', this.fakey, true);
+
+        console.log(this.slide.x + "," + this.slide.y);
         console.log("fake" + this.fakex + "," + this.fakey);
     }
 
