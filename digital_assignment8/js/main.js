@@ -107,10 +107,7 @@ class StartButton extends Button {
 
 class Tank extends Phaser.Physics.Arcade.Sprite {
     dir;
-    right;
-    up;
-    down;
-    left;
+    slide;
     fakex;
     fakey;
 
@@ -131,39 +128,9 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.fakex = x;
         this.fakey = y;
 
-        this.right = scene.tweens.add({
+        this.slide = scene.tweens.add({
             targets: this,
             x: this.x,
-            y: this.y,
-            ease: 'Power1',
-            paused: true,
-            onComplete: this.afterTween.bind(this),
-            duration: 3000
-        });
-
-        this.up = scene.tweens.add({
-            targets: this,
-            x: this.x,
-            y: this.y + tileSize,
-            ease: 'Power1',
-            paused: true,
-            onComplete: this.afterTween.bind(this),
-            duration: 3000
-        });
-
-        this.down = scene.tweens.add({
-            targets: this,
-            x: this.x,
-            y: this.y + tileSize,
-            ease: 'Power1',
-            paused: true,
-            onComplete: this.afterTween.bind(this),
-            duration: 3000
-        });
-
-        this.left = scene.tweens.add({
-            targets: this,
-            x: this.x - tileSize,
             y: this.y,
             ease: 'Power1',
             paused: true,
@@ -181,32 +148,14 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     afterTween() {
-
-        this.right.updateTo('x', this.fakex, true);
-        this.up.updateTo('x', this.fakex, true);
-        this.down.updateTo('x', this.fakex, true);
-        this.left.updateTo('x', this.fakex, true);
-
-        this.right.updateTo('y', this.fakey, true);
-        this.up.updateTo('y', this.fakey, true);
-        this.down.updateTo('y', this.fakey, true);
-        this.left.updateTo('y', this.fakey, true);
-
-        //this.right.restart();
-        //this.up.restart();
-        //this.down.restart();
-        //this.left.restart();
-
-        //this.right.pause();
-        //this.up.pause();
-        //this.down.pause();
-        //this.left.pause();
-
         console.log(this.x + "," + this.y);
         console.log("fake" + this.fakex + "," + this.fakey);
     }
 
     move() {
+        console.log(this.x + "," + this.y);
+        console.log("fake" + this.fakex + "," + this.fakey);
+
         switch (this.dir) {
             case 0:
                 this.fakey -= tileSize;
@@ -225,10 +174,10 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
                 break;
         }
 
-        this.right.updateTo('x', this.fakex, true);
-        this.right.updateTo('y', this.fakey, true);
+        this.slide.updateTo('x', this.fakex, true);
+        this.slide.updateTo('y', this.fakey, true);
 
-        this.right.resume();
+        this.slide.resume();
     }
 
     preUpdate(time, delta) {
