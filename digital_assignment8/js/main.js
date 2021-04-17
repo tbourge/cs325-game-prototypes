@@ -203,7 +203,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     move() {
-        if (!this.slide.isPlaying() && !this.isPlaying()) {
+        if (!this.slide.isPlaying() && !this.anims.isPlaying) {
             switch (this.dir) {
                 case 0:
                     this.fakey -= tileSize;
