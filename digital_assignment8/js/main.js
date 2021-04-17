@@ -153,9 +153,6 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     move() {
-        console.log(this.x + "," + this.y);
-        console.log("fake" + this.fakex + "," + this.fakey);
-
         switch (this.dir) {
             case 0:
                 this.fakey -= tileSize;
@@ -176,6 +173,9 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
         this.slide.updateTo('x', this.fakex, true);
         this.slide.updateTo('y', this.fakey, true);
+
+        console.log(this.slide.x + "," + this.slide.y);
+        console.log("fake" + this.fakex + "," + this.fakey);
 
         this.slide.play();
     }
