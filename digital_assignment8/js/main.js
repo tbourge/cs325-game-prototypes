@@ -175,7 +175,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
                 break;
         }
 
-        this.slide.resume();
+        this.slide.play();
     }
 
     preUpdate(time, delta) {
