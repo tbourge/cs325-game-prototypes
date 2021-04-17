@@ -115,11 +115,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
         scene.add.existing(this);
 
-        this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
+        //this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
 
         //test
         this.setInteractive();
-        this.on('pointerdown', () => this.startMove());
+        this.on('pointerdown', () => this.move());
         this.on('pointerover', () => this.turnRight());
     }
 
@@ -163,23 +163,33 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     move() {
+        let movementx = 0, movementy = 0;
+
         switch (this.dir) {
             case 0:
-                this.y -= tileSize;
+                movementy = -tileSize;
                 break;
 
             case 1:
-                this.x += tileSize;
+                movementx = tileSize;
                 break;
 
             case 2:
-                this.y += tileSize;
+                movementy = tileSize;
                 break;
 
             case 3:
-                this.x -= tileSize;
+                movementx = -tileSize;
                 break;
         }
+
+        this.tweens.add({
+            targets: image,
+            x: movementx,
+            y: movementy,
+            ease: 'Power1',
+            duration: 3000
+        });
     }
 
     preUpdate(time, delta) {
