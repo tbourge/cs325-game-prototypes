@@ -128,7 +128,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             paused: true,
             onComplete: this.afterTween,
             callbackScope: this,
-            duration: 4000
+            duration: 1000
         });
     }
 
