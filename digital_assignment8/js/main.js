@@ -148,7 +148,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
 
         //test
         this.setInteractive();
-        this.on('pointerdown', () => this.move());
+        this.on('pointerdown', () => this.attack(dir));
         this.on('pointerover', () => this.turnRight());
 
         this.fakex = x;
@@ -164,6 +164,15 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
             callbackScope: this,
             duration: 2000
         });
+    }
+
+    attack(dir) {
+        if (dir > 1) {
+            this.rocketShoot();
+        }
+        else {
+            this.hookShoot();
+        }
     }
 
     endAnim() {
@@ -194,7 +203,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     move() {
-        if (!this.slide.isPlaying()) {
+        if (!this.slide.isPlaying() && !this.isPlaying()) {
             switch (this.dir) {
                 case 0:
                     this.fakey -= tileSize;
