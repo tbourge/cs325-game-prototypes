@@ -214,19 +214,19 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     move() {
         switch (this.dir) {
             case 0:
-                this.up.restart();
+                this.up.resume();
                 break;
 
             case 1:
-                this.right.restart();
+                this.right.resume();
                 break;
 
             case 2:
-                this.down.restart();
+                this.down.resume();
                 break;
 
             case 3:
-                this.left.restart();
+                this.left.resume();
                 break;
         }
     }
