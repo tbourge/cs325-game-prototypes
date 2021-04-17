@@ -31,7 +31,6 @@ class MyScene extends Phaser.Scene {
         this.load.image("robot", "assets/Rob.png");
         this.load.spritesheet('robotAnims', 'assets/Robot.png', { frameWidth: 192, frameHeight: 64 });
         this.load.spritesheet('tank', 'assets/Tank.png', { frameWidth: 50, frameHeight: 62 });
-        this.load.spritesheet('tankForward', 'assets/TankMove.png', { frameWidth: 50, frameHeight: 2 * tileSize });
     }
     
     create() {
@@ -44,13 +43,6 @@ class MyScene extends Phaser.Scene {
         this.anims.create({
             key: 'shoot',
             frames: this.anims.generateFrameNumbers('tank', { frames: [0, 1] }),
-            frameRate: 4,
-            repeat: 0
-        });
-
-        this.anims.create({
-            key: 'tankMove',
-            frames: this.anims.generateFrameNumbers('tankForward', { frames: [0, 1, 2, 3] }),
             frameRate: 4,
             repeat: 0
         });
