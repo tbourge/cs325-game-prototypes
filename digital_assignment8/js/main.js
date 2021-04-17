@@ -142,7 +142,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             y: this.y + tileSize,
             ease: 'Power1',
             paused: true,
-            onComplete: this.afterTween,
+            onComplete: this.afterTween.bind(this),
             duration: 3000
         });
 
@@ -152,7 +152,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             y: this.y + tileSize,
             ease: 'Power1',
             paused: true,
-            onComplete: this.afterTween,
+            onComplete: this.afterTween.bind(this),
             duration: 3000
         });
 
@@ -162,7 +162,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             y: this.y,
             ease: 'Power1',
             paused: true,
-            onComplete: this.afterTween,
+            onComplete: this.afterTween.bind(this),
             duration: 3000
         });
     }
@@ -194,15 +194,15 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
                 break;
         }
 
-        this.right.updateTo('x', this.x + tileSize);
-        this.up.updateTo('x', this.x);
-        this.down.updateTo('x', this.x);
-        this.left.updateTo('x', this.x - tileSize);
+        this.right.updateTo('x', this.x + tileSize, true);
+        this.up.updateTo('x', this.x, true);
+        this.down.updateTo('x', this.x, true);
+        this.left.updateTo('x', this.x - tileSize, true);
 
-        this.right.updateTo('y', this.y);
-        this.up.updateTo('y', this.y - tileSize);
-        this.down.updateTo('y', this.y + tileSize);
-        this.left.updateTo('y', this.y);
+        this.right.updateTo('y', this.y, true);
+        this.up.updateTo('y', this.y - tileSize, true);
+        this.down.updateTo('y', this.y + tileSize, true);
+        this.left.updateTo('y', this.y, true);
     }
 
     move() {
