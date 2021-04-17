@@ -125,10 +125,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
         this.right = scene.tweens.add({
             targets: this,
-            x: tileSize,
-            y: 0,
+            x: this.x + tileSize,
+            y: this.y,
             ease: 'Power1',
             paused: true,
+            onComplete: this.x += tileSize,
             duration: 3000
         });
     }
@@ -183,11 +184,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
                 break;
 
             case 2:
-                movementy = tileSize;
+
                 break;
 
             case 3:
-                movementx = -tileSize;
+
                 break;
         }
     }
