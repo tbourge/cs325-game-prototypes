@@ -178,6 +178,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.slide.updateTo('y', this.fakey, true);
 
         this.slide.resume();
+        this.slide.resume();
     }
 
     preUpdate(time, delta) {
