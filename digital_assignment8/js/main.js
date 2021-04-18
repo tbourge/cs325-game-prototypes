@@ -207,6 +207,9 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     }
 
     make(scene, dir, robot) {
+        this.setVisible(true);
+        this.setActive(true);
+
         this.dir = dir;
         this.robot = robot;
 
