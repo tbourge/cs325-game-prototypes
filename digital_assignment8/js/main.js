@@ -58,6 +58,12 @@ class MyScene extends Phaser.Scene {
             r.body.enable = false;
         });
 
+        this.tanks.getChildren().forEach(function (t) {
+            t.setVisible(false);
+            t.setActive(false);
+            t.body.enable = false;
+        });
+
         this.physics.add.collider(this.rockets, this.tanks, function (r, t) {
             r.explode();
 
@@ -238,6 +244,10 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         super.preUpdate(time, delta);
 
         let speed = 2;
+
+        if (this.hasExploded) {
+            speed = 0;
+        }
 
         switch (this.dir) {
             case 0:
