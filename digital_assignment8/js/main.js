@@ -260,6 +260,11 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
         this.setAngle(this.dir * 90);
 
+        if (this.slide.isPlaying()) {
+            this.slide.updateTo('x', this.fakex, true);
+            this.slide.updateTo('y', this.fakey, true);
+        }
+
         if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 650) {
             this.explode();
         }
