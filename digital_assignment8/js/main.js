@@ -22,6 +22,8 @@ class MyScene extends Phaser.Scene {
         this.rockets;
 
         this.robot;
+        this.tanks;
+
         this.tank;
 
         this.start;
@@ -48,6 +50,15 @@ class MyScene extends Phaser.Scene {
         Phaser.Actions.GridAlign(c, { width: 8, cellWidth: tileSize, cellHeight: tileSize, x: firstTile, y: firstTile });
 
         this.rockets = this.physics.add.group({ key: 'rocket', classType: Rocket });
+        this.tanks = this.physics.add.group({ key: 'tank', classType: Tank });
+
+        this.physics.add.collider(this.rockets, this.tanks, function (r, t) {
+            r.explode();
+
+            t.destroy();
+
+            this.robot.score++;
+        }.bind(this));
 
         this.rockets.getChildren().forEach(function (r) {
             r.setVisible(false);
@@ -103,8 +114,8 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        this.tank = new Tank(this, this.getTile(0), this.getTile(0));
-        this.robot = new Robot(this, this.getTile(0), this.getTile(7), this.rockets, null);
+        this.tank = this.tanks.get(this.getTile(0), this.getTile(0));
+        this.robot = new Robot(this, this.getTile(1), this.getTile(7), this.rockets, null);
 
         this.start = new StartButton(this, 400, 300, () => this.startAction());
 
@@ -161,6 +172,8 @@ class StartButton extends Button {
 class Rocket extends Phaser.Physics.Arcade.Sprite {
     dir;
     robot;
+    hasExploded;
+    damage = 2;
 
     constructor(scene, x, y) {
         super(scene, x, y, "rocket");
@@ -176,6 +189,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
         this.dir = dir;
         this.robot = robot;
+        this.hasExploded = false;
 
         this.setAngle(this.dir * 90);
 
@@ -213,7 +227,9 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     }
 
     explode() {
-        this.play('explode');
+        if (!this.hasExploded) {
+            this.play('explode');
+        }
     }
 
     preUpdate(time, delta) {
@@ -258,6 +274,8 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     rockets;
     hooks;
     scene;
+    health;
+    score;
 
     constructor(scene, x, y, rockets, hooks) {
         super(scene, x, y, "robot");
@@ -268,6 +286,8 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         this.hooks = hooks;
         this.attackDone = true;
         this.scene = scene;
+        this.health = 10;
+        this.score = 0;
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -422,11 +442,13 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     slide;
     fakex;
     fakey;
+    health;
 
     constructor(scene, x, y) {
         super(scene, x, y, "tank");
 
         this.dir = 1;
+        this.health = 4;
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
