@@ -63,7 +63,7 @@ class MyScene extends Phaser.Scene {
         this.rockets.getChildren().forEach(function (r) {
             r.setVisible(false);
             r.setActive(false);
-            r.enableBody(false);
+          //  r.enableBody(false);
         });
 
         this.anims.create({
@@ -178,6 +178,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene, x, y) {
         super(scene, x, y, "rocket");
+        this.enableBody(false);
         this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
     }
 
