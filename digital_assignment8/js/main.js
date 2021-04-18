@@ -175,7 +175,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
             ease: 'Power0',
             onComplete: this.explode,
             callbackScope: this,
-            duration: 8000,
+            duration: 2000,
             paused: true
         });
 
