@@ -58,7 +58,7 @@ class MyScene extends Phaser.Scene {
 
         this.anims.create({
             key: 'rocketOut',
-            frames: this.anims.generateFrameNumbers('robotAnims', { frames: [0, 8, 9, 10, 11, 12, 13, 14] }),
+            frames: this.anims.generateFrameNumbers('robotAnims', { frames: [0, 8, 9, 10, 11, 12, 13, 14, 15] }),
             frameRate: 8,
             repeat: 0
         });
