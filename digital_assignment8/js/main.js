@@ -173,7 +173,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
             x: this.fakex,
             y: this.fakey,
             ease: 'Power0',
-            onComplete: this.renew,
+            onComplete: this.explode,
             callbackScope: this,
             duration: 8000,
             paused: true
@@ -255,42 +255,10 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         this.play('explode');
     }
 
-    renew() {
-        switch (this.dir) {
-            case 0:
-                this.fakey = this.fakey + tileSize;
-                break;
-
-            case 1:
-                this.fakex = this.fakex + tileSize;
-                break;
-
-            case 2:
-                this.fakey = this.fakey - tileSize;
-                break;
-
-            case 3:
-                this.fakex = this.fakex - tileSize;
-                break;
-
-            default:
-                this.explode();
-        }
-
-        this.slide.play();
-
-        console.log(this.fakex + "," + this.fakey);
-    }
-
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
 
         this.setAngle(this.dir * 90);
-
-        if (this.slide.isPlaying()) {
-            this.slide.updateTo('x', this.fakex, true);
-            this.slide.updateTo('y', this.fakey, true);
-        }
 
         if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 650) {
             this.explode();
