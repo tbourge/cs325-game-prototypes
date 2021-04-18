@@ -121,7 +121,7 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        this.tank = this.tanks.create(this.getTile(0), this.getTile(0));
+        this.tank = this.tanks.get(this.getTile(0), this.getTile(0));
         this.robot = new Robot(this, this.getTile(1), this.getTile(7), this.rockets, null);
 
         this.start = new StartButton(this, 400, 300, () => this.startAction());
@@ -176,6 +176,97 @@ class StartButton extends Button {
     }
 }
 
+class Hook extends Phaser.Physics.Arcade.Sprite {
+    dir;
+    robot;
+    hasHit;
+
+    constructor(scene, x, y) {
+        super(scene, x, y, "hook");
+        this.hasHit = false;
+    }
+
+    make(robot) {
+        this.robot = robot;
+
+        this.dir = robot.dir;
+
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+
+        this.dir = dir;
+        this.robot = robot;
+        this.hasExploded = false;
+
+        this.setAngle(this.dir * 90);
+
+        switch (this.dir) {
+            case 0:
+                this.x = robot.x + tileSize;
+                this.y = robot.y;
+                break;
+
+            case 1:
+                this.x = robot.x;
+                this.y = robot.y + tileSize;
+                break;
+
+            case 2:
+                this.x = robot.x - tileSize;
+                this.y = robot.y;
+                break;
+
+            case 3:
+                this.x = robot.x;
+                this.y = robot.y - tileSize;
+                break;
+
+            default:
+                this.retract();
+        }
+    }
+
+    retract() {
+        this.hasHit = true;
+    }
+
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
+
+        let speed = 2;
+
+        if (this.hasHit) {
+            speed = -2;
+        }
+
+        switch (this.dir) {
+            case 0:
+                this.y -= speed;
+                break;
+
+            case 1:
+                this.x += speed;
+                break;
+
+            case 2:
+                this.y += speed;
+                break;
+
+            case 3:
+                this.x -= speed;
+                break;
+
+            default:
+                this.retract();
+        }
+
+        if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 650) {
+            this.endAnim();
+        }
+    }
+}
+
+
 class Rocket extends Phaser.Physics.Arcade.Sprite {
     dir;
     robot;
@@ -188,8 +279,8 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     }
 
     make(scene, dir, robot) {
-        this.setVisible(true);
-        this.setActive(true);
+        //this.setVisible(true);
+        //this.setActive(true);
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
