@@ -49,6 +49,11 @@ class MyScene extends Phaser.Scene {
 
         this.rockets = this.physics.add.group({ key: 'rocket', classType: Rocket });
 
+        this.rockets.getChildren().forEach(function (r) {
+            r.setVisible(false);
+            r.setActive(false);
+        });
+
         this.anims.create({
             key: 'shoot',
             frames: this.anims.generateFrameNumbers('tank', { frames: [0, 1] }),
