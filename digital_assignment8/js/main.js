@@ -52,6 +52,12 @@ class MyScene extends Phaser.Scene {
         this.rockets = this.physics.add.group({ key: 'rocket', classType: Rocket });
         this.tanks = this.physics.add.group({ key: 'tank', classType: Tank });
 
+        this.rockets.getChildren().forEach(function (r) {
+            r.setVisible(false);
+            r.setActive(false);
+            r.enableBody(false);
+        });
+
         this.physics.add.collider(this.rockets, this.tanks, function (r, t) {
             r.explode();
 
@@ -59,12 +65,6 @@ class MyScene extends Phaser.Scene {
 
             this.robot.score++;
         }.bind(this));
-
-        this.rockets.getChildren().forEach(function (r) {
-            r.setVisible(false);
-            r.setActive(false);
-          //  r.enableBody(false);
-        });
 
         this.anims.create({
             key: 'shoot',
@@ -178,7 +178,6 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene, x, y) {
         super(scene, x, y, "rocket");
-        this.enableBody(false);
         this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
     }
 
