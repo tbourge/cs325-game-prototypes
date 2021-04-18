@@ -278,6 +278,8 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         }
 
         this.slide.play();
+
+        console.log(this.fakex + "," + this.fakey);
     }
 
     preUpdate(time, delta) {
