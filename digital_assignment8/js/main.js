@@ -210,6 +210,9 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         this.setVisible(true);
         this.setActive(true);
 
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
+
         this.dir = dir;
         this.robot = robot;
 
@@ -247,9 +250,6 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
             default:
                 this.explode();
         }
-
-        scene.add.existing(this);
-        scene.physics.add.existing(this);
 
         this.play("fly");
 
@@ -307,11 +307,6 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
 
         this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
 
-        //test
-        this.setInteractive();
-        this.on('pointerdown', () => this.attack(this.dir));
-        this.on('pointerover', () => this.turnRight());
-
         this.fakex = x;
         this.fakey = y;
 
@@ -325,6 +320,11 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
             callbackScope: this,
             duration: 2000
         });
+
+        //test
+        this.setInteractive();
+        this.on('pointerdown', () => this.attack(this.dir));
+        this.on('pointerover', () => this.turnRight());
     }
 
     attack(dir) {
