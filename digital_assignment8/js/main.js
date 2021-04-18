@@ -205,6 +205,8 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         this.dir = dir;
         this.robot = robot;
 
+        this.setAngle(this.dir * 90);
+
         switch (dir) {
             case 0:
                 this.x = robot.x + tileSize;
@@ -257,8 +259,6 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
-
-        this.setAngle(this.dir * 90);
 
         if (this.slide.isPlaying()) {
             this.slide.updateTo('x', this.fakex, true);
