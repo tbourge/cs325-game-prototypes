@@ -268,6 +268,8 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 650) {
             this.explode();
         }
+
+        console.log(this.x + "," + this.y);
     }
 }
 
