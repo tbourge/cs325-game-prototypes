@@ -47,7 +47,7 @@ class MyScene extends Phaser.Scene {
 
         Phaser.Actions.GridAlign(c, { width: 8, cellWidth: tileSize, cellHeight: tileSize, x: firstTile, y: firstTile });
 
-        this.rockets = this.physics.add.group({ key: 'rocket', classType: Rocket, repeat: 1 });
+        this.rockets = this.physics.add.group({ key: 'rocket', classType: Rocket });
 
         this.anims.create({
             key: 'shoot',
@@ -397,7 +397,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     rocketSpawn() {
-        this.rockets.getFirst().make(scene, this.dir, this);
+        this.rockets.get().make(scene, this.dir, this);
     }
 
     rocketAway() {
