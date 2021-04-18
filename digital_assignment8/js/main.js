@@ -205,8 +205,6 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         }
 
         this.play("fly");
-
-        this.slide.play();
     }
 
     endAnim() {
