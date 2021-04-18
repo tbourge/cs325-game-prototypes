@@ -397,7 +397,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     rocketSpawn() {
-        this.rockets.get().make(scene, this.dir, this);
+        this.rockets.get().make(this.scene, this.dir, this);
     }
 
     rocketAway() {
