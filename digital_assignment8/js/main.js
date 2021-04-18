@@ -256,7 +256,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     }
 
     renew() {
-        switch (dir) {
+        switch (this.dir) {
             case 0:
                 this.fakey = this.fakey + tileSize;
                 break;
