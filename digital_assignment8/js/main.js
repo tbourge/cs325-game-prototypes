@@ -160,50 +160,11 @@ class StartButton extends Button {
 
 class Rocket extends Phaser.Physics.Arcade.Sprite {
     dir;
-    slide;
-    fakex;
-    fakey;
     robot;
 
     constructor(scene, x, y) {
         super(scene, x, y, "rocket");
-
-        this.fakex = x;
-        this.fakey = y;
-
         this.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => this.endAnim()); 
-
-        this.slide = scene.tweens.add({
-            targets: this,
-            x: this.fakex,
-            y: this.fakey,
-            ease: 'Power0',
-            onComplete: this.explode,
-            callbackScope: this,
-            duration: 2000,
-            paused: true
-        });
-
-        switch (this.dir) {
-            case 0:
-                this.fakey -= tileSize;
-                break;
-
-            case 1:
-                this.fakex += tileSize;
-                break;
-
-            case 2:
-                this.fakey += tileSize;
-                break;
-
-            case 3:
-                this.fakex -= tileSize;
-                break;
-
-            default:
-                this.explode();
-        }
     }
 
     make(scene, dir, robot) {
@@ -222,29 +183,21 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
             case 0:
                 this.x = robot.x + tileSize;
                 this.y = robot.y;
-                this.fakex = this.x;
-                this.fakey = this.y + tileSize * 9;
                 break;
 
             case 1:
                 this.x = robot.x;
                 this.y = robot.y - tileSize;
-                this.fakex = this.x + tileSize * 9;
-                this.fakey = this.y;
                 break;
 
             case 2:
                 this.x = robot.x - tileSize;
                 this.y = robot.y;
-                this.fakex = this.x;
-                this.fakey = this.y - tileSize * 9;
                 break;
 
             case 3:
                 this.x = robot.x;
                 this.y = robot.y + tileSize;
-                this.fakex = this.x - tileSize * 9;
-                this.fakey = this.y;
                 break;
 
             default:
@@ -268,9 +221,25 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
 
-        if (this.slide.isPlaying()) {
-            this.slide.updateTo('x', this.fakex, true);
-            this.slide.updateTo('y', this.fakey, true);
+        switch (this.dir) {
+            case 0:
+                this.y -= 1;
+                break;
+
+            case 1:
+                this.x += 1;
+                break;
+
+            case 2:
+                this.y += 1;
+                break;
+
+            case 3:
+                this.x -= 1;
+                break;
+
+            default:
+                this.explode();
         }
 
         if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 650) {
