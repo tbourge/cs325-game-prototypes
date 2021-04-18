@@ -546,6 +546,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     fakex;
     fakey;
     health;
+    hook;
 
     constructor(scene, x, y) {
         super(scene, x, y, "tank");
@@ -576,6 +577,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             callbackScope: this,
             duration: 2000
         });
+    }
+
+    pulled(h) {
+        this.isPulled = true;
+        this.hook = h;
     }
 
     endAnim() {
@@ -633,6 +639,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         if (this.slide.isPlaying()) {
             this.slide.updateTo('x', this.fakex, true);
             this.slide.updateTo('y', this.fakey, true);
+        }
+
+        if (this.isPulled) {
+            this.x = hook.x;
+            this.y = hook.y;
         }
     }
 }
