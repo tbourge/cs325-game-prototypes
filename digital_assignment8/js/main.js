@@ -181,7 +181,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
         switch (dir) {
             case 0:
-                this.x = robot.x + tileSize;
+                this.x = robot.x - tileSize;
                 this.y = robot.y;
                 break;
 
@@ -191,7 +191,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
                 break;
 
             case 2:
-                this.x = robot.x - tileSize;
+                this.x = robot.x + tileSize;
                 this.y = robot.y;
                 break;
 
