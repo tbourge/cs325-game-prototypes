@@ -63,6 +63,7 @@ class MyScene extends Phaser.Scene {
         this.rockets.getChildren().forEach(function (r) {
             r.setVisible(false);
             r.setActive(false);
+            r.enableBody(false);
         });
 
         this.anims.create({
