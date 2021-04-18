@@ -219,21 +219,23 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
 
+        let speed = 2;
+
         switch (this.dir) {
             case 0:
-                this.y -= 1;
+                this.y -= speed;
                 break;
 
             case 1:
-                this.x += 1;
+                this.x += speed;
                 break;
 
             case 2:
-                this.y += 1;
+                this.y += speed;
                 break;
 
             case 3:
-                this.x -= 1;
+                this.x -= speed;
                 break;
 
             default:
@@ -241,11 +243,8 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 650) {
-            console.log("!");
             this.endAnim();
         }
-
-        console.log(this.x + "," + this.y);
     }
 }
 
