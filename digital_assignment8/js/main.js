@@ -175,7 +175,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
             ease: 'Power0',
             onComplete: this.renew,
             callbackScope: this,
-            duration: 2000,
+            duration: 8000,
             paused: true
         });
 
@@ -210,13 +210,13 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
                 this.x = robot.x + tileSize;
                 this.y = robot.y;
                 this.fakex = this.x;
-                this.fakey = this.y + tileSize;
+                this.fakey = this.y + tileSize * 8;
                 break;
 
             case 1:
                 this.x = robot.x;
                 this.y = robot.y - tileSize;
-                this.fakex = this.x + tileSize;
+                this.fakex = this.x + tileSize * 8;
                 this.fakey = this.y;
                 break;
 
@@ -224,13 +224,13 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
                 this.x = robot.x - tileSize;
                 this.y = robot.y;
                 this.fakex = this.x;
-                this.fakey = this.y - tileSize;
+                this.fakey = this.y - tileSize * 8;
                 break;
 
             case 3:
                 this.x = robot.x;
                 this.y = robot.y + tileSize;
-                this.fakex = this.x - tileSize;
+                this.fakex = this.x - tileSize * 8;
                 this.fakey = this.y;
                 break;
 
