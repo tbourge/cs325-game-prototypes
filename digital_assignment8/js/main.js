@@ -636,10 +636,10 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         let d = (this.dir - 2) * 90 - this.rot;
 
         if (d < -180) {
-            d += 360;
+            d -= 360;
         }
         else if (d > 180) {
-            d -= 360;
+            d += 360;
         }
 
         this.rot += d;
