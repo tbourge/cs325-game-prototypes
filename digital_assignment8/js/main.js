@@ -544,6 +544,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     slide;
     rot;
     r;
+    t;
     fakex;
     fakey;
     health;
@@ -554,6 +555,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
         this.dir = 2;
         this.rot = this.dir * 90;
+        this.t = this.rot;
         this.health = 4;
 
         scene.add.existing(this);
@@ -627,7 +629,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     move() {
-        if (!this.slide.isPlaying() && !this.turn.isPlaying()) {
+        if (!this.slide.isPlaying()) {
             switch (this.dir) {
                 case 0:
                     this.fakey -= tileSize;
@@ -658,13 +660,15 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             this.slide.updateTo('y', this.fakey, true);
         }
 
-        if (this.angle != this.rot) {
+        if (this.t != this.rot) {
             if (this.r) {
-                this.setAngle(this.angle - 1);
+                this.t++;
             }
             else {
-                this.setAngle(this.angle + 1);
+                this.t--;
             }
+
+            this.setAngle(this.t);
         }
 
         console.log(this.angle + "," + this.rot);
