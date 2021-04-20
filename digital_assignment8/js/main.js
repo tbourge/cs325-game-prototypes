@@ -35,7 +35,7 @@ class MyScene extends Phaser.Scene {
         this.load.image("startButton", "assets/START.png");
         this.load.image("robot", "assets/Rob.png");
         this.load.spritesheet('robotAnims', 'assets/Robot.png', { frameWidth: 192, frameHeight: 64 });
-        this.load.spritesheet('tank', 'assets/Tank.png', { frameWidth: 50, frameHeight: 62 });
+        this.load.spritesheet('tank', 'assets/Tank.png', { frameWidth: 62, frameHeight: 62 });
         this.load.spritesheet('rocket', 'assets/Rocket.png', { frameWidth: 64, frameHeight: 64 });
         this.load.image('bullet', 'assets/Bullet.png', { frameWidth: 24, frameHeight: 24 });
         this.load.image('hook', 'assets/Hook.png', { frameWidth: 64, frameHeight: 64 });
@@ -553,7 +553,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, "tank");
 
         this.dir = 2;
-        this.rot = (this.dir - 2) * 90;
+        this.rot = this.dir * 90;
         this.health = 4;
 
         scene.add.existing(this);
@@ -611,18 +611,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             this.dir--;
         }
 
-        let d = (this.dir - 2) * 90 - this.rot;
-
-        if (d < -180) {
-            d += 360;
-        }
-        else if (d > 180) {
-            d -= 360;
-        }
-
-        this.rot += d;
-
-        this.turn.play();
+        this.rot = this.dir * 90;
     }
 
     turnRight() {
@@ -633,18 +622,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             this.dir++;
         }
 
-        let d = (this.dir - 2) * 90 - this.rot;
-
-        if (d < -180) {
-            d -= 360;
-        }
-        else if (d > 180) {
-            d += 360;
-        }
-
-        this.rot += d;
-
-        this.turn.play();
+        this.rot = this.dir * 90;
     }
 
     afterTween() {
@@ -683,9 +661,13 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             this.slide.updateTo('y', this.fakey, true);
         }
 
-        //  if (this.turn.isPlaying()) 
-        {
-            this.turn.updateTo('angle', this.rot, true);
+        if (this.getAngle() != this.rot) {
+            if (this.r) {
+                this.setAngle(this.getAngle() - 1);
+            }
+            else {
+                this.setAngle(this.getAngle() + 1);
+            }
         }
 
         if (this.isPulled) {
