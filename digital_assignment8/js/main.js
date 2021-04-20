@@ -40,7 +40,7 @@ class MyScene extends Phaser.Scene {
         this.load.image('bullet', 'assets/Bullet.png', { frameWidth: 24, frameHeight: 24 });
         this.load.image('hook', 'assets/Hook.png', { frameWidth: 64, frameHeight: 64 });
         this.load.image('rope', 'assets/TinyRope.png', { frameWidth: 64, frameHeight: 64 });
-        this.load.spritesheet('explosion', 'assets/Explosion.png', { frameWidth: 256, frameHeight: 256 });
+        this.load.spritesheet('explosion', 'assets/Explosion.png', { frameWidth: 224, frameHeight: 224 });
     }
     
     create() {
