@@ -658,7 +658,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (this.turn.isPlaying()) {
-            this.slide.updateTo('angle', this.dir * 90, true);
+            this.turn.updateTo('angle', this.dir * 90, true);
         }
 
         if (this.isPulled) {
