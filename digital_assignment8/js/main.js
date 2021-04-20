@@ -190,17 +190,13 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
 
     make(robot) {
         this.robot = robot;
-
         this.dir = robot.dir;
-
-        scene.add.existing(this);
-        scene.physics.add.existing(this);
-
-        this.dir = dir;
-        this.robot = robot;
-        this.hasExploded = false;
-
         this.setAngle(this.dir * 90);
+
+        robot.scene.add.existing(this);
+        robot.scene.physics.add.existing(this);
+
+        this.hasHit = false;
 
         switch (this.dir) {
             case 0:
@@ -370,6 +366,9 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     dir;
     anim;
     slide;
+    t;
+    r;
+    rot
     fakex;
     fakey;
     attackDone;
@@ -383,6 +382,10 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, "robot");
 
         this.dir = 0;
+        this.rot = this.dir * 90;
+        this.t = this.rot;
+        this.setAngle(this.t);
+        this.r = false;
         this.anim = -1;
         this.rockets = rockets;
         this.hooks = hooks;
@@ -459,11 +462,29 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     turnLeft() {
-        this.dir--;
+        if (this.dir < 1) {
+            this.dir = 3;
+        }
+        else {
+            this.dir--;
+        }
+
+        this.r = false;
+
+        this.rot = this.dir * 90;
     }
 
     turnRight() {
-        this.dir++;
+        if (this.dir > 2) {
+            this.dir = 0;
+        }
+        else {
+            this.dir++;
+        }
+
+        this.r = true;
+
+        this.rot = this.dir * 90;
     }
 
     afterTween() {
@@ -471,7 +492,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     move() {
-        if (!this.slide.isPlaying() && !this.anims.isPlaying) {
+        if (!this.slide.isPlaying() && !this.anims.isPlaying && this.t === this.rot) {
             switch (this.dir) {
                 case 0:
                     this.fakey -= tileSize;
@@ -523,7 +544,23 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
 
-        this.setAngle(this.dir * 90);
+        if (this.t != this.rot) {
+            if (this.r) {
+                this.t++;
+            }
+            else {
+                this.t--;
+            }
+
+            if (this.t > 359) {
+                this.t = 0;
+            }
+            else if (this.t < 0) {
+                this.t = 359;
+            }
+
+            this.setAngle(this.t);
+        }
 
         if (this.dir > 3) {
             this.dir = 0;
@@ -630,7 +667,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     move() {
-        if (!this.slide.isPlaying()) {
+        if (!this.slide.isPlaying() && this.t === this.rot) {
             switch (this.dir) {
                 case 0:
                     this.fakey -= tileSize;
@@ -678,8 +715,6 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
             this.setAngle(this.t);
         }
-
-        console.log(this.t + "," + this.rot);
 
         if (this.isPulled) {
             this.x = hook.x;
