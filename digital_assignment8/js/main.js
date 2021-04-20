@@ -542,8 +542,8 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
 class Tank extends Phaser.Physics.Arcade.Sprite {
     dir;
     slide;
-    turn;
     rot;
+    r;
     fakex;
     fakey;
     health;
@@ -580,14 +580,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             duration: 2000
         });
 
-        this.turn = scene.tweens.add({
-            targets: this,
-            ease: 'Power1',
-            onComplete: this.afterTween,
-            callbackScope: this,
-            duration: 1000,
-            angle: this.rot
-        });
+        this.r = false;
     }
 
     pulled(h) {
@@ -611,6 +604,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             this.dir--;
         }
 
+        this.r = false;
+
         this.rot = this.dir * 90;
     }
 
@@ -621,6 +616,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         else {
             this.dir++;
         }
+
+        this.r = true;
 
         this.rot = this.dir * 90;
     }
@@ -661,12 +658,12 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             this.slide.updateTo('y', this.fakey, true);
         }
 
-        if (this.getAngle() != this.rot) {
+        if (this.angle != this.rot) {
             if (this.r) {
-                this.setAngle(this.getAngle() - 1);
+                this.setAngle(this.angle - 1);
             }
             else {
-                this.setAngle(this.getAngle() + 1);
+                this.setAngle(this.angle + 1);
             }
         }
 
