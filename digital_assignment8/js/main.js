@@ -556,7 +556,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.dir = 2;
         this.rot = this.dir * 90;
         this.t = this.rot;
-        this.setAngle(t);
+        this.setAngle(this.t);
         this.health = 4;
 
         scene.add.existing(this);
