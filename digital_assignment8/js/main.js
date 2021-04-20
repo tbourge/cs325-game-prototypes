@@ -668,6 +668,13 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
                 this.t--;
             }
 
+            if (t > 359) {
+                this.t = 0;
+            }
+            else if (this.t < 0) {
+                this.t = 359;
+            }
+
             this.setAngle(this.t);
         }
 
