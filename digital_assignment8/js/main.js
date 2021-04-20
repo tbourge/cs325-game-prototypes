@@ -603,12 +603,24 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     turnLeft() {
-        this.dir--;
+        if (this.dir < 1) {
+            this.dir = 3;
+        }
+        else {
+            this.dir--;
+        }
+
         this.turn.play();
     }
 
     turnRight() {
-        this.dir++;
+        if (this.dir > 2) {
+            this.dir = 0;
+        }
+        else {
+            this.dir++;
+        }
+
         this.turn.play();
     }
 
@@ -642,15 +654,6 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
-
-        //this.setAngle(this.dir * 90);
-
-        if (this.dir > 3) {
-            this.dir = 0;
-        }
-        else if (this.dir < 0) {
-            this.dir = 3;
-        }
 
         if (this.slide.isPlaying()) {
             this.slide.updateTo('x', this.fakex, true);
