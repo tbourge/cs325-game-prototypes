@@ -556,6 +556,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.dir = 2;
         this.rot = this.dir * 90;
         this.t = this.rot;
+        this.setAngle(t);
         this.health = 4;
 
         scene.add.existing(this);
@@ -668,7 +669,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
                 this.t--;
             }
 
-            if (t > 359) {
+            if (this.t > 359) {
                 this.t = 0;
             }
             else if (this.t < 0) {
