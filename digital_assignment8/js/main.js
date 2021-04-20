@@ -290,7 +290,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
         this.setAngle(this.dir * 90);
 
-        switch (dir) {
+        switch (this.dir) {
             case 0:
                 this.x = robot.x - tileSize;
                 this.y = robot.y;
