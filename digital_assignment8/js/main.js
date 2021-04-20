@@ -544,19 +544,21 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
 
+        let speed = 2;
+
         if (this.t != this.rot) {
             if (this.r) {
-                this.t++;
+                this.t += speed;
             }
             else {
-                this.t--;
+                this.t -= speed;
             }
 
             if (this.t > 359) {
                 this.t = 0;
             }
             else if (this.t < 0) {
-                this.t = 359;
+                this.t = 358;
             }
 
             this.setAngle(this.t);
@@ -698,19 +700,21 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             this.slide.updateTo('y', this.fakey, true);
         }
 
+        let speed = 2;
+
         if (this.t != this.rot) {
             if (this.r) {
-                this.t++;
+                this.t += speed;
             }
             else {
-                this.t--;
+                this.t -= speed;
             }
 
             if (this.t > 359) {
                 this.t = 0;
             }
             else if (this.t < 0) {
-                this.t = 359;
+                this.t = 358;
             }
 
             this.setAngle(this.t);
