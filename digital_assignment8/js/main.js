@@ -500,7 +500,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     rocketSpawn() {
-        this.rockets.get().make(this);
+        this.rockets.create().make(this);
     }
 
     rocketAway() {
@@ -658,7 +658,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (this.turn.isPlaying()) {
-            this.slide.updateTo('angle', this.dir, true);
+            this.slide.updateTo('angle', this.dir * 90, true);
         }
 
         if (this.isPulled) {
