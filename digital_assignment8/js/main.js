@@ -581,7 +581,6 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.turn = scene.tweens.add({
             targets: this,
             ease: 'Power1',
-            paused: true,
             onComplete: this.afterTween,
             callbackScope: this,
             duration: 1000,
@@ -660,7 +659,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             this.slide.updateTo('y', this.fakey, true);
         }
 
-        if (this.turn.isPlaying()) {
+        //  if (this.turn.isPlaying()) 
+        {
             this.turn.updateTo('angle', this.dir * 90, true);
         }
 
