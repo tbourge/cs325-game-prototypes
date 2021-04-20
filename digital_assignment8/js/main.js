@@ -667,6 +667,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             }
         }
 
+        console.log(this.angle + "," + this.rot);
+
         if (this.isPulled) {
             this.x = hook.x;
             this.y = hook.y;
