@@ -583,7 +583,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     hookSpawn() {
-        this.hooks.get().make(this);
+        this.hooks.create().make(this);
     }
 
     hookAway() {
