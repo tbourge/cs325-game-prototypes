@@ -154,7 +154,7 @@ class MyScene extends Phaser.Scene {
     }
 
     getTile(num) {
-        return Phaser.Math.RoundTo(tileSize / num) - firstTile;
+        return Phaser.Math.RoundTo((num - firstTile) / tileSize);
     }
 
     startAction() {
@@ -692,8 +692,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     getTile(num) {
-        return Phaser.Math.RoundTo(tileSize / num) - firstTile;
-    }
+        return Phaser.Math.RoundTo((num - firstTile) / tileSize);    }
 
     retile() {
         this.x = this.getCoord(this.getTile(this.x));
