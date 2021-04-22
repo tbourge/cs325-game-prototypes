@@ -468,7 +468,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         this.setInteractive();
         this.on('pointerdown', () => this.attack(this.dir));
         this.on('pointerover', () => {
-            if (!this.slide.isPlaying()) {
+            if (!this.slide.isPlaying() && this.t === this.rot) {
                 this.turnRight();
             }
         });
@@ -665,7 +665,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.setInteractive();
         this.on('pointerdown', () => this.move());
         this.on('pointerover', () => {
-            if (!this.slide.isPlaying()) {
+            if (!this.slide.isPlaying() && this.t === this.rot) {
                 this.turnRight();
             }
         });
@@ -692,7 +692,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     getTile(num) {
-        return Phaser.Math.RoundTo((num - firstTile) / tileSize);    }
+        return Phaser.Math.RoundTo((num - firstTile) / tileSize);
+    }
 
     retile() {
         this.x = this.getCoord(this.getTile(this.x));
