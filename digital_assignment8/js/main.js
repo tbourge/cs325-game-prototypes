@@ -137,8 +137,8 @@ class MyScene extends Phaser.Scene {
             repeat: -1
         });
 
-        this.tank = this.tanks.create(this.getTile(0), this.getTile(0));
-        this.robot = new Robot(this, this.getTile(3), this.getTile(4), this.rockets, this.hooks);
+        this.tank = this.tanks.create(this.getCoord(0), this.getCoord(0));
+        this.robot = new Robot(this, this.getCoord(3), this.getCoord(4), this.rockets, this.hooks);
 
         this.start = new StartButton(this, 400, 300, () => this.startAction());
 
@@ -149,8 +149,12 @@ class MyScene extends Phaser.Scene {
         
     }
 
-    getTile(num) {
+    getCoord(num) {
         return firstTile + tileSize * num;
+    }
+
+    getTile(num) {
+        return Phaser.Math.RoundTo(tileSize / num) - firstTile;
     }
 
     startAction() {
@@ -683,6 +687,20 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.r = false;
     }
 
+    getCoord(num) {
+        return firstTile + tileSize * num;
+    }
+
+    getTile(num) {
+        return Phaser.Math.RoundTo(tileSize / num) - firstTile;
+    }
+
+    retile() {
+        this.x = this.getCoord(this.getTile(this.x));
+        this.y = this.getCoord(this.getTile(this.y));
+
+    }
+
     pulled(h) {
         this.hook = h;
         this.isPulled = true;
@@ -690,6 +708,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
     letGo() {
         this.isPulled = false;
+        this.retile();
         this.fakex = this.x;
         this.fakey = this.y;
     }
@@ -755,7 +774,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
 
-        if (this.slide.isPlaying()) {
+        if (this.slide.isPlaying() || this.isPulled) {
             this.slide.updateTo('x', this.fakex, true);
             this.slide.updateTo('y', this.fakey, true);
         }
