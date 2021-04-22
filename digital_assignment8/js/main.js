@@ -187,6 +187,7 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y) {
         super(scene, x, y, "hook");
         this.hasHit = false;
+        this.robot = null;
         this.tank = null;
     }
 
@@ -285,7 +286,7 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                 this.retract();
         }
 
-        if (this.x === this.robot.x || this.y === this.robot.y) {
+        if (this.robot != null && (this.x === this.robot.x || this.y === this.robot.y)) {
             this.robot.weaponGone = true;
             this.destroy();
         }
