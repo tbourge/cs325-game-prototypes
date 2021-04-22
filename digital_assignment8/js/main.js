@@ -60,6 +60,12 @@ class MyScene extends Phaser.Scene {
             r.body.enable = false;
         });
 
+        this.hooks.getChildren().forEach(function (h) {
+            h.setVisible(false);
+            h.setActive(false);
+            h.body.enable = false;
+        });
+
         this.tanks.getChildren().forEach(function (t) {
             t.setVisible(false);
             t.setActive(false);
