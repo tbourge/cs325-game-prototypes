@@ -807,8 +807,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             this.setAngle(this.t);
         }
 
-        console.log("Fake: "+this.fakex + "," + this.fakey);
-        console.log("Slide: " +this.slide.x + "," + this.slide.y);
+        console.log("Fake: " + this.fakex + "," + this.fakey);
+        console.log("Slide: " + this.slide.getValue(1) + "," + this.slide.getValue(2));
     }
 }
 
