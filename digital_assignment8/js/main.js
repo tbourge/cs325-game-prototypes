@@ -163,16 +163,16 @@ class MyScene extends Phaser.Scene {
 }
 
 class Rope extends Phaser.GameObjects.Sprite {
-    id;
     hook;
 
     constructor(scene, x, y, hook) {
         super(scene, x, y);
 
-        this.id = ropes++;
+        ropes++;
         this.hook = hook;
         this.setTexture("rope");
         this.setAngle(hook.dir * 90);
+        scene.add.existing(this);
     }
 
     die() {
