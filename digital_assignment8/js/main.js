@@ -74,6 +74,12 @@ class MyScene extends Phaser.Scene {
             this.robot.score++;
         }.bind(this));
 
+        this.physics.add.collider(this.hooks, this.tanks, function (h, t) {
+            h.hit(t);
+
+            t.pulled(h);
+        }.bind(this));
+
         this.anims.create({
             key: 'shoot',
             frames: this.anims.generateFrameNumbers('tank', { frames: [0, 1] }),
@@ -97,7 +103,7 @@ class MyScene extends Phaser.Scene {
 
         this.anims.create({
             key: 'hookOut',
-            frames: this.anims.generateFrameNumbers('robotAnims', { frames: [0, 7, 6, 5, 4, 3, 2] }),
+            frames: this.anims.generateFrameNumbers('robotAnims', { frames: [0, 7, 6, 5, 4, 3, 2, 1] }),
             frameRate: 8,
             repeat: 0
         });
