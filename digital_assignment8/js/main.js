@@ -688,6 +688,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
     letGo() {
         this.isPulled = false;
+        this.fakex = this.x;
+        this.fakey = this.y;
     }
 
     endAnim() {
