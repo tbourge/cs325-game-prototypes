@@ -301,10 +301,10 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
 
                 if (this.hasHit) {
                     this.ropes[ropes - 1].die();
-                    this.ropes[ropes - 1].die();
+                    //this.ropes[ropes - 1].die();
                 }
                 else {
-                    this.ropes.push(new Rope(this.scene, this.x, this.y, this), new Rope(this.scene, this.x, this.y + 1, this));
+                    this.ropes.push(new Rope(this.scene, this.x, this.y, this));//, new Rope(this.scene, this.x, this.y + 1, this));
                     //this.ropes.push(new Rope(this.scene, this.x, this.y + 1, this));
                 }
                 break;
@@ -318,10 +318,10 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
 
                 if (this.hasHit) {
                     this.ropes[ropes - 1].die();
-                    this.ropes[ropes - 1].die();
+                    //this.ropes[ropes - 1].die();
                 }
                 else {
-                    this.ropes.push(new Rope(this.scene, this.x, this.y, this), new Rope(this.scene, this.x - 1, this.y, this));
+                    this.ropes.push(new Rope(this.scene, this.x, this.y, this));//, new Rope(this.scene, this.x - 1, this.y, this));
                     //this.ropes.push(new Rope(this.scene, this.x, this.y + 1, this));
                 }
                 break;
@@ -335,10 +335,10 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
 
                 if (this.hasHit) {
                     this.ropes[ropes - 1].die();
-                    this.ropes[ropes - 1].die();
+                    //this.ropes[ropes - 1].die();
                 }
                 else {
-                    this.ropes.push(new Rope(this.scene, this.x, this.y, this), new Rope(this.scene, this.x, this.y - 1, this));
+                    this.ropes.push(new Rope(this.scene, this.x, this.y, this));//, new Rope(this.scene, this.x, this.y - 1, this));
                     //this.ropes.push(new Rope(this.scene, this.x, this.y + 1, this));
                 }
                 break;
@@ -352,10 +352,10 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
 
                 if (this.hasHit) {
                     this.ropes[ropes - 1].die();
-                    this.ropes[ropes - 1].die();
+                    //this.ropes[ropes - 1].die();
                 }
                 else {
-                    this.ropes.push(new Rope(this.scene, this.x, this.y, this), new Rope(this.scene, this.x + 1, this.y, this));
+                    this.ropes.push(new Rope(this.scene, this.x, this.y, this));//, new Rope(this.scene, this.x + 1, this.y, this));
                     //this.ropes.push(new Rope(this.scene, this.x, this.y + 1, this));
                 }
                 break;
