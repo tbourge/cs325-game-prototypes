@@ -247,18 +247,38 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
         switch (this.dir) {
             case 0:
                 this.y -= speed;
+
+                if (this.y >= this.robot.y - tileSize && this.tank != null) {
+                    this.tank.letGo();
+                }
+
                 break;
 
             case 1:
                 this.x += speed;
+
+                if (this.x <= this.robot.x + tileSize && this.tank != null) {
+                    this.tank.letGo();
+                }
+
                 break;
 
             case 2:
                 this.y += speed;
+
+                if (this.y <= this.robot.y + tileSize && this.tank != null) {
+                    this.tank.letGo();
+                }
+
                 break;
 
             case 3:
                 this.x -= speed;
+
+                if (this.x >= this.robot.x - tileSize && this.tank != null) {
+                    this.tank.letGo();
+                }
+
                 break;
 
             default:
@@ -423,7 +443,11 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         //test
         this.setInteractive();
         this.on('pointerdown', () => this.attack(this.dir));
-        this.on('pointerover', () => this.turnRight());
+        this.on('pointerover', () => {
+            if (!this.slide.isPlaying()) {
+                this.turnRight();
+            }
+        });
     }
 
     attack(dir) {
@@ -613,7 +637,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         //test
         this.setInteractive();
         this.on('pointerdown', () => this.move());
-        this.on('pointerover', () => this.turnRight());
+        this.on('pointerover', () => {
+            if (!this.slide.isPlaying()) {
+                this.turnRight();
+            }
+        });
 
         this.fakex = x;
         this.fakey = y;
@@ -633,11 +661,11 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     }
 
     pulled(h) {
-        this.isPulled = true;
         this.hook = h;
+        this.isPulled = true;
     }
 
-    release() {
+    letGo() {
         this.isPulled = false;
     }
 
