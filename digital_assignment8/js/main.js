@@ -124,7 +124,7 @@ class MyScene extends Phaser.Scene {
         });
 
         this.tank = this.tanks.create(this.getTile(0), this.getTile(0));
-        this.robot = new Robot(this, this.getTile(1), this.getTile(7), this.rockets, this.hooks);
+        this.robot = new Robot(this, this.getTile(3), this.getTile(4), this.rockets, this.hooks);
 
         this.start = new StartButton(this, 400, 300, () => this.startAction());
 
