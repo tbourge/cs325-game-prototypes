@@ -630,8 +630,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     fakex;
     fakey;
     health;
-    hook = null;
-    isPulled = false;
+    hook;
+    isPulled;
 
     constructor(scene, x, y) {
         super(scene, x, y, "tank");
@@ -641,6 +641,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.t = this.rot;
         this.setAngle(this.t);
         this.health = 4;
+        this.hook = null;
+        this.isPulled = false;
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -768,7 +770,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
             this.setAngle(this.t);
         }
 
-        if (this.isPulled && this.hook != null) {
+        if (this.hook != null && this.isPulled) {
             this.x = hook.x;
             this.y = hook.y;
         }
