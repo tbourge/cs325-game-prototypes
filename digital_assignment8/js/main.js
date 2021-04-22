@@ -630,7 +630,8 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     fakex;
     fakey;
     health;
-    hook;
+    hook = null;
+    isPulled = false;
 
     constructor(scene, x, y) {
         super(scene, x, y, "tank");
