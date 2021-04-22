@@ -170,7 +170,7 @@ class StartButton extends Button {
     constructor(scene, x, y, action) {
         super(scene, x, y, "startButton", action);
 
-        scene.add.existing(this);
+     //   scene.add.existing(this);
     }
 
     preUpdate(time, delta) {
