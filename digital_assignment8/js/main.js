@@ -285,6 +285,11 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                 this.retract();
         }
 
+        if (this.x === this.robot.x || this.y === this.robot.y) {
+            this.robot.weaponGone = true;
+            this.destroy();
+        }
+
         if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 650) {
             this.retract();
         }
