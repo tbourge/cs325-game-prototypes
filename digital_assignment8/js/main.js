@@ -11,7 +11,7 @@ import "./phaser.js";
 
 // The simplest class example: https://phaser.io/examples/v3/view/scenes/scene-from-es6-class
 
-var offset = 20, tileSize = 68, firstTile = tileSize / 2 + offset;
+var offset = 20, tileSize = 68, firstTile = tileSize / 2 + offset, ropes = 0;
 
 class MyScene extends Phaser.Scene {
     
@@ -162,6 +162,30 @@ class MyScene extends Phaser.Scene {
     }
 }
 
+class Rope extends Phaser.GameObjects.Sprite {
+    id;
+    hook;
+
+    constructor(scene, x, y, hook) {
+        super(scene, x, y);
+
+        this.id = ropes++;
+        this.hook = hook;
+        this.setTexture("rope");
+        this.setAngle(hook.dir * 90);
+    }
+
+    die() {
+        ropes--;
+        this.destroy();
+    }
+
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
+
+    }
+}
+
 class Button extends Phaser.GameObjects.Sprite {
 
     constructor(scene, x, y, sprite, action) {
@@ -201,12 +225,16 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
     robot;
     hasHit;
     tank;
+    scene;
+    ropes;
 
     constructor(scene, x, y) {
         super(scene, x, y, "hook");
         this.hasHit = false;
         this.robot = null;
         this.tank = null;
+        this.scene = scene;
+        this.ropes = [];
     }
 
     make(robot) {
@@ -271,6 +299,14 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
+                if (this.hasHit) {
+                    this.ropes[ropes - 1].die();
+                    this.ropes[ropes - 1].die();
+                }
+                else {
+                    this.ropes.push(new Rope(this.scene, this.x, this.y, this), new Rope(this.scene, this.x, this.y + 1, this));
+                    //this.ropes.push(new Rope(this.scene, this.x, this.y + 1, this));
+                }
                 break;
 
             case 1:
@@ -280,6 +316,14 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
+                if (this.hasHit) {
+                    this.ropes[ropes - 1].die();
+                    this.ropes[ropes - 1].die();
+                }
+                else {
+                    this.ropes.push(new Rope(this.scene, this.x, this.y, this), new Rope(this.scene, this.x - 1, this.y, this));
+                    //this.ropes.push(new Rope(this.scene, this.x, this.y + 1, this));
+                }
                 break;
 
             case 2:
@@ -289,6 +333,14 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
+                if (this.hasHit) {
+                    this.ropes[ropes - 1].die();
+                    this.ropes[ropes - 1].die();
+                }
+                else {
+                    this.ropes.push(new Rope(this.scene, this.x, this.y, this), new Rope(this.scene, this.x, this.y - 1, this));
+                    //this.ropes.push(new Rope(this.scene, this.x, this.y + 1, this));
+                }
                 break;
 
             case 3:
@@ -298,6 +350,14 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
+                if (this.hasHit) {
+                    this.ropes[ropes - 1].die();
+                    this.ropes[ropes - 1].die();
+                }
+                else {
+                    this.ropes.push(new Rope(this.scene, this.x, this.y, this), new Rope(this.scene, this.x + 1, this.y, this));
+                    //this.ropes.push(new Rope(this.scene, this.x, this.y + 1, this));
+                }
                 break;
 
             default:
