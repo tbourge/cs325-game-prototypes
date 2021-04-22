@@ -711,6 +711,10 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.retile();
         this.fakex = this.x;
         this.fakey = this.y;
+        this.slide.play();
+        this.slide.updateTo('x', this.fakex);
+        this.slide.updateTo('y', this.fakey);
+        this.slide.pause();
     }
 
     endAnim() {
@@ -774,7 +778,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
 
-        if (this.slide.isPlaying() || this.isPulled) {
+        if (this.slide.isPlaying()) {
             this.slide.updateTo('x', this.fakex, true);
             this.slide.updateTo('y', this.fakey, true);
         }
