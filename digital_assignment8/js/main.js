@@ -81,9 +81,11 @@ class MyScene extends Phaser.Scene {
         }.bind(this));
 
         this.physics.add.collider(this.hooks, this.tanks, function (h, t) {
-            t.pulled(h);
+            if (!h.hasHit) {
+                t.pulled(h);
 
-            h.hit(t);
+                h.hit(t);
+            }
         }.bind(this));
 
         this.anims.create({
