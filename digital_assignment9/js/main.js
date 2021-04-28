@@ -311,7 +311,7 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
+                        this.ropes.push(new Rope(this.scene, this.x, this.y, this)).make(this.x,this.y);
                     }
                     else {
                         if (this.ropes != null)
@@ -332,7 +332,7 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
+                        this.ropes.push(new Rope(this.scene, this.x, this.y, this)).make(this.x, this.y);
                     }
                     else {
                         if (this.ropes != null)
@@ -353,7 +353,7 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
+                        this.ropes.push(new Rope(this.scene, this.x, this.y, this)).make(this.x, this.y);
                     }
                     else {
                         if (this.ropes != null)
@@ -374,7 +374,7 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
+                        this.ropes.push(new Rope(this.scene, this.x, this.y, this)).make(this.x, this.y);
                     }
                     else {
                         if (this.ropes != null)
@@ -717,6 +717,12 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
             this.slide.updateTo('x', this.fakex, true);
             this.slide.updateTo('y', this.fakey, true);
         }
+    }
+}
+
+class Bullet extends Phaser.Physics.Arcade.Sprite {
+    constructor(scene, x, y) {
+        super(scene, x, y, "tank");
     }
 }
 
