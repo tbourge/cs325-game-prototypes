@@ -75,7 +75,7 @@ class MyScene extends Phaser.Scene {
             this.robot.score++;
         }.bind(this));
 
-        this.physics.add.collider(this.hooks, this.tanks, function (h, t) {
+        this.physics.add.collider(this.hook, this.tanks, function (h, t) {
             if (!h.hasHit) {
                 t.pulled(h);
 
