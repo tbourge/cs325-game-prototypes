@@ -345,10 +345,12 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
         else {
             if (this.ropes != null && ropes === this.ropes.length) {
                 this.ropes.push(new Rope(this.scene, this.x, this.y, this));
+                this.ropes[ropes].make(this.x, this.y);
             }
-
-            if (this.ropes != null && this.ropes[ropes - 1] != null)
-                this.ropes[ropes - 1].make(this.x, this.y);
+            else {
+                if (this.ropes != null && this.ropes[ropes - 1] != null)
+                    this.ropes[ropes - 1].make(this.x, this.y);
+            }
         }
 
         if (this.robot != null && (this.x === this.robot.x || this.y === this.robot.y)) {
