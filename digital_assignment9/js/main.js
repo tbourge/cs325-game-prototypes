@@ -241,13 +241,13 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
         this.robot = null;
         this.tank = null;
         this.scene = scene;
-        this.ropes = [];
     }
 
     make(robot) {
         this.robot = robot;
         this.dir = robot.dir;
         this.setAngle(this.dir * 90);
+        this.ropes = robot.ropes;
 
         robot.scene.add.existing(this);
         robot.scene.physics.add.existing(this);
@@ -306,15 +306,16 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
-                if (this.hasHit) {
+                if (this.ropes != null && this.hasHit) {
                     this.ropes[ropes - 1].die();
                 }
                 else {
-                    if (ropes === this.ropes.length) {
+                    if (this.ropes != null && ropes === this.ropes.length) {
                         this.ropes.push(new Rope(this.scene, this.x, this.y, this));
                     }
                     else {
-                        this.ropes[ropes - 1].make(this.x, this.y);
+                        if (this.ropes != null)
+                            this.ropes[ropes - 1].make(this.x, this.y);
                     }
                 }
                 break;
@@ -326,15 +327,16 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
-                if (this.hasHit) {
+                if (this.ropes != null && this.hasHit) {
                     this.ropes[ropes - 1].die();
                 }
                 else {
-                    if (ropes === this.ropes.length) {
+                    if (this.ropes != null && ropes === this.ropes.length) {
                         this.ropes.push(new Rope(this.scene, this.x, this.y, this));
                     }
                     else {
-                        this.ropes[ropes - 1].make(this.x, this.y);
+                        if (this.ropes != null)
+                            this.ropes[ropes - 1].make(this.x, this.y);
                     }
                 }
                 break;
@@ -346,15 +348,16 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
-                if (this.hasHit) {
+                if (this.ropes != null && this.hasHit) {
                     this.ropes[ropes - 1].die();
                 }
                 else {
-                    if (ropes === this.ropes.length) {
+                    if (this.ropes != null && ropes === this.ropes.length) {
                         this.ropes.push(new Rope(this.scene, this.x, this.y, this));
                     }
                     else {
-                        this.ropes[ropes - 1].make(this.x, this.y);
+                        if (this.ropes != null)
+                            this.ropes[ropes - 1].make(this.x, this.y);
                     }
                 }
                 break;
@@ -366,15 +369,16 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
-                if (this.hasHit) {
+                if (this.ropes != null && this.hasHit) {
                     this.ropes[ropes - 1].die();
                 }
                 else {
-                    if (ropes === this.ropes.length) {
+                    if (this.ropes != null && ropes === this.ropes.length) {
                         this.ropes.push(new Rope(this.scene, this.x, this.y, this));
                     }
                     else {
-                        this.ropes[ropes - 1].make(this.x, this.y);
+                        if (this.ropes != null)
+                            this.ropes[ropes - 1].make(this.x, this.y);
                     }
                 }
                 break;
@@ -504,6 +508,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     attackDone;
     rockets;
     hooks;
+    ropes;
     scene;
     health;
     score;
@@ -523,6 +528,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         this.scene = scene;
         this.health = 10;
         this.score = 0;
+        this.ropes = [];
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
