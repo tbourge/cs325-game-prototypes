@@ -306,18 +306,6 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
-                if (this.ropes != null && this.hasHit) {
-                    this.ropes[ropes - 1].die();
-                }
-                else {
-                    if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
-                    }
-                    else {
-                        if (this.ropes != null)
-                            this.ropes[ropes - 1].make(this.x, this.y);
-                    }
-                }
                 break;
 
             case 1:
@@ -327,17 +315,6 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
-                if (this.ropes != null && this.hasHit) {
-                    this.ropes[ropes - 1].die();
-                }
-                else {
-                    if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
-                    }
-
-                    if (this.ropes != null)
-                        this.ropes[ropes - 1].make(this.x, this.y);
-                }
                 break;
 
             case 2:
@@ -347,17 +324,6 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
-                if (this.ropes != null && this.hasHit) {
-                    this.ropes[ropes - 1].die();
-                }
-                else {
-                    if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
-                    }
-
-                    if (this.ropes != null)
-                        this.ropes[ropes - 1].make(this.x, this.y);
-                }
                 break;
 
             case 3:
@@ -367,21 +333,22 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.tank.letGo();
                 }
 
-                if (this.ropes != null && this.hasHit) {
-                    this.ropes[ropes - 1].die();
-                }
-                else {
-                    if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
-                    }
-
-                    if (this.ropes != null)
-                        this.ropes[ropes - 1].make(this.x, this.y);
-                }
                 break;
 
             default:
                 this.retract();
+        }
+
+        if (this.ropes != null && this.hasHit) {
+            this.ropes[ropes - 1].die();
+        }
+        else {
+            if (this.ropes != null && ropes === this.ropes.length) {
+                this.ropes.push(new Rope(this.scene, this.x, this.y, this));
+            }
+
+            if (this.ropes != null && this.ropes[ropes - 1] != null)
+                this.ropes[ropes - 1].make(this.x, this.y);
         }
 
         if (this.robot != null && (this.x === this.robot.x || this.y === this.robot.y)) {
@@ -930,8 +897,6 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
 
             this.setAngle(this.t);
         }
-
-        console.log("Ropes: " + ropes);
     }
 }
 
