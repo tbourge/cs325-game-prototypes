@@ -301,10 +301,10 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
 
-        let speed = 2;
+        let speed = 3;
 
         if (this.hasHit) {
-            speed = -2;
+            speed = -3;
         }
 
         switch (this.dir) {
@@ -360,9 +360,7 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                     this.ropes[ropes].make(this.x, this.y);
                 }
                 else {
-                    //if (this.ropes[ropes] != null) {
                         this.ropes[ropes].make(this.x, this.y);
-                    //}
                 }
             }
         }
