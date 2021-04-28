@@ -311,7 +311,7 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this)).make(this.x,this.y);
+                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
                     }
                     else {
                         if (this.ropes != null)
@@ -332,12 +332,11 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this)).make(this.x, this.y);
+                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
                     }
-                    else {
-                        if (this.ropes != null)
-                            this.ropes[ropes - 1].make(this.x, this.y);
-                    }
+
+                    if (this.ropes != null)
+                        this.ropes[ropes - 1].make(this.x, this.y);
                 }
                 break;
 
@@ -353,12 +352,11 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this)).make(this.x, this.y);
+                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
                     }
-                    else {
-                        if (this.ropes != null)
-                            this.ropes[ropes - 1].make(this.x, this.y);
-                    }
+
+                    if (this.ropes != null)
+                        this.ropes[ropes - 1].make(this.x, this.y);
                 }
                 break;
 
@@ -374,12 +372,11 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
                 }
                 else {
                     if (this.ropes != null && ropes === this.ropes.length) {
-                        this.ropes.push(new Rope(this.scene, this.x, this.y, this)).make(this.x, this.y);
+                        this.ropes.push(new Rope(this.scene, this.x, this.y, this));
                     }
-                    else {
-                        if (this.ropes != null)
-                            this.ropes[ropes - 1].make(this.x, this.y);
-                    }
+
+                    if (this.ropes != null)
+                        this.ropes[ropes - 1].make(this.x, this.y);
                 }
                 break;
 
