@@ -301,10 +301,10 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
     preUpdate(time, delta) {
         super.preUpdate(time, delta);
 
-        let speed = 3;
+        let speed = 4;
 
         if (this.hasHit) {
-            speed = -3;
+            speed = -4;
         }
 
         switch (this.dir) {
