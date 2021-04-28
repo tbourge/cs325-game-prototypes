@@ -718,8 +718,38 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
 }
 
 class Bullet extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y) {
-        super(scene, x, y, "tank");
+    tank;
+    dir;
+
+    constructor(scene, x, y, tank) {
+        super(scene, x, y, "bullet");
+
+        this.tank = tank;
+        tank.dir = dir;
+    }
+
+    preUpdate(time, delta) {
+        super.preUpdate(time, delta);
+
+        let speed = 2;
+
+        switch (this.dir) {
+            case 0:
+                this.y -= speed;
+                break;
+
+            case 1:
+                this.x += speed;
+                break;
+
+            case 2:
+                this.y += speed;
+                break;
+
+            case 3:
+                this.x -= speed;
+                break;
+        }
     }
 }
 
