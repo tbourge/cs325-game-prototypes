@@ -165,7 +165,7 @@ class MyScene extends Phaser.Scene {
 class Rope extends Phaser.GameObjects.Sprite {
     hook;
 
-    constructor(scene, x, y) {
+    constructor(scene, x, y, hook) {
         super(scene, x, y);
         this.hook = hook;
         this.setTexture("rope");
@@ -512,6 +512,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     scene;
     health;
     score;
+    actions;
 
     constructor(scene, x, y, rockets, hooks) {
         super(scene, x, y, "robot");
@@ -529,6 +530,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         this.health = 10;
         this.score = 0;
         this.ropes = [];
+        this.actions = 10;
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -631,9 +633,9 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
 
     }
 
-    move() {
+    move(d) {
         if (!this.slide.isPlaying() && !this.anims.isPlaying && this.t === this.rot) {
-            switch (this.dir) {
+            switch (d) {
                 case 0:
                     this.fakey -= tileSize;
                     break;
@@ -729,6 +731,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
     health;
     hook;
     isPulled;
+    actions;
 
     constructor(scene, x, y) {
         super(scene, x, y, "tank");
@@ -740,6 +743,7 @@ class Tank extends Phaser.Physics.Arcade.Sprite {
         this.health = 4;
         this.hook = null;
         this.isPulled = false;
+        this.actions = 4;
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
