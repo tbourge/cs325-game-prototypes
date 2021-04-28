@@ -20,7 +20,7 @@ class MyScene extends Phaser.Scene {
 
         this.board;
         this.rockets;
-        this.hooks;
+        this.hook;
 
         this.robot;
         this.tanks;
@@ -51,19 +51,14 @@ class MyScene extends Phaser.Scene {
         Phaser.Actions.GridAlign(c, { width: 8, cellWidth: tileSize, cellHeight: tileSize, x: firstTile, y: firstTile });
 
         this.rockets = this.physics.add.group({ key: 'rocket', classType: Rocket });
-        this.hooks = this.physics.add.group({ key: 'hook', classType: Hook });
+        this.hook = new Hook(this, 0, 0);
+        this.hook.turnOff();
         this.tanks = this.physics.add.group({ key: 'tank', classType: Tank });
 
         this.rockets.getChildren().forEach(function (r) {
             r.setVisible(false);
             r.setActive(false);
             r.body.enable = false;
-        });
-
-        this.hooks.getChildren().forEach(function (h) {
-            h.setVisible(false);
-            h.setActive(false);
-            h.body.enable = false;
         });
 
         this.tanks.getChildren().forEach(function (t) {
@@ -241,16 +236,19 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
         this.robot = null;
         this.tank = null;
         this.scene = scene;
+        this.ropes = [];
+        scene.add.existing(this);
+        scene.physics.add.existing(this);
     }
 
     make(robot) {
         this.robot = robot;
         this.dir = robot.dir;
         this.setAngle(this.dir * 90);
-        this.ropes = robot.ropes;
 
-        robot.scene.add.existing(this);
-        robot.scene.physics.add.existing(this);
+        this.setActive(true);
+        this.setVisible(true);
+        this.body.enable = true;
 
         this.hasHit = false;
 
@@ -287,6 +285,17 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
 
     retract() {
         this.hasHit = true;
+    }
+
+    die() {
+        this.robot.weaponGone();
+        this.turnOff();
+    }
+
+    turnOff() {
+        this.setActive(false);
+        this.setVisible(false);
+        this.body.enable = false;
     }
 
     preUpdate(time, delta) {
@@ -354,8 +363,7 @@ class Hook extends Phaser.Physics.Arcade.Sprite {
         }
 
         if (this.robot != null && (this.x === this.robot.x || this.y === this.robot.y)) {
-            this.robot.weaponGone();
-            this.destroy();
+            this.die();
         }
 
         if (this.x < 0 || this.x > 800 || this.y < 0 || this.y > 650) {
@@ -473,14 +481,13 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     fakey;
     attackDone;
     rockets;
-    hooks;
-    ropes;
+    hook;
     scene;
     health;
     score;
     actions;
 
-    constructor(scene, x, y, rockets, hooks) {
+    constructor(scene, x, y, rockets, hook) {
         super(scene, x, y, "robot");
 
         this.dir = 0;
@@ -490,12 +497,11 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
         this.r = false;
         this.anim = -1;
         this.rockets = rockets;
-        this.hooks = hooks;
+        this.hook = hook;
         this.attackDone = true;
         this.scene = scene;
         this.health = 10;
         this.score = 0;
-        this.ropes = [];
         this.actions = 10;
 
         scene.add.existing(this);
@@ -642,7 +648,7 @@ class Robot extends Phaser.Physics.Arcade.Sprite {
     }
 
     hookSpawn() {
-        this.hooks.create().make(this);
+        this.hook.make(this);
     }
 
     hookAway() {
